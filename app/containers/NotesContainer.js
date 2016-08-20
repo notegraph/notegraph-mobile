@@ -3,27 +3,43 @@ import {
   Text,
   View,
   StyleSheet,
-  Dimensions
-} from 'react-native';
+  Dimensions,
+  TouchableHighlight,
+
+} from 'react-native'
 
 import { connect } from 'react-redux'
+import { openNote } from '../actions/actionCreators'
 
 
-const notesColumn = (notes: string[], isEven: bool) => {
-  return notes.map( (text, i) => {
-      if (isEven && (i % 2) === 1 ) return;
-      if (!isEven && (i % 2) === 0 ) return;
-      return (
-        <View style={[styles.note]} key={i}>
-          <Text>{text}</Text>
-        </View>
-      )
-    }
-  );
+const NoteItem = ({id, text, onOpenNote}) => {
+  const handlePress = () => onOpenNote(id)
+
+  return (<TouchableHighlight onPress={handlePress}>
+    <View style={[styles.note]}>
+      <Text>{text}</Text>
+    </View>
+  </TouchableHighlight>)
 }
 
-const NotesContainer = ({ notes }) => {
-  const layoutWidth = Dimensions.get('window').width;
+NoteItem.propTypes = {
+  id: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
+  onOpenNote: PropTypes.func.isRequired,
+}
+
+
+const notesColumn = (notes: string[], isEven: bool, props) => {
+  return notes.map((note, i) => {
+    if (isEven && (i % 2) === 1) return
+    if (!isEven && (i % 2) === 0) return
+    return <NoteItem key={i} id={note.id} text={note.text} {...props} />
+  }
+  )
+}
+
+const NotesContainer = ({ notes, onOpenNote }) => {
+  const layoutWidth = Dimensions.get('window').width
   const columnStyle = StyleSheet.create({
     runtime: {
       width: layoutWidth / 2 - 15,
@@ -33,10 +49,10 @@ const NotesContainer = ({ notes }) => {
   return (
     <View style={styles.content}>
       <View style={columnStyle.runtime}>
-        {notesColumn(notes, true)}
+        {notesColumn(notes, true, { onOpenNote })}
       </View>
       <View style={columnStyle.runtime}>
-        {notesColumn(notes, false)}
+        {notesColumn(notes, false, { onOpenNote })}
       </View>
     </View>
   )
@@ -45,13 +61,14 @@ const NotesContainer = ({ notes }) => {
 
 NotesContainer.propTypes = {
   notes: PropTypes.array.isRequired,
+  onOpenNote: PropTypes.func.isRequired,
 }
 
 const styles = StyleSheet.create({
   content: { // notes
     flex: 1,
-    //fontSize: 20,
-    //textAlign: 'center',
+    // fontSize: 20,
+    // textAlign: 'center',
     margin: 10,
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -65,8 +82,7 @@ const styles = StyleSheet.create({
 
     backgroundColor: '#fff'
   },
-
-});
+})
 
 
 const mapStateToProps = (state) => {
@@ -75,4 +91,13 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(NotesContainer)
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    onOpenNote: (id) => {
+      ownProps.navToNote(id)
+      dispatch(openNote(id))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NotesContainer)

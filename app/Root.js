@@ -1,53 +1,36 @@
-/* @flow */
-
 import React, { Component, PropTypes } from 'react'
 import {
   Text,
   View,
   StyleSheet,
-  Dimensions
-} from 'react-native';
+  Navigator
+} from 'react-native'
 import { Provider } from 'react-redux'
 
-import NotesContainer from './containers/NotesContainer'
-import TakeANote from './containers/TakeANote'
+import { NavigationBar, Routes, Router } from './navigation'
 
+import Dashboard from './containers/Dashboard'
 
 export default class Root extends Component {
-  static propTypes = {
+  propTypes = {
     store: PropTypes.object.isRequired
-  };
+  }
 
-  render(){
+  render () {
     return (
       <Provider store={this.props.store}>
-        <View style={styles.container}>
-          <View style={styles.header}>
-            <Text>NG Notes</Text>
-          </View>
-          <NotesContainer />
-          <TakeANote />
-        </View>
+          <Navigator
+            ref={(ref) => { this.navigator = ref }}
+            initialRoute={Routes.Dashboard}
+            configureScene={Router.configureScene}
+            renderScene={Router.renderScene}
+            navigationBar={NavigationBar.render()}
+            // style={styles.container}
+          />
       </Provider>
     )
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    margin: 0,
-    backgroundColor: '#ccc',
-  },
-  header: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingTop: 5,
-    paddingBottom: 10,
-    backgroundColor: 'orange'
 
-  },
-  headerText: {
-    //backgroundColor: '#F5FCFF',
-  },
-});
+

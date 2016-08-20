@@ -1,24 +1,22 @@
-import React, { Component } from 'react';
-import { AppRegistry, Text, View } from 'react-native';
+import React, { Component } from 'react'
+import { AppRegistry, Text, View } from 'react-native'
 
-import Root from './App/Root';
-
+import Root from './App/Root'
 
 // const RootX = () => (<View><Text>Fukc off</Text></View>);
 
 const data = {
-  notes: [],
+  notes: []
   // activeNote
 }
 
 class NgKeep extends Component {
-  render() {
+  render () {
     return (
       <Root data={data} />
-    );
+    )
   }
 }
 
 
-
-AppRegistry.registerComponent('ngkeep', () => NgKeep);
+AppRegistry.registerComponent('ngkeep', () => NgKeep)

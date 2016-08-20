@@ -4,9 +4,9 @@ import createLogger from 'redux-logger'
 import rootReducer from './reducers/index'
 
 // creat the logger
-const logger = createLogger({});
+const logger = createLogger({})
 
-let middleware = [];
+let middleware = []
 // Don't ship these
 if (__DEV__) {
   middleware.push(logger)

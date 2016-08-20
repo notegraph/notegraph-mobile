@@ -2,5 +2,7 @@ import { createTypes } from 'reduxsauce'
 
 
 export default createTypes(`
-  ADD_NOTE
+  NEW_NOTE
+  OPEN_NOTE
+  CLOSE_NOTE
 `)

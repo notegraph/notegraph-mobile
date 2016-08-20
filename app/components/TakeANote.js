@@ -3,7 +3,8 @@ import {
   Text,
   View,
   StyleSheet,
-} from 'react-native';
+} from 'react-native'
+
 
 
 const TakeANote = () => (
@@ -11,10 +12,6 @@ const TakeANote = () => (
     <Text style={styles.footerText}>Take a Note</Text>
   </View>
 )
-
-export default TakeANote
-
-
 
 const styles = StyleSheet.create({
   footer: {
@@ -30,4 +27,7 @@ const styles = StyleSheet.create({
   },
 
 
-});
+})
+
+
+export default TakeANote

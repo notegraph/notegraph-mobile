@@ -1,6 +1,6 @@
 // @flow
 
-import { createReducer } from 'reduxsauce';
+import { createReducer } from 'reduxsauce'
 import types from '../actions/types'
 
 
@@ -15,15 +15,14 @@ const makeFakeData = (): string[] => {
     'Yet Another one 2',
   ];
 
-
-  [0, 2, 10, 4, 3].forEach( (n, i) => {
-    for(let m=0; m<n; m++) notes[i] += ' ' + notes[i];
-  });
-  return notes;
+  [0, 2, 10, 4, 3].forEach((n, i) => {
+    for (let m = 0; m < n; m++) notes[i] += ' ' + notes[i]
+  })
+  return notes.map((n, i) => ({id: i, text: n}))
 }
 
 
-const INITIAL_STATE = makeFakeData();
+const INITIAL_STATE = makeFakeData()
 
 
 const add = (state, action) =>
