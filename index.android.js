@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import { AppRegistry, Text, View } from 'react-native';
+import React, { Component } from 'react'
+import { AppRegistry, Text, View } from 'react-native'
 
-import Root from './app/Root';
+import Root from './app/Root'
 
-import configureStore from './app/store';
+import configureStore from './app/store'
 
 
-const store = configureStore();
+const store = configureStore()
 
 const data = {
   notes: [],
@@ -14,12 +14,12 @@ const data = {
 }
 
 class NgKeep extends Component {
-  render() {
+  render () {
     return (
       <Root data={data} store={store} />
-    );
+    )
   }
 }
 
 
-AppRegistry.registerComponent('ngkeep', () => NgKeep);
+AppRegistry.registerComponent('ngkeep', () => NgKeep)

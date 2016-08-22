@@ -18,7 +18,7 @@ const makeFakeData = (): string[] => {
   [0, 2, 10, 4, 3].forEach((n, i) => {
     for (let m = 0; m < n; m++) notes[i] += ' ' + notes[i]
   })
-  return notes.map((n, i) => ({id: i, text: n}))
+  return notes.map((n, i) => ({id: i.toString(), text: n}))
 }
 
 

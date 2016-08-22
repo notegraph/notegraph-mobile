@@ -5,7 +5,7 @@ import {
   StyleSheet,
 } from 'react-native'
 
-import * as actionCreators from '../actions/actionCreators'
+import actions from '../actions/creators'
 
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -43,7 +43,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return { actions: bindActionCreators(actionCreators, dispatch) }
+  return { actions: bindActionCreators(actions, dispatch) }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard)

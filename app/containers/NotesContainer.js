@@ -9,7 +9,7 @@ import {
 } from 'react-native'
 
 import { connect } from 'react-redux'
-import { openNote } from '../actions/actionCreators'
+import actions from '../actions/creators'
 
 
 const NoteItem = ({id, text, onOpenNote}) => {
@@ -95,7 +95,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     onOpenNote: (id) => {
       ownProps.navToNote(id)
-      dispatch(openNote(id))
+      dispatch(actions.openNote(id))
     }
   }
 }

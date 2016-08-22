@@ -6,11 +6,11 @@ import {
 } from 'react-native'
 
 import { connect } from 'react-redux'
-import { AppStyles } from '../themes'
+import { AppStyles, Colors } from '../themes'
 
 
 class OpenedNote extends Component {
-  propTypes = {
+  static propTypes = {
     note: PropTypes.object.isRequired,
   }
 
@@ -18,8 +18,8 @@ class OpenedNote extends Component {
     const { note } = this.props
 
     return (
-      <View style={styles.mainContainer}>
-        <Text>{note.text}</Text>
+      <View style={[styles.mainContainer, styles.container]}>
+        <Text style={styles.text}>{note.text}</Text>
       </View>
     )
   }
@@ -30,13 +30,18 @@ class OpenedNote extends Component {
 const styles = StyleSheet.create({
   ...AppStyles.screen,
   container: {
-    flex: 1,
+    padding: 10,
+  },
+  text: {
+    color: Colors.noteText,
+    fontSize: 15,
   }
+
 })
 
 const mapStateToProps = (state) => {
   return {
-    note: state.activeNote.opened,
+    note: state.activeNote.opened || {},
   }
 }
 

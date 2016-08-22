@@ -1,12 +1,14 @@
 import { createStore, applyMiddleware, compose } from 'redux'
 // import { autoRehydrate } from 'redux-persist'
 import createLogger from 'redux-logger'
+import thunk from 'redux-thunk'
+
 import rootReducer from './reducers/index'
 
 // creat the logger
 const logger = createLogger({})
 
-let middleware = []
+let middleware = [thunk]
 // Don't ship these
 if (__DEV__) {
   middleware.push(logger)
