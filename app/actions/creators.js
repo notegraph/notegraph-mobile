@@ -11,9 +11,9 @@ const openNote = (id) => (dispatch, getState) => {
   })
 }
 
-const addNote = () => ({ type: types.ADD_NOTE })
+const newNote = () => ({ type: types.NEW_NOTE })
 
 export default {
-  addNote,
+  newNote,
   openNote,
 }

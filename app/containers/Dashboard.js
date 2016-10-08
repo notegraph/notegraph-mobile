@@ -17,14 +17,13 @@ import { AppStyles } from '../themes'
 
 
 class Dashboard extends Component {
-  x = 1
 
   render () {
-    const { navigator } = this.props
+
     return (
       <View style={[styles.mainContainer, styles.container]} >
         <NotesContainer navToNote={this.navToNote} />
-        <TakeANote />
+        <TakeANote onPress={this.navToNewnote} />
       </View>
     )
   }
@@ -32,17 +31,24 @@ class Dashboard extends Component {
   navToNote = () => {
     this.props.navigator.push(Routes.OpenedNote)
   }
+
+  navToNewnote = () => {
+    const { actions } = this.props
+    actions.newNote()
+    this.navToNote()
+  }
 }
 
 Dashboard.propTypes = {
   navigator: PropTypes.object.isRequired,
+  actions: PropTypes.object.isRequired,
 }
 
 const mapStateToProps = (state) => {
   return { }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch, ownProps) => {
   return { actions: bindActionCreators(actions, dispatch) }
 }
 

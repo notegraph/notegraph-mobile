@@ -10,6 +10,7 @@ import {
 
 import { connect } from 'react-redux'
 import actions from '../actions/creators'
+import { Colors } from '../themes'
 
 
 const NoteItem = ({id, text, onOpenNote}) => {
@@ -17,7 +18,7 @@ const NoteItem = ({id, text, onOpenNote}) => {
 
   return (<TouchableHighlight onPress={handlePress}>
     <View style={[styles.note]}>
-      <Text>{text}</Text>
+      <Text style={styles.text}>{text}</Text>
     </View>
   </TouchableHighlight>)
 }
@@ -79,9 +80,11 @@ const styles = StyleSheet.create({
     maxHeight: 200,
     margin: 5,
     padding: 5,
-
-    backgroundColor: '#fff'
+    backgroundColor: '#fff',
   },
+  text: {
+    color: Colors.noteText,
+  }
 })
 
 

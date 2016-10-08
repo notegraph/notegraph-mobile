@@ -2,16 +2,23 @@ import React, { Component, PropTypes } from 'react'
 import {
   Text,
   View,
+  TouchableHighlight,
   StyleSheet,
 } from 'react-native'
 
 
 
-const TakeANote = () => (
-  <View style={styles.footer}>
-    <Text style={styles.footerText}>Take a Note</Text>
-  </View>
+const TakeANote = ({ onPress }) => (
+  <TouchableHighlight onPress={onPress}>
+    <View style={styles.footer} >
+      <Text style={styles.footerText}>Take a Note</Text>
+    </View>
+  </TouchableHighlight>
 )
+
+TakeANote.propTypes = {
+  onPress: PropTypes.func.isRequired,
+}
 
 const styles = StyleSheet.create({
   footer: {
