@@ -9,7 +9,7 @@ export default new class Routes {
     return {
       title: 'Notes',
       component: require('../containers/Dashboard').default,
-      // leftButton: 'BACK's
+      // leftButton: 'HAMBURGER',
     }
   }
 
@@ -18,6 +18,7 @@ export default new class Routes {
       title: 'Active Note',
       component: require('../containers/OpenedNote').default,
       leftButton: 'BACK',
+      rightButton: 'DELETE_NOTE',
     }
   }
 

@@ -20,8 +20,10 @@ export default {
         return NavButtons.backButton(this.BackButton.bind(this, navigator))
       case 'HAMBURGER':
         return NavButtons.hamburgerButton(navigator.state.tapHamburger)
+      case 'DELETE_NOTE':
+        return NavButtons.deleteNoteButton()
       default:
-        return (<Text>Needs Button</Text>)
+        return (<Text>Needs Button {buttonId} </Text>)
     }
   },
 

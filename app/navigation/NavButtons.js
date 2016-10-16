@@ -1,7 +1,7 @@
 import React from 'react'
 import { TouchableOpacity, Text } from 'react-native'
 import styles from './NavigationStyle'
-import Icon from 'react-native-vector-icons/FontAwesome'
+import Icon from 'react-native-vector-icons/Ionicons'
 import { Colors, Metrics } from '../themes'
 
 // I18n
@@ -12,7 +12,7 @@ export default {
   backButton (onPressFunction) {
     return (
       <TouchableOpacity onPress={onPressFunction}>
-        <Icon name="angle-left"
+        <Icon name="ios-arrow-back"
           size={Metrics.icons.medium}
           color={Colors.snow}
           style={styles.navButtonLeft}
@@ -28,6 +28,18 @@ export default {
           size={Metrics.icons.medium}
           color={Colors.snow}
           style={styles.navButtonLeft}
+        />
+      </TouchableOpacity>
+    )
+  },
+
+  deleteNoteButton (onPressFunction) {
+    return (
+      <TouchableOpacity >
+        <Icon name="ios-trash"
+          size={Metrics.icons.medium}
+          color={Colors.snow}
+          style={styles.navButtonRight}
         />
       </TouchableOpacity>
     )
