@@ -6,13 +6,13 @@ import {
 } from 'react-native'
 
 import actions from '../actions/creators'
+import { Actions as RouteActions } from 'react-native-router-flux';
 
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import NotesContainer from './NotesContainer'
 
 import TakeANote from '../components/TakeANote'
-import Routes from '../navigation/Routes'
 import { AppStyles } from '../themes'
 
 
@@ -29,7 +29,7 @@ class Dashboard extends Component {
   }
 
   navToNote = () => {
-    this.props.navigator.push(Routes.OpenedNote)
+    RouteActions.openedNote()
   }
 
   navToNewnote = () => {
@@ -40,7 +40,6 @@ class Dashboard extends Component {
 }
 
 Dashboard.propTypes = {
-  navigator: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired,
 }
 

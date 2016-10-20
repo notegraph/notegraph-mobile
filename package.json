@@ -5,18 +5,21 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "flow": "flow",
-    "lint": "eslint *.js app/**/*.js"
+    "lint": "eslint *.js app/**/*.js",
+    "android:install": "cd android && ./gradlew assembleRelease && adb -s 010fc2cba482160c install -r app/build/outputs/apk/app-release.apk"
   },
   "dependencies": {
     "ramda": "^0.22.1",
     "react": "15.2.1",
     "react-native": "^0.31.0",
+    "react-native-router-flux": "^3.36.0",
     "react-native-vector-icons": "^2.0.3",
     "redux": "^3.4.0",
     "redux-logger": "^2.4.0",
+    "redux-persist": "^4.0.0-alpha6",
     "redux-thunk": "^2.1.0",
-    "reduxsauce": "0.1.0",
-    "seamless-immutable": "^6.1.1"
+    "reduxsauce": "^0.2.0",
+    "seamless-immutable": "^6.1.4"
   },
   "devDependencies": {
     "babel-eslint": "^6.1.2",

@@ -5,11 +5,10 @@ import {
   StyleSheet,
   Navigator
 } from 'react-native'
+
 import { Provider } from 'react-redux'
+import NavigationRouter from './navigation/NavigationRouter'
 
-import { NavigationBar, Routes, Router } from './navigation'
-
-import Dashboard from './containers/Dashboard'
 
 export default class Root extends Component {
   static propTypes = {
@@ -19,13 +18,9 @@ export default class Root extends Component {
   render () {
     return (
       <Provider store={this.props.store}>
-        <Navigator
-          initialRoute={Routes.Dashboard}
-          configureScene={Router.configureScene}
-          renderScene={Router.renderScene}
-          navigationBar={NavigationBar.render()}
-          // style={styles.container}
-        />
+        <View style={styles.applicationView}>
+          <NavigationRouter />
+        </View>
       </Provider>
     )
   }
@@ -33,3 +28,8 @@ export default class Root extends Component {
 
 
 
+const styles = StyleSheet.create({
+  applicationView: {
+    flex: 1
+  },
+})

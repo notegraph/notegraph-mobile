@@ -6,4 +6,5 @@ export default createTypes(`
   OPEN_NOTE
   CLOSE_NOTE
   SAVE_NOTE
+  DELETE_NOTE
 `)

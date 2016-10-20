@@ -39,31 +39,21 @@ class OpenedNote extends Component {
     }
   }
 
-  // render() {
-  //   // <NavBar leftButton={this.cancelButton} rightButton={this.postButton}/>
-  //   return (
-  //     <ScrollView keyboardDismissMode='interactive' style={styles.container}>
-  //       <TextInput multiline={true}
-  //         onChangeText={(text) => {
-  //           this.state.note.text = text;
-  //         }}
-  //         defaultValue={this.state.note.text}
-  //         autoFocus={true}
-  //         style={[styles.text]}
-  //       />
-  //     </ScrollView>
-  //   );
-  // }
+  onChangeTitle = (title) => {
+    const { note } = this.state
+    this.setState({
+      note: R.merge(note, { title }),
+      isChanged: true,
+    }, () => {
+      console.debug({ n: 'onChangeTitle', note: this.state.note })
+    })
+  }
 
   onChangeText = (text) => {
     const { note } = this.state
-    note.text = text;
-
     this.setState({
-      note: R.evolve({ text: () => text})(note),
+      note: R.merge(note, { text }),
       isChanged: true,
-    }, () => {
-      // console.debug({ n: 'onChangeText', note: this.state.note, text })
     })
 
   }
@@ -74,10 +64,18 @@ class OpenedNote extends Component {
     return (
       <View style={[styles.mainContainer, styles.container]}>
         <TextInput
+          style={styles.title}
+          defaultValue={note.title}
+          onChangeText={this.onChangeTitle}
+          placeholder={'Title'}
+        />
+
+        <TextInput
           style={styles.text}
           defaultValue={note.text}
           multiline={true}
           onChangeText={this.onChangeText}
+          placeholder={'Note'}
         />
       </View>
     )
@@ -91,13 +89,18 @@ const styles = StyleSheet.create({
     padding: 10,
     paddingTop: 20,
   },
+  title: {
+    color: Colors.noteText,
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
   text: {
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'flex-start',
     textAlignVertical: 'top',
     color: Colors.noteText,
-    fontSize: 15,
+    fontSize: 17,
     // fontFamily: 'System',
     // height: height - 30,
   }

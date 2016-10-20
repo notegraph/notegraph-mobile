@@ -19,26 +19,43 @@ function guid() {
 }
 
 
-const saveNote = ({id, text}) => {
-  let isNew = false;
+
+const newNote = () => ({ type: types.NEW_NOTE })
+
+
+const saveNote = (note) => {
+  let isNew = false
+  let { id } = note
   if (!id) {
-    id = guid();
-    isNew = true;
+    id = guid()
+    isNew = true
   }
 
   return {
     type: types.SAVE_NOTE,
     payload: {
-      note: { id, text },
+      note: { ... note, id },
       isNew
     }
   }
 }
 
-const newNote = () => ({ type: types.NEW_NOTE })
+const deleteActiveNote = () => (dispatch, getState) => {
+  const activeNote = getState().activeNote.opened
+
+  if (!activeNote || !activeNote.id) return;
+
+  dispatch({
+    type: types.DELETE_NOTE,
+    payload: {
+      id: activeNote.id,
+    }
+  })
+}
 
 export default {
   newNote,
   openNote,
   saveNote,
+  deleteActiveNote,
 }

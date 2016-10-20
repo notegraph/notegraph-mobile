@@ -1,5 +1,6 @@
 // @flow
-import R from 'ramda';
+import R from 'ramda'
+import Immutable from 'seamless-immutable'
 
 import { createReducer } from 'reduxsauce'
 import types from '../actions/types'
@@ -18,7 +19,8 @@ const makeFakeData = (): string[] => {
   [0, 2, 10, 4, 3].forEach((n, i) => {
     for (let m = 0; m < n; m++) notes[i] += ' ' + i + ' ' + notes[i]
   })
-  return notes.map((n, i) => ({id: i.toString(), text: n}))
+  const data = notes.map((n, i) => ({id: i.toString(), text: n }))
+  return Immutable(data)
 }
 
 const INITIAL_STATE = makeFakeData()
@@ -42,9 +44,15 @@ const save = (state, action) => {
   }
 }
 
+const deleteNote = (state, action) => {
+  const { id } = action.payload
+  return R.reject(R.propEq('id', id))(state)
+}
+
 const ACTION_HANDLERS = {
   [types.ADD_NOTE]: add,
   [types.SAVE_NOTE]: save,
+  [types.DELETE_NOTE]: deleteNote,
 }
 
 
