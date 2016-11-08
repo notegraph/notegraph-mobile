@@ -6,12 +6,17 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "flow": "flow",
     "lint": "eslint *.js app/**/*.js",
-    "android:install": "cd android && ./gradlew assembleRelease && adb -s 010fc2cba482160c install -r app/build/outputs/apk/app-release.apk"
+    "fixcode": "npm run lint -- --fix",
+    "android:install": "cd android && ./gradlew assembleRelease && adb -s 010fc2cba482160c install -r app/build/outputs/apk/app-release.apk",
+    "test": "NODE_ENV=production ava",
+    "test:watch": "npm run test -- --watch",
+    "coverage": "nyc ava && nyc report --reporter=html && open coverage/index.html || xdg-open coverage/index.html",
+    "adb:date": "adb shell \"date `date +%m%d%H%M%Y.%s`\""
   },
   "dependencies": {
     "ramda": "^0.22.1",
-    "react": "15.2.1",
-    "react-native": "^0.31.0",
+    "react": "15.3.2",
+    "react-native": "^0.36.1",
     "react-native-router-flux": "^3.36.0",
     "react-native-vector-icons": "^2.0.3",
     "redux": "^3.4.0",
@@ -22,12 +27,40 @@
     "seamless-immutable": "^6.1.4"
   },
   "devDependencies": {
+    "ava": "^0.16.0",
     "babel-eslint": "^6.1.2",
+    "chai": "^3.5.0",
+    "enzyme": "^2.3.0",
     "eslint": "^3.3.1",
     "eslint-config-standard": "^6.0.0-beta.3",
     "eslint-config-standard-react": "^3.0.0",
+    "eslint-plugin-import": "^2.1.0",
     "eslint-plugin-promise": "^2.0.1",
     "eslint-plugin-react": "^6.1.2",
-    "eslint-plugin-standard": "^2.0.0"
+    "eslint-plugin-standard": "^2.0.0",
+    "flow-bin": "^0.32.0",
+    "mockery": "^1.7.0",
+    "nyc": "^8.1.0",
+    "react-addons-test-utils": "^15.3.1",
+    "react-dom": "^15.3.1",
+    "react-native-mock": "^0.2.6",
+    "reactotron-apisauce": "^1.1.2",
+    "reactotron-react-native": "^1.1.2",
+    "reactotron-redux": "^1.1.2"
+  },
+  "ava": {
+    "files": [
+      "tests/**/*.js",
+      "!tests/setup.js",
+      "!tests/components/*",
+      "!tests/sagas/*"
+    ],
+    "require": [
+      "babel-register",
+      "babel-polyfill",
+      "react-native-mock/mock",
+      "./tests/setup"
+    ],
+    "babel": "inherit"
   }
 }

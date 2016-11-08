@@ -20,7 +20,8 @@ const metrics = {
     small: 20,
     medium: 30,
     large: 45,
-    xl: 60
+    xl: 60,
+    button: 60,
   },
   images: {
     small: 20,

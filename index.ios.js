@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { AppRegistry, Text, View } from 'react-native'
 
-import Root from './App/Root'
+import Root from './app/Root'
 
 // const RootX = () => (<View><Text>Fukc off</Text></View>);
 

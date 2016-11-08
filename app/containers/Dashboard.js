@@ -6,7 +6,6 @@ import {
 } from 'react-native'
 
 import actions from '../actions/creators'
-import { Actions as RouteActions } from 'react-native-router-flux';
 
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -19,7 +18,6 @@ import { AppStyles } from '../themes'
 class Dashboard extends Component {
 
   render () {
-
     return (
       <View style={[styles.mainContainer, styles.container]} >
         <NotesContainer navToNote={this.navToNote} />
@@ -28,14 +26,9 @@ class Dashboard extends Component {
     )
   }
 
-  navToNote = () => {
-    RouteActions.openedNote()
-  }
-
   navToNewnote = () => {
     const { actions } = this.props
     actions.newNote()
-    this.navToNote()
   }
 }
 

@@ -17,7 +17,7 @@ import actions from '../actions/creators'
 
 const {height, width} = Dimensions.get('window')
 
-class OpenedNote extends Component {
+class NoteEdit extends Component {
   static propTypes = {
     note: PropTypes.object.isRequired,
     saveNote: PropTypes.func.isRequired,
@@ -32,8 +32,8 @@ class OpenedNote extends Component {
     }
   }
 
-  componentWillUnmount() {
-    const { saveNote } = this.props;
+  componentWillUnmount () {
+    const { saveNote } = this.props
     if (this.state.isChanged) {
       saveNote(this.state.note)
     }
@@ -55,7 +55,6 @@ class OpenedNote extends Component {
       note: R.merge(note, { text }),
       isChanged: true,
     })
-
   }
 
   render () {
@@ -109,7 +108,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
   return {
-    note: state.activeNote.opened || {},
+    note: state.editor.note || {},
   }
 }
 
@@ -119,4 +118,4 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(OpenedNote)
+export default connect(mapStateToProps, mapDispatchToProps)(NoteEdit)

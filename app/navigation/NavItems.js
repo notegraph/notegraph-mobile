@@ -2,7 +2,7 @@ import React from 'react'
 import { TouchableOpacity, Text } from 'react-native'
 import styles from './styles/NavItemsStyle'
 import { Actions as NavigationActions } from 'react-native-router-flux'
-import Icon from 'react-native-vector-icons/Ionicons'
+import Icon from 'react-native-vector-icons/MaterialIcons'
 import { Colors, Metrics } from '../themes'
 
 // I18n
@@ -20,7 +20,7 @@ export default {
   backButton () {
     return (
       <TouchableOpacity onPress={NavigationActions.pop}>
-        <Icon name='ios-arrow-back'
+        <Icon name="arrow-back"
           size={Metrics.icons.medium}
           color={Colors.snow}
           style={styles.navButtonLeft}
@@ -32,7 +32,7 @@ export default {
   hamburgerButton () {
     return (
       <TouchableOpacity onPress={openDrawer}>
-        <Icon name='bars'
+        <Icon name="menu"
           size={Metrics.icons.medium}
           color={Colors.snow}
           style={styles.navButtonLeft}
@@ -44,10 +44,10 @@ export default {
   deleteNoteButton (onPressFunction) {
     return (
       <TouchableOpacity onPress={onPressFunction} >
-        <Icon name="ios-trash"
+        <Icon name="delete"
           size={Metrics.icons.medium}
           color={Colors.snow}
-          style={[styles.navButtonRight, {paddingTop: -3}]}
+          style={[styles.navButtonRight]}
         />
       </TouchableOpacity>
     )

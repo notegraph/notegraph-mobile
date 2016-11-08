@@ -25,7 +25,7 @@ export default (rootReducer, rootSaga) => {
   /* ------------- Logger Middleware ------------- */
 
   const SAGA_LOGGING_BLACKLIST = ['EFFECT_TRIGGERED', 'EFFECT_RESOLVED', 'EFFECT_REJECTED', 'persist/REHYDRATE']
-  if (__DEV__) {
+  if (__DEV__ && !global.__TEST__) {
     // the logger master switch
     const USE_LOGGING = Config.reduxLogging
     // silence these saga-based messages

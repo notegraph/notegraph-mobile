@@ -7,4 +7,5 @@ export default createTypes(`
   CLOSE_NOTE
   SAVE_NOTE
   DELETE_NOTE
+  SAVE_RELATION
 `)

@@ -1,3 +1,4 @@
+/** eslint ignore */
 // bDO: notes ownership
 
 export default {
@@ -41,7 +42,7 @@ export default {
           entrypoint: true,
           items: [
             { id: 'a1', bgcolor: 'yellow' },
-            { id: 'b1', owner: 'a1', },
+            { id: 'b1', owner: 'a1' },
           ]
         },
         cons: [
@@ -71,6 +72,10 @@ export default {
         },
       }
     },
+  },
+
+  editor: {
+    notebook: 'ngbook1',
   }
 
 }
