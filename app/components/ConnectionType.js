@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
 } from 'react-native'
 
-import { AppStyles, Colors, Metrics } from '../themes'
+import { AppStyles, Colors, Fonts } from '../themes'
 
 
 class ConnectionType extends Component {
@@ -24,11 +24,19 @@ class ConnectionType extends Component {
     const { type } = this.props
     return (
       <TouchableOpacity onPress={this._onSelect}>
-        <Text>{type.name}</Text>
+        <View style={styles.container}>
+          <Text>{type.name}</Text>
+        </View>
       </TouchableOpacity>
     )
   }
 }
 
+
+const styles = StyleSheet.create({
+  container: {
+    padding: 10,
+  }
+})
 
 export default ConnectionType

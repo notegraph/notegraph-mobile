@@ -29,10 +29,17 @@ const saveRelation = (state, action) => {
   })
 }
 
+const deleteRelation = (state, action) => {
+  const { relId, groupId } = action
+  return state.updateIn([groupId, 'cons'], cons => {
+    return R.reject(R.propEq('id', relId), cons)
+  })
+}
 
 const ACTION_HANDLERS = {
   [types.SAVE_NOTE]: saveNote,
   [types.SAVE_RELATION]: saveRelation,
+  [types.DELETE_RELATION]: deleteRelation,
 }
 
 

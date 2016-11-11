@@ -8,4 +8,5 @@ export default createTypes(`
   SAVE_NOTE
   DELETE_NOTE
   SAVE_RELATION
+  DELETE_RELATION
 `)

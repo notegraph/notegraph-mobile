@@ -1,3 +1,5 @@
+/* @flow weak */
+
 import React, { Component, PropTypes } from 'react'
 import {
   Text,
@@ -11,7 +13,7 @@ import {
 import R from 'ramda'
 
 import { connect } from 'react-redux'
-import { AppStyles, Colors, Metrics } from '../themes'
+import { AppStyles, Fonts } from '../themes'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { Actions as RouteActions } from 'react-native-router-flux'
 
@@ -24,6 +26,8 @@ import ConnectionType from '../components/ConnectionType'
 
 const connectionTypes = [
   { id: 'defines', name: 'Defines' },
+  { id: 'related', name: 'Related' },
+  { id: 'custom', name: 'Custom Relationship', isCustom: true },
 ]
 
 
@@ -43,9 +47,10 @@ const mapStateToProps = (state) => {
   }
 }
 
+
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    saveRelation: (groupId, curNoteId, selNoteId, conType) => {
+    saveRelation: (groupId: string, curNoteId: string, selNoteId: string, conType: ConType) => {
       const rel = {
         from: curNoteId,
         to: selNoteId,
@@ -66,6 +71,10 @@ class AddRelation extends Component {
     // editNote: PropTypes.func.isRequired,
     // viewNote: PropTypes.func.isRequired,
     // saveNote: PropTypes.func.isRequired,
+  }
+
+  state: {
+    selectedNote?: any,
   }
 
   constructor (props) {
@@ -106,7 +115,7 @@ class AddRelation extends Component {
     )
   }
 
-  onConnectionTypePress = (conType) => {
+  onConnectionTypePress = (conType: ConType) => {
     const { curNote, groupId, saveRelation } = this.props
     const selNote = this.state.selectedNote
     if (!selNote) return
@@ -117,7 +126,7 @@ class AddRelation extends Component {
   renderRelationSelect () {
     return (
       <View>
-        <Text>Select Connection Type</Text>
+        <Text style={styles.header}>Select Connection Type</Text>
         {connectionTypes.map(t => (
           <ConnectionType
             key={t.id}
@@ -153,10 +162,18 @@ const styles = StyleSheet.create({
 
   },
 
-
+  header: {
+    fontSize: Fonts.size.h3,
+    // color: 'red',
+  }
 })
 
 
-
-
 export default connect(mapStateToProps, mapDispatchToProps)(AddRelation)
+
+
+// flow types
+
+type ConType = {
+  id: string, name: string,
+}

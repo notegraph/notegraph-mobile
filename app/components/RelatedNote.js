@@ -8,10 +8,16 @@ import {
 
 
 class RelatedNote extends Component {
-  _onPress = () => {
-    const { note, viewNote } = this.props
-    viewNote(note.id)
+  handlePress = () => {
+    const { note, onPress } = this.props
+    onPress(note.id)
   }
+
+  handleLongPress = () => {
+    const { onLongPress, con } = this.props
+    onLongPress(con.id)
+  }
+
 
   render () {
     const { note, con } = this.props
@@ -19,9 +25,10 @@ class RelatedNote extends Component {
     // FIXME: remove type.name || type hack
     return (
       <TouchableOpacity
-        onPress={this._onPress}
+        onPress={this.handlePress}
+        onLongPress={this.handleLongPress}
       >
-        <View>
+        <View style={styles.container}>
           <Text style={styles.conType}>{con.type.name || con.type}</Text>
           {!!note.title && <Text>{note.title}</Text>}
           <Text>{note.text}</Text>
@@ -34,7 +41,8 @@ class RelatedNote extends Component {
 RelatedNote.propTypes = {
   note: PropTypes.object.isRequired,
   con: PropTypes.object.isRequired,
-  viewNote: PropTypes.func.isRequired,
+  onPress: PropTypes.func.isRequired,
+  onLongPress: PropTypes.func.isRequired,
 }
 
 const styles = StyleSheet.create({
@@ -43,6 +51,9 @@ const styles = StyleSheet.create({
     color: 'white',
     padding: 3,
     textAlign: 'center',
+  },
+  container: {
+    marginBottom: 15,
   }
 })
 

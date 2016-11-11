@@ -1,3 +1,4 @@
+/* @flow weak */
 import React, { Component, PropTypes } from 'react'
 import {
   Text,
@@ -6,6 +7,7 @@ import {
   Dimensions,
   ScrollView,
   TouchableOpacity,
+  Alert,
 } from 'react-native'
 
 import R from 'ramda'
@@ -29,11 +31,13 @@ const {height, width} = Dimensions.get('window')
 const mapStateToProps = (state) => {
   const { editor } = state
   const note = editor.note || {}
+  const { groupId } = editor
 
-  const related = findRelatedNotes(state, editor.groupId, note.id)
+  const related = findRelatedNotes(state, groupId, note.id)
   return {
     note,
     related,
+    groupId,
   }
 }
 
@@ -42,6 +46,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     editNote: (id) => dispatch(actions.openNote(id, false)),
     viewNote: (id) => dispatch(actions.openNote(id, true)),
     addRelation: () => RouteActions.newRelation(),
+    deleteRelation: (groupId, relId) => dispatch(actions.deleteRelation(groupId, relId))
   }
 }
 
@@ -60,6 +65,7 @@ function AddButton ({onPress, style}) {
 class NoteView extends Component {
   static propTypes = {
     note: PropTypes.object.isRequired,
+    groupId: PropTypes.string.isRequired,
     related: PropTypes.arrayOf(
       PropTypes.shape({
         con: PropTypes.object.isRequired,
@@ -69,25 +75,36 @@ class NoteView extends Component {
     editNote: PropTypes.func.isRequired,
     viewNote: PropTypes.func.isRequired,
     addRelation: PropTypes.func.isRequired,
+    deleteRelation: PropTypes.func.isRequired,
   }
-
-
 
   editCurrentNote = () => {
     const { note, editNote } = this.props
     editNote(note.id)
   }
 
+  showDeleteConfirm = (relId) => {
+    const { deleteRelation, groupId } = this.props
+
+    Alert.alert(
+      'Remove connection',
+      'Are you sure?',
+      [
+        {text: 'Cancel', onPress: () => {}, style: 'cancel'},
+        {text: 'OK', onPress: () => deleteRelation(groupId, relId) },
+      ]
+    )
+  }
+
   renderRelated () {
     const { viewNote } = this.props
 
-
-
     return this.props.related.map(r => (
       <RelatedNote
-        key={r.note.id}
+        key={`${r.note.id}-${r.con.type}`}
         {...r}
-        viewNote={viewNote}
+        onPress={viewNote}
+        onLongPress={this.showDeleteConfirm}
       />)
     )
   }
@@ -96,29 +113,31 @@ class NoteView extends Component {
     const { note, addRelation } = this.props
 
     return (
-    <View style={[styles.container]}>
+      <View style={{flex: 1}}>
+        <ScrollView style={styles.scrollview}>
+          <View style={[styles.container]}>
+            <View style={styles.noteContainer}>
+              <TouchableOpacity onPress={this.editCurrentNote}>
+                <Icon name="mode-edit"
+                  size={Metrics.icons.medium}
+                />
+              </TouchableOpacity>
 
-      <View style={styles.noteContainer}>
-        <TouchableOpacity onPress={this.editCurrentNote}>
-          <Icon name="mode-edit"
-            size={Metrics.icons.medium}
+              <Text style={styles.title}>{note.title}</Text>
+              <Text style={styles.text}>{note.text}</Text>
+            </View>
+
+            <View style={styles.relatedContainer}>
+              {this.renderRelated()}
+            </View>
+          </View>
+        </ScrollView>
+        <View style={styles.buttonsFooter} >
+          <AddButton
+            onPress={addRelation}
           />
-        </TouchableOpacity>
-
-        <Text style={styles.title}>{note.title}</Text>
-        <Text style={styles.text}>{note.text}</Text>
+        </View>
       </View>
-
-      <View style={styles.relatedContainer}>
-        {this.renderRelated()}
-      </View>
-
-      <View style={styles.buttonsFooter} >
-        <AddButton
-          onPress={addRelation}
-        />
-      </View>
-    </View>
     )
   }
 }
@@ -126,6 +145,9 @@ class NoteView extends Component {
 
 const styles = StyleSheet.create({
   ...AppStyles.screen,
+  scrollview: {
+    // flex: 1,
+  },
   container: {
     padding: 10,
     paddingTop: 50,

@@ -1,10 +1,12 @@
+// @flow weak
+
 import test from 'ava'
 import { expect } from 'chai'
 
 import R from 'ramda'
 import Immutable from 'seamless-immutable'
 
-import types from '../../app/actions/types'
+// import types from '../../app/actions/types'
 import actions from '../../app/actions/creators'
 import createStore from '../../app/store'
 import groupsReducer from '../../app/reducers/groups'
@@ -21,7 +23,6 @@ const getNoteByTitle = title =>
 
 
 test('add note', t => {
-
   const store = createStore()
   const noteData = {
     title: 'test note',
@@ -41,7 +42,9 @@ test('add note', t => {
   expect(item).to.not.be.undefined
 })
 
-test('add relation', t => {
+test('add and remove relation', t => {
+  const store = createStore()
+
   const groupId = 'g-mmap1'
   const rel = {
     from: 'c',
@@ -49,17 +52,34 @@ test('add relation', t => {
     type: 'custom',
   }
 
-  const action = actions.saveRelation(groupId, rel)
+  const findCon = R.compose(
+    R.find(R.propEq('b', rel.to)),
+    R.path(['groups', groupId, 'cons']),
+  )
 
-  const findCon = R.find(R.propEq('b', rel.to))
-  expect(findCon(defState)).to.be.undefined
+  expect(
+    findCon(store.getState())
+  ).to.be.undefined
 
-  const processedGroups = groupsReducer(Immutable(defState.groups), action)
+  store.dispatch(actions.saveRelation(groupId, rel))
 
-  const addedRel = findCon(R.path([groupId, 'cons'], processedGroups))
+  const addedRel = findCon(store.getState())
   expect(addedRel).to.not.be.undefined
 
   expect(addedRel).to.have.property('a', 'c')
   expect(addedRel).to.have.property('type', 'custom')
+  expect(addedRel).to.have.property('id')
+
+  const getConsCount = () => R.path(['groups', groupId, 'cons'])(store.getState()).length
+
+  const consLen = getConsCount()
+  store.dispatch(actions.deleteRelation(groupId, addedRel.id))
+
+
+  expect(
+    findCon(store.getState())
+  ).to.be.undefined
+
+  expect(getConsCount()).to.be.equal(consLen - 1)
 })
 

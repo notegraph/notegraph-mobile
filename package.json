@@ -11,7 +11,8 @@
     "test": "NODE_ENV=production ava",
     "test:watch": "npm run test -- --watch",
     "coverage": "nyc ava && nyc report --reporter=html && open coverage/index.html || xdg-open coverage/index.html",
-    "adb:date": "adb shell \"date `date +%m%d%H%M%Y.%s`\""
+    "adb:date": "adb shell \"date `date +%m%d%H%M%Y.%s`\"",
+    "flow": "flow; test $? -eq 0 -o $? -eq 2"
   },
   "dependencies": {
     "ramda": "^0.22.1",

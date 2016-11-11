@@ -1,7 +1,11 @@
+// @flow weak
+
 import R from 'ramda'
 import types from './types'
 import { Actions as RouteActions } from 'react-native-router-flux'
 
+
+// type Thunk = (dispatch: ()=> void, getState: ()=> dictionary)
 
 const openNote = (id, readMode) => (dispatch, getState) => {
   const note = getState().notes[id]
@@ -67,8 +71,8 @@ const deleteActiveNote = () => (dispatch, getState) => {
 }
 
 
-const saveRelation = (groupId, rel) => (dispatch, getState) => {
-  const { notes } = getState().notes
+const saveRelation = (groupId: string, rel: Rel) => (dispatch, getState) => {
+  const { notes } = getState()
   if (!notes[rel.from] || !notes[rel.to]) {
     console.warn('incorrect from or to')
     return
@@ -78,9 +82,23 @@ const saveRelation = (groupId, rel) => (dispatch, getState) => {
   dispatch({
     type: types.SAVE_RELATION,
     groupId,
-    rel: { a: rel.from, b: rel.to, type: rel.type },
+    rel: {
+      id: guid(),
+      a: rel.from,
+      b: rel.to,
+      type: rel.type,
+    },
   })
 }
+
+const deleteRelation = (groupId: string, relId: string) => {
+  return {
+    type: types.DELETE_RELATION,
+    groupId,
+    relId,
+  }
+}
+
 
 export default {
   newNote,
@@ -88,4 +106,13 @@ export default {
   saveNote,
   deleteActiveNote,
   saveRelation,
+  deleteRelation,
+}
+
+// types
+
+type Rel = {
+  from: string,
+  to: string,
+  type: string,
 }

@@ -61,15 +61,17 @@ export default (rootReducer, rootSaga) => {
 
   /* ------------- AutoRehydrate Enhancer ------------- */
 
+  const persistEnabled = ReduxPersist.active && !global.__TEST__
+
   // add the autoRehydrate enhancer
-  if (ReduxPersist.active) {
+  if (persistEnabled) {
     enhancers.push(autoRehydrate())
   }
 
   const store = createStore(rootReducer, compose(...enhancers))
 
   // configure persistStore and check reducer version number
-  if (ReduxPersist.active) {
+  if (persistEnabled) {
     RehydrationServices.updateReducers(store)
   }
 
