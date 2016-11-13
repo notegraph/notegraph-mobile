@@ -40,6 +40,37 @@ test('add note', t => {
   const item = R.find(R.propEq('id', note.id))(group.items)
 
   expect(item).to.not.be.undefined
+
+  const findNoteById = () => store.getState().notes[note.id]
+
+  // test delete now
+  expect(findNoteById()).to.not.be.undefined
+  store.dispatch(actions.deleteNote(note.id))
+  expect(findNoteById()).to.be.undefined
+})
+
+
+test('delete note with relations', () => {
+  const store = createStore()
+  const groupId = 'g-mmap1'
+  const noteId = 'a1'
+  const findCon = R.compose(
+    R.find(R.propEq('a', noteId)),
+    R.path(['groups', groupId, 'cons']),
+  )
+  const findGroupItem = R.compose(
+    R.find(R.propEq('id', noteId)),
+    R.path(['groups', groupId, 'items']),
+  )
+
+
+  expect(findCon(store.getState())).to.not.be.undefined
+  store.dispatch(actions.deleteNote(noteId))
+
+  const stateAfter = store.getState()
+
+  expect(findCon(stateAfter)).to.be.undefined
+  expect(findGroupItem(stateAfter)).to.be.undefined
 })
 
 test('add and remove relation', t => {

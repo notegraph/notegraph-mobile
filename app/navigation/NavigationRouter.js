@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react'
+import { Alert } from 'react-native'
+
 import { Scene, Router, Actions as RouteActions } from 'react-native-router-flux'
 import styles from './styles/NavigationContainerStyle'
-// import itemStyle from './styles/NavItemsStyle'
 import NavItems from './NavItems'
 
 import { connect } from 'react-redux'
@@ -22,11 +23,11 @@ import actions from '../actions/creators'
 
 class NavigationRouter extends Component {
 
-  renderDeleteBtn = () => NavItems.deleteNoteButton(this.props.deleteNote)
+  renderDeleteBtn = (navProps) => NavItems.deleteNoteButton(navProps, this.props.deleteNote)
 
   render () {
     return (
-      <Router >
+      <Router titleStyle={styles.title} >
         <Scene key="root" navigationBarStyle={styles.navBar} >
 
           <Scene initial key="dashboard" component={Dashboard} title="Notes" />
@@ -60,11 +61,22 @@ function mapStateToProps (state) {
   return {}
 }
 
-function mapDispatchToProps (dispatch) {
+function mapDispatchToProps (dispatch, ownProps) {
   return {
-    deleteNote: () => {
-      dispatch(actions.deleteActiveNote())
-      RouteActions.pop()
+    deleteNote: (noteId) => {
+      const doDelete = () => {
+        dispatch(actions.deleteNote(noteId))
+        RouteActions.pop()
+      }
+
+      Alert.alert(
+        'Remove note',
+        'Are you sure?',
+        [
+          { text: 'Cancel', style: 'cancel' },
+          { text: 'OK', onPress: doDelete },
+        ]
+      )
     }
   }
 }

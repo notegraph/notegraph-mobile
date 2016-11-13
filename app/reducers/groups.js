@@ -36,8 +36,17 @@ const deleteRelation = (state, action) => {
   })
 }
 
+const deleteNote = (state, action) => {
+  const { noteId, groupId } = action
+  return state.updateIn([groupId, 'items'], items => {
+    return R.reject(R.propEq('id', noteId), items)
+  })
+}
+
+
 const ACTION_HANDLERS = {
   [types.SAVE_NOTE]: saveNote,
+  [types.DELETE_NOTE]: deleteNote,
   [types.SAVE_RELATION]: saveRelation,
   [types.DELETE_RELATION]: deleteRelation,
 }

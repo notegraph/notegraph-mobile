@@ -41,9 +41,10 @@ export default {
     )
   },
 
-  deleteNoteButton (onPressFunction) {
+  deleteNoteButton ({ noteId }, onPressFunction) {
+    const handlePress = () => onPressFunction(noteId)
     return (
-      <TouchableOpacity onPress={onPressFunction} >
+      <TouchableOpacity onPress={handlePress} >
         <Icon name="delete"
           size={Metrics.icons.medium}
           color={Colors.snow}

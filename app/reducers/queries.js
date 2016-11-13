@@ -1,7 +1,9 @@
+/* @flow weak */
+
 import R from 'ramda'
 
 
-export const findRelatedNotes = (state, groupId, noteId) => {
+export const findRelatedNotes = (state, groupId, noteId) : RelInfo[] => {
   const { groups, notes } = state
   const group = groups[groupId]
   if (!group || !group.cons) return []
@@ -18,4 +20,11 @@ export const findRelatedNotes = (state, groupId, noteId) => {
       return { con, note: relId ? notes[relId] : null }
     })
   )(group.cons)
+}
+
+// tyes
+
+type RelInfo = {
+  con: any,
+  note: any,
 }

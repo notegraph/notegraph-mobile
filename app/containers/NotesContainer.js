@@ -40,6 +40,12 @@ const notesColumn = (items: any[], isEven: bool, props) => {
 
     if (isEven && (i % 2) === 1) return
     if (!isEven && (i % 2) === 0) return
+
+    if (!note) {
+      console.warn(`orphan record, no note found, i=${i}`)
+      return
+    }
+
     return <NoteItem key={i} id={note.id} note={note} {...props} />
   })
 }

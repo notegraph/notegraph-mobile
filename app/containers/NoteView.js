@@ -10,8 +10,6 @@ import {
   Alert,
 } from 'react-native'
 
-import R from 'ramda'
-
 import { connect } from 'react-redux'
 import { AppStyles, Colors, Metrics } from '../themes'
 import Icon from 'react-native-vector-icons/MaterialIcons'
@@ -28,9 +26,10 @@ import RelatedNote from '../components/RelatedNote'
 const {height, width} = Dimensions.get('window')
 
 
-const mapStateToProps = (state) => {
-  const { editor } = state
-  const note = editor.note || {}
+const mapStateToProps = (state, ownProps) => {
+  const { noteId } = ownProps
+  const { editor, notes } = state
+  const note = notes[noteId] || {}
   const { groupId } = editor
 
   const related = findRelatedNotes(state, groupId, note.id)
@@ -42,10 +41,11 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
+  const { noteId } = ownProps
   return {
-    editNote: (id) => dispatch(actions.openNote(id, false)),
+    editNote: () => dispatch(actions.openNote(noteId, false)),
     viewNote: (id) => dispatch(actions.openNote(id, true)),
-    addRelation: () => RouteActions.newRelation(),
+    addRelation: (id) => RouteActions.newRelation({ noteId }),
     deleteRelation: (groupId, relId) => dispatch(actions.deleteRelation(groupId, relId))
   }
 }
@@ -64,6 +64,7 @@ function AddButton ({onPress, style}) {
 
 class NoteView extends Component {
   static propTypes = {
+    noteId: PropTypes.string.isRequired,
     note: PropTypes.object.isRequired,
     groupId: PropTypes.string.isRequired,
     related: PropTypes.arrayOf(
@@ -79,8 +80,8 @@ class NoteView extends Component {
   }
 
   editCurrentNote = () => {
-    const { note, editNote } = this.props
-    editNote(note.id)
+    const { editNote } = this.props
+    editNote()
   }
 
   showDeleteConfirm = (relId) => {

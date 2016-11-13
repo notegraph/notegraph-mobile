@@ -31,18 +31,19 @@ const connectionTypes = [
 ]
 
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
+  const { noteId } = ownProps
   const { editor, notes } = state
   const items = R.path(['groups', editor.groupId, 'items'])(state)
 
   const matchedNotes = R.compose(
-    R.reject(R.propEq('id', editor.note.id)),
+    R.reject(R.propEq('id', noteId)),
     R.map(i => notes[i.id])
   )(items)
 
   return {
     groupId: editor.groupId,
-    curNote: editor.note,
+    curNote: notes[noteId],
     matchedNotes,
   }
 }
@@ -64,6 +65,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 
 class AddRelation extends Component {
   static propTypes = {
+    noteId: PropTypes.string.isRequired,
     groupId: PropTypes.string.isRequired,
     curNote: PropTypes.object.isRequired,
     matchedNotes: PropTypes.arrayOf(PropTypes.any).isRequired,

@@ -26,6 +26,7 @@ class RelatedNote extends Component {
     return (
       <TouchableOpacity
         onPress={this.handlePress}
+        delayLongPress={3000}
         onLongPress={this.handleLongPress}
       >
         <View style={styles.container}>

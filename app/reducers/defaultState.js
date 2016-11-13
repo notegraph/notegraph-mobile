@@ -60,8 +60,8 @@ export default {
       ],
 
       cons: [
-        { a: 'a1', b: 'b1', type: 'defines' },
-        { a: 'b1', b: 'c',
+        { id: 1, a: 'a1', b: 'b1', type: 'defines' },
+        { id: 2, a: 'b1', b: 'c',
           type: 'custom',
           desc: 'how are they related...',
           nondir: true, // non directional
@@ -81,10 +81,10 @@ export default {
         { id: 'fd', type: 'flow-decision' },
       ],
       cons: [
-        {a: 'fa', b: 'fb'},
-        {a: 'fb', b: 'fc'},
-        {a: 'fb', b: 'fd', 'type': 'flow-follows'},
-        {a: 'fd', b: 'fa', 'type': 'flow-negative'},
+        {id: 1, a: 'fa', b: 'fb'},
+        {id: 2, a: 'fb', b: 'fc'},
+        {id: 3, a: 'fb', b: 'fd', 'type': 'flow-follows'},
+        {id: 4, a: 'fd', b: 'fa', 'type': 'flow-negative'},
       ]
     },
   },

@@ -19,6 +19,7 @@ const {height, width} = Dimensions.get('window')
 
 class NoteEdit extends Component {
   static propTypes = {
+    noteId: PropTypes.string,
     note: PropTypes.object.isRequired,
     saveNote: PropTypes.func.isRequired,
   }
@@ -106,9 +107,11 @@ const styles = StyleSheet.create({
 
 })
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
+  const { noteId } = ownProps
+  const { notes } = state
   return {
-    note: state.editor.note || {},
+    note: noteId ? notes[noteId] : {},
   }
 }
 

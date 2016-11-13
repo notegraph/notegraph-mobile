@@ -39,8 +39,8 @@ const save = (state, action) => {
 }
 
 const deleteNote = (state, action) => {
-  const { id } = action.payload
-  return R.reject(R.propEq('id', id))(state)
+  const { noteId } = action
+  return R.reject(R.propEq('id', noteId))(state)
 }
 
 const ACTION_HANDLERS = {

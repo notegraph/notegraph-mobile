@@ -3,7 +3,7 @@
 import R from 'ramda'
 import types from './types'
 import { Actions as RouteActions } from 'react-native-router-flux'
-
+import { findRelatedNotes } from '../reducers/queries'
 
 // type Thunk = (dispatch: ()=> void, getState: ()=> dictionary)
 
@@ -15,12 +15,12 @@ const openNote = (id, readMode) => (dispatch, getState) => {
     payload: { note },
   })
 
-  if (readMode) RouteActions.noteView(id)
-  else RouteActions.noteEdit(id)
+  if (readMode) RouteActions.noteView({ noteId: id })
+  else RouteActions.noteEdit({ noteId: id })
 }
 
 const newNote = () => {
-  RouteActions.noteEdit()
+  RouteActions.noteEdit({ noteId: null })
   return { type: types.NEW_NOTE }
 }
 
@@ -57,16 +57,25 @@ const saveNote = (note) => (dispatch, getState) => {
 }
 
 
-const deleteActiveNote = () => (dispatch, getState) => {
-  const activeNote = getState().editor.note
+const deleteNote = (noteId: string) => (dispatch, getState) => {
+  // FIXME: remove dependency on active note
+  const state = getState()
+  const { notes, editor } = state
 
+  const activeNote = notes[noteId]
   if (!activeNote || !activeNote.id) return
+
+  const { groupId } = editor
+
+  const rels = findRelatedNotes(state, groupId, noteId)
+  for (const rel of rels) {
+    dispatch(deleteRelation(groupId, rel.con.id))
+  }
 
   dispatch({
     type: types.DELETE_NOTE,
-    payload: {
-      id: activeNote.id,
-    }
+    noteId,
+    groupId,
   })
 }
 
@@ -92,6 +101,13 @@ const saveRelation = (groupId: string, rel: Rel) => (dispatch, getState) => {
 }
 
 const deleteRelation = (groupId: string, relId: string) => {
+
+  if (!groupId || !relId) {
+    console.warn('deleteRelation, insufficient parameters')
+    console.log({ n: 'deleteRelation', groupId, relId })
+    return { type: 'EMPTY' }
+  }
+
   return {
     type: types.DELETE_RELATION,
     groupId,
@@ -104,7 +120,7 @@ export default {
   newNote,
   openNote,
   saveNote,
-  deleteActiveNote,
+  deleteNote,
   saveRelation,
   deleteRelation,
 }
