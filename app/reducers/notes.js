@@ -34,13 +34,13 @@ const INITIAL_STATE = Immutable(defaultState.notes)
 
 
 const save = (state, action) => {
-  const { isNew, note } = action.payload
+  const { note } = action.payload
   return state.set(note.id, note)
 }
 
 const deleteNote = (state, action) => {
   const { noteId } = action
-  return R.reject(R.propEq('id', noteId))(state)
+  return state.without(noteId)
 }
 
 const ACTION_HANDLERS = {

@@ -29,6 +29,18 @@ export default {
     )
   },
 
+  saveNoteButton (handlePress) {
+    return (
+      <TouchableOpacity onPress={handlePress}>
+        <Icon name="check"
+          size={Metrics.icons.medium}
+          color={Colors.snow}
+          style={styles.navButtonLeft}
+        />
+      </TouchableOpacity>
+    )
+  },
+
   hamburgerButton () {
     return (
       <TouchableOpacity onPress={openDrawer}>

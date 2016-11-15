@@ -2,7 +2,7 @@
 
 import R from 'ramda'
 import types from './types'
-import { Actions as RouteActions } from 'react-native-router-flux'
+import { Actions as RouteActions, ActionConst } from 'react-native-router-flux'
 import { findRelatedNotes } from '../reducers/queries'
 
 // type Thunk = (dispatch: ()=> void, getState: ()=> dictionary)
@@ -13,6 +13,7 @@ const openNote = (id, readMode) => (dispatch, getState) => {
   dispatch({
     type: types.OPEN_NOTE,
     payload: { note },
+    isReadMode: readMode,
   })
 
   if (readMode) RouteActions.noteView({ noteId: id })
@@ -30,7 +31,8 @@ const newNote = () => {
 
 function guid () {
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-    var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8)
+    const r = Math.random() * 16 | 0
+    const v = c === 'x' ? r : (r & 0x3 | 0x8)
     return v.toString(16)
   })
 }
@@ -54,6 +56,12 @@ const saveNote = (note) => (dispatch, getState) => {
       notebookId,
     }
   })
+
+  if (isNew) {
+    RouteActions.noteView({ noteId: id, type: ActionConst.REPLACE })
+  } else {
+    RouteActions.pop()
+  }
 }
 
 
@@ -115,6 +123,14 @@ const deleteRelation = (groupId: string, relId: string) => {
   }
 }
 
+const setEditorReadMode = (mode = true) => {
+  return {
+    type: types.SET_EDITOR_MODE,
+    isReadMode: true,
+  }
+}
+
+
 
 export default {
   newNote,
@@ -123,6 +139,7 @@ export default {
   deleteNote,
   saveRelation,
   deleteRelation,
+  setEditorReadMode,
 }
 
 // types

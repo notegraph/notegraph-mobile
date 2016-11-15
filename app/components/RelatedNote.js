@@ -6,6 +6,8 @@ import {
   TouchableOpacity,
 } from 'react-native'
 
+import { Colors } from '../themes'
+
 
 class RelatedNote extends Component {
   handlePress = () => {
@@ -31,7 +33,7 @@ class RelatedNote extends Component {
       >
         <View style={styles.container}>
           <Text style={styles.conType}>{con.type.name || con.type}</Text>
-          {!!note.title && <Text>{note.title}</Text>}
+          {!!note.title && <Text style={styles.title}>{note.title}</Text>}
           <Text>{note.text}</Text>
         </View>
       </TouchableOpacity>
@@ -48,10 +50,13 @@ RelatedNote.propTypes = {
 
 const styles = StyleSheet.create({
   conType: {
-    backgroundColor: 'blue',
+    backgroundColor: Colors.blue,
     color: 'white',
     padding: 3,
     textAlign: 'center',
+  },
+  title: {
+    fontWeight: 'bold',
   },
   container: {
     marginBottom: 15,

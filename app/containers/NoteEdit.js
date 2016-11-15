@@ -13,15 +13,35 @@ import R from 'ramda'
 import { connect } from 'react-redux'
 import { AppStyles, Colors } from '../themes'
 import actions from '../actions/creators'
+import { Actions as RouteActions } from 'react-native-router-flux'
 
 
 const {height, width} = Dimensions.get('window')
+
+
+const mapStateToProps = (state, ownProps) => {
+  const { noteId } = ownProps
+  const { notes, editor } = state
+  return {
+    note: noteId ? notes[noteId] : {},
+    isReadMode: editor.isReadMode,
+  }
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    saveNote: note => dispatch(actions.saveNote(note)),
+
+  }
+}
+
 
 class NoteEdit extends Component {
   static propTypes = {
     noteId: PropTypes.string,
     note: PropTypes.object.isRequired,
     saveNote: PropTypes.func.isRequired,
+    isReadMode: PropTypes.bool.isRequired,
   }
 
   constructor (props) {
@@ -33,10 +53,14 @@ class NoteEdit extends Component {
     }
   }
 
-  componentWillUnmount () {
+  componentWillReceiveProps (nextProps) {
     const { saveNote } = this.props
-    if (this.state.isChanged) {
-      saveNote(this.state.note)
+    if (nextProps.isReadMode && nextProps.isReadMode !== this.props.isReadMode) {
+      if (this.state.isChanged) {
+        saveNote(this.state.note)
+      } else {
+        RouteActions.pop()
+      }
     }
   }
 
@@ -107,18 +131,6 @@ const styles = StyleSheet.create({
 
 })
 
-const mapStateToProps = (state, ownProps) => {
-  const { noteId } = ownProps
-  const { notes } = state
-  return {
-    note: noteId ? notes[noteId] : {},
-  }
-}
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-  return {
-    saveNote: note => dispatch(actions.saveNote(note)),
-  }
-}
 
 export default connect(mapStateToProps, mapDispatchToProps)(NoteEdit)

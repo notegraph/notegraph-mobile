@@ -24,6 +24,8 @@ import actions from '../actions/creators'
 class NavigationRouter extends Component {
 
   renderDeleteBtn = (navProps) => NavItems.deleteNoteButton(navProps, this.props.deleteNote)
+  renderSaveButton = () => NavItems.saveNoteButton(this.props.setNoteEditorMode)
+
 
   render () {
     return (
@@ -33,7 +35,7 @@ class NavigationRouter extends Component {
           <Scene initial key="dashboard" component={Dashboard} title="Notes" />
           <Scene
             key="noteEdit" component={NoteEdit} title="Active Note"
-            renderBackButton={NavItems.backButton}
+            renderBackButton={this.renderSaveButton}
             renderRightButton={this.renderDeleteBtn}
           />
           <Scene
@@ -54,6 +56,7 @@ class NavigationRouter extends Component {
 
 NavigationRouter.propTypes = {
   deleteNote: PropTypes.func.isRequired,
+  setNoteEditorMode: PropTypes.func.isRequired,
 }
 
 
@@ -77,7 +80,8 @@ function mapDispatchToProps (dispatch, ownProps) {
           { text: 'OK', onPress: doDelete },
         ]
       )
-    }
+    },
+    setNoteEditorMode: () => dispatch(actions.setEditorReadMode()),
   }
 }
 

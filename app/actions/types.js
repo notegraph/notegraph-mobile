@@ -9,4 +9,5 @@ export default createTypes(`
   DELETE_NOTE
   SAVE_RELATION
   DELETE_RELATION
+  SET_EDITOR_MODE
 `)

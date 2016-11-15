@@ -20,7 +20,7 @@ import actions from '../actions/creators'
 
 import { findRelatedNotes } from '../reducers/queries'
 import RelatedNote from '../components/RelatedNote'
-
+import ActionButton from '../components/ActionButton'
 
 
 const {height, width} = Dimensions.get('window')
@@ -51,16 +51,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 }
 
 
-function AddButton ({onPress, style}) {
-  return (
-    <TouchableOpacity onPress={onPress}>
-      <Icon name="add-circle"
-        size={Metrics.icons.button}
-        style={style}
-      />
-    </TouchableOpacity>
-  )
-}
+
 
 class NoteView extends Component {
   static propTypes = {
@@ -91,8 +82,8 @@ class NoteView extends Component {
       'Remove connection',
       'Are you sure?',
       [
-        {text: 'Cancel', onPress: () => {}, style: 'cancel'},
-        {text: 'OK', onPress: () => deleteRelation(groupId, relId) },
+        { text: 'Cancel', onPress: () => {}, style: 'cancel' },
+        { text: 'OK', onPress: () => deleteRelation(groupId, relId) },
       ]
     )
   }
@@ -111,7 +102,7 @@ class NoteView extends Component {
   }
 
   render () {
-    const { note, addRelation } = this.props
+    const { note, addRelation, related } = this.props
 
     return (
       <View style={{flex: 1}}>
@@ -128,13 +119,16 @@ class NoteView extends Component {
               <Text style={styles.text}>{note.text}</Text>
             </View>
 
-            <View style={styles.relatedContainer}>
-              {this.renderRelated()}
-            </View>
+            { !!related.length && (
+              <View style={styles.relatedContainer}>
+                {this.renderRelated()}
+              </View>
+              )
+            }
           </View>
         </ScrollView>
         <View style={styles.buttonsFooter} >
-          <AddButton
+          <ActionButton
             onPress={addRelation}
           />
         </View>

@@ -11,7 +11,10 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import NotesContainer from './NotesContainer'
 
-import TakeANote from '../components/TakeANote'
+// import TakeANote from '../components/TakeANote'
+import ActionButton from '../components/ActionButton'
+
+
 import { AppStyles } from '../themes'
 
 
@@ -21,7 +24,9 @@ class Dashboard extends Component {
     return (
       <View style={[styles.mainContainer, styles.container]} >
         <NotesContainer navToNote={this.navToNote} />
-        <TakeANote onPress={this.navToNewnote} />
+        <View style={styles.buttonsFooter}>
+          <ActionButton onPress={this.navToNewnote} />
+        </View>
       </View>
     )
   }
@@ -54,5 +59,9 @@ const styles = StyleSheet.create({
     margin: 0,
     backgroundColor: '#ccc',
   },
-
+  buttonsFooter: {
+    position: 'absolute',
+    bottom: 30,
+    right: 30,
+  }
 })

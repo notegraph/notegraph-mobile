@@ -3,6 +3,7 @@ import {
   View,
   StyleSheet,
   Dimensions,
+  ScrollView,
 } from 'react-native'
 
 import R from 'ramda'
@@ -54,18 +55,23 @@ const NotesContainer = ({ items, onOpenNote }) => {
   const layoutWidth = Dimensions.get('window').width
   const columnStyle = StyleSheet.create({
     runtime: {
-      width: layoutWidth / 2 - NOTES_MARGIN * 2 + 1,
+      flex: 1,
+      // width: layoutWidth / 2 - NOTES_MARGIN * 2 + 1,
     }
   })
 
   return (
-    <View style={styles.content}>
-      <View style={[styles.columnLeft, columnStyle.runtime]}>
-        {notesColumn(items, true, { onOpenNote })}
-      </View>
-      <View style={[styles.columnRight, columnStyle.runtime]}>
-        {notesColumn(items, false, { onOpenNote })}
-      </View>
+    <View style={styles.container}>
+      <ScrollView>
+        <View style={styles.scrollable}>
+          <View style={[styles.column, styles.columnLeft]}>
+            {notesColumn(items, true, { onOpenNote })}
+          </View>
+          <View style={[styles.column, styles.columnRight]}>
+            {notesColumn(items, false, { onOpenNote })}
+          </View>
+        </View>
+      </ScrollView>
     </View>
   )
 }
@@ -76,27 +82,30 @@ NotesContainer.propTypes = {
   onOpenNote: PropTypes.func,
 }
 
-const NOTES_MARGIN = 4
+// const NOTES_MARGIN = 4
 
 const styles = StyleSheet.create({
-  content: { // notes
-    flex: 1,
-    // fontSize: 20,
-    // textAlign: 'center',
+  container: {
     paddingTop: 5,
+    flex: 1,
+  },
+  scrollable: { // notes
+    flex: 1,
     flexDirection: 'row',
-    flexWrap: 'wrap',
-    alignItems: 'flex-start',
+    // flexWrap: 'wrap',
+    // alignItems: 'flex-start',
+  },
+  column: {
+    flex: 1,
+    margin: 1,
   },
 
   columnLeft: {
-    margin: 0,
-    marginLeft: NOTES_MARGIN,
-    marginRight: NOTES_MARGIN / 2,
+    marginLeft: 2,
+    // marginRight: 1,
   },
   columnRight: {
-    margin: 0,
-    marginLeft: NOTES_MARGIN / 2,
+    marginRight: 2,
   },
 
 })

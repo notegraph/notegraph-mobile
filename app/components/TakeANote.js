@@ -7,7 +7,7 @@ import {
 } from 'react-native'
 
 
-
+// TODO: obsolete, remove
 const TakeANote = ({ onPress }) => (
   <TouchableHighlight onPress={onPress}>
     <View style={styles.footer} >

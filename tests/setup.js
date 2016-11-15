@@ -20,7 +20,13 @@ mockery.registerMock('reactotron-redux', {})
 mockery.registerMock('reactotron-apisauce', {})
 mockery.registerMock('react-native-animatable', {View: 'Animatable.View'})
 mockery.registerMock('react-native-vector-icons/Ionicons', {})
-mockery.registerMock('react-native-router-flux', {})
+mockery.registerMock('react-native-router-flux', {
+  Actions: {
+    noteView: () => {},
+    pop: () => {},
+  },
+  ActionConst: {}
+})
 
 
 // mock i18n as it uses react native stufff

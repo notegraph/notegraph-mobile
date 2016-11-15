@@ -9,16 +9,26 @@ const INITIAL_STATE = Immutable({
   note: null,
   notebookId: 'ngbook1',
   groupId: 'g-mmap1',
+  isReadMode: null,
 })
-
-
 
 
 // const closeNote = (state, action) =>
 //   state.merge({ note: null })
 
-// const openNote = (state, action) =>
-//   state.merge({ note: action.payload.note })
+const newNote = (state, action) => {
+  return state.merge({ isReadMode: false })
+}
+
+const openNote = (state, action) => {
+  const { isReadMode } = action
+  return state.merge({ isReadMode })
+}
+
+const setMode = (state, action) => {
+  const { isReadMode } = action
+  return state.merge({ isReadMode })
+}
 
 
 // const newNote = (state, action) =>
@@ -29,8 +39,9 @@ const INITIAL_STATE = Immutable({
 
 
 const ACTION_HANDLERS = {
-  // [types.NEW_NOTE]: newNote,
-  // [types.OPEN_NOTE]: openNote,
+  [types.NEW_NOTE]: newNote,
+  [types.OPEN_NOTE]: openNote,
+  [types.SET_EDITOR_MODE]: setMode,
   // [types.CLOSE_NOTE]: closeNote,
   // [types.SAVE_NOTE]: saveNote,
 }
