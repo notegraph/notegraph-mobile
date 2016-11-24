@@ -6,7 +6,6 @@ import {
   View,
   TextInput,
   StyleSheet,
-  Dimensions,
   ScrollView,
 } from 'react-native'
 
@@ -14,21 +13,24 @@ import R from 'ramda'
 
 import { connect } from 'react-redux'
 import { AppStyles, Fonts } from '../themes'
-import Icon from 'react-native-vector-icons/MaterialIcons'
 import { Actions as RouteActions } from 'react-native-router-flux'
 
 import actions from '../actions/creators'
 import FoundNote from '../components/FoundNote'
 import ConnectionType from '../components/ConnectionType'
-
+import relTypes, { relNames, onStartIcons } from '../constants/relTypes'
 // import { findRelatedNotes } from '../reducers/queries'
 
 
-const connectionTypes = [
-  { id: 'defines', name: 'Defines' },
-  { id: 'related', name: 'Related' },
-  { id: 'custom', name: 'Custom Relationship', isCustom: true },
-]
+const allowedTypes = [relTypes.related, relTypes.defines, relTypes.custom]
+
+const connectionTypes = allowedTypes.map(id => {
+  return {
+    id,
+    name: relNames[id],
+    icon: onStartIcons[id],
+  }
+})
 
 
 const mapStateToProps = (state, ownProps) => {
@@ -110,9 +112,9 @@ class AddRelation extends Component {
     return (
       <View>
         <TextInput placeholder="Search" />
-
-        <Text>Select note</Text>
-        {this.renderResults()}
+        <ScrollView style={styles.results}>
+          {this.renderResults()}
+        </ScrollView>
       </View>
     )
   }
@@ -163,7 +165,9 @@ const styles = StyleSheet.create({
     // flexDirection: 'row',
 
   },
-
+  results: {
+    marginTop: 20,
+  },
   header: {
     fontSize: Fonts.size.h3,
     // color: 'red',

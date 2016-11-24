@@ -1,10 +1,11 @@
 import React, { Component, PropTypes } from 'react'
 import {
-  Text,
   View,
   StyleSheet,
-  Navigator
+  StatusBar,
 } from 'react-native'
+
+import { Colors } from './themes'
 
 import { Provider } from 'react-redux'
 import NavigationRouter from './navigation/NavigationRouter'
@@ -19,6 +20,10 @@ export default class Root extends Component {
     return (
       <Provider store={this.props.store}>
         <View style={styles.applicationView}>
+          <StatusBar
+            backgroundColor={Colors.statusBar}
+            barStyle="light-content"
+          />
           <NavigationRouter />
         </View>
       </Provider>
@@ -31,5 +36,5 @@ export default class Root extends Component {
 const styles = StyleSheet.create({
   applicationView: {
     flex: 1
-  },
+  }
 })

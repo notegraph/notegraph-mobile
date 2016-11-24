@@ -38,7 +38,7 @@ function guid () {
 }
 
 
-const saveNote = (note) => (dispatch, getState) => {
+const saveNote = (note, ownerNoteId) => (dispatch, getState) => {
   const { groupId, notebookId } = getState().editor
   let isNew = false
   let { id } = note
@@ -54,6 +54,7 @@ const saveNote = (note) => (dispatch, getState) => {
       isNew,
       groupId,
       notebookId,
+      owner: ownerNoteId,
     }
   })
 
@@ -78,6 +79,12 @@ const deleteNote = (noteId: string) => (dispatch, getState) => {
   const rels = findRelatedNotes(state, groupId, noteId)
   for (const rel of rels) {
     dispatch(deleteRelation(groupId, rel.con.id))
+  }
+
+  const groupItems = R.path(['groups', groupId, 'items'], state)
+  const children = R.filter(R.propEq('owner', noteId), groupItems)
+  for (const item of children) {
+    dispatch(deleteNote(item.id))
   }
 
   dispatch({

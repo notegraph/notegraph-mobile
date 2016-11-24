@@ -1,7 +1,10 @@
 import React from 'react'
-import { TouchableOpacity, Text } from 'react-native'
+import {
+  TouchableOpacity,
+  View,
+} from 'react-native'
 import styles from './styles/NavItemsStyle'
-import { Actions as NavigationActions } from 'react-native-router-flux'
+import { Actions as RouteActions, ActionConst } from 'react-native-router-flux'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { Colors, Metrics } from '../themes'
 
@@ -9,7 +12,7 @@ import { Colors, Metrics } from '../themes'
 // import I18n from '../I18n/I18n.js'
 
 const openDrawer = () => {
-  NavigationActions.refresh({
+  RouteActions.refresh({
     key: 'drawer',
     open: true
   })
@@ -19,13 +22,34 @@ export default {
 
   backButton () {
     return (
-      <TouchableOpacity onPress={NavigationActions.pop}>
+      <TouchableOpacity onPress={RouteActions.pop}>
         <Icon name="arrow-back"
           size={Metrics.icons.medium}
           color={Colors.snow}
           style={styles.navButtonLeft}
         />
       </TouchableOpacity>
+    )
+  },
+
+  homeButton () {
+    return (
+      <TouchableOpacity onPress={() => RouteActions.dashboard({ type: ActionConst.RESET })}>
+        <Icon name="home"
+          size={Metrics.icons.medium}
+          color={Colors.snow}
+          style={styles.navButtonLeft}
+        />
+      </TouchableOpacity>
+    )
+  },
+
+  backAndHome () {
+    return (
+      <View style={styles.twoButtons}>
+        {this.backButton()}
+        {this.homeButton()}
+      </View>
     )
   },
 

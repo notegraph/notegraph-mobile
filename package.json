@@ -4,20 +4,20 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "flow": "flow",
+    "flow": "flow; test $? -eq 0 -o $? -eq 2",
     "lint": "eslint *.js app/**/*.js",
     "fixcode": "npm run lint -- --fix",
     "android:install": "cd android && ./gradlew assembleRelease && adb -s 010fc2cba482160c install -r app/build/outputs/apk/app-release.apk",
     "test": "NODE_ENV=production ava",
     "test:watch": "npm run test -- --watch",
     "coverage": "nyc ava && nyc report --reporter=html && open coverage/index.html || xdg-open coverage/index.html",
-    "adb:date": "adb shell \"date `date +%m%d%H%M%Y.%s`\"",
-    "flow": "flow; test $? -eq 0 -o $? -eq 2"
+    "adb:date": "adb shell \"date `date +%m%d%H%M%Y.%s`\""
   },
   "dependencies": {
     "ramda": "^0.22.1",
     "react": "15.3.2",
     "react-native": "^0.36.1",
+    "react-native-material-kit": "^0.3.3",
     "react-native-router-flux": "^3.36.0",
     "react-native-vector-icons": "^2.0.3",
     "redux": "^3.4.0",
@@ -44,6 +44,7 @@
     "nyc": "^8.1.0",
     "react-addons-test-utils": "^15.3.1",
     "react-dom": "^15.3.1",
+    "react-native-material-kit": "github:xinthink/react-native-material-kit#2ba4348e14256d206e9d4e8a27e932e966cb8d45",
     "react-native-mock": "^0.2.6",
     "reactotron-apisauce": "^1.1.2",
     "reactotron-react-native": "^1.1.2",

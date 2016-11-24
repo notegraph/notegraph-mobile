@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
 } from 'react-native'
 
+import Icon from 'react-native-vector-icons/MaterialIcons'
 import { AppStyles, Colors, Fonts } from '../themes'
 
 
@@ -25,6 +26,13 @@ class ConnectionType extends Component {
     return (
       <TouchableOpacity onPress={this._onSelect}>
         <View style={styles.container}>
+
+          <Icon name={type.icon}
+            size={20}
+            color={'black'}
+            style={styles.relatedIcon}
+          />
+
           <Text>{type.name}</Text>
         </View>
       </TouchableOpacity>

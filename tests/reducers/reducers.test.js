@@ -28,7 +28,7 @@ test('add note', t => {
     title: 'test note',
     text: 'new 123',
   }
-  store.dispatch(actions.saveNote(noteData))
+  store.dispatch(actions.saveNote(noteData, 'a1'))
 
   const { notes, groups, editor } = store.getState()
 
@@ -40,6 +40,7 @@ test('add note', t => {
   const item = R.find(R.propEq('id', note.id))(group.items)
 
   expect(item).to.not.be.undefined
+  expect(item).to.have.property('owner', 'a1')
 
   const findNoteById = () => store.getState().notes[note.id]
 
@@ -72,6 +73,23 @@ test('delete note with relations', () => {
   expect(findCon(stateAfter)).to.be.undefined
   expect(findGroupItem(stateAfter)).to.be.undefined
 })
+
+test('delete parent note', () => {
+  const store = createStore()
+  const noteId = 'c'
+  const findNote = (state, id) => state.notes[id]
+
+  const notesBefore = store.getState().notes
+  expect(notesBefore).to.have.property('c')
+  expect(notesBefore).to.have.property('d')
+
+  store.dispatch(actions.deleteNote(noteId))
+
+  const notesAfter = store.getState().notes
+  expect(notesAfter).to.not.have.property('c')
+  expect(notesAfter).to.not.have.property('d')
+})
+
 
 test('add and remove relation', t => {
   const store = createStore()

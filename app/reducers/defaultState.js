@@ -55,8 +55,9 @@ export default {
       entrypoint: true,
       items: [
         { id: 'a1', bgcolor: 'yellow' },
-        { id: 'b1', owner: 'a1' },
+        { id: 'b1' },
         { id: 'c' },
+        { id: 'd', owner: 'c', },
       ],
 
       cons: [

@@ -17,7 +17,7 @@ const mapStateToProps = (state) => {
   const { groupId } = state.editor
 
   const group = R.path(['groups', groupId], state) || {}
-  const items = group.items || []
+  const items = R.filter(x => !x.owner)(group.items || [])
   return {
     items: items.map(
       item => ({ item, note: state.notes[item.id] })
@@ -32,8 +32,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     }
   }
 }
-
-
 
 const notesColumn = (items: any[], isEven: bool, props) => {
   return items.map((elem, i) => {
@@ -52,14 +50,6 @@ const notesColumn = (items: any[], isEven: bool, props) => {
 }
 
 const NotesContainer = ({ items, onOpenNote }) => {
-  const layoutWidth = Dimensions.get('window').width
-  const columnStyle = StyleSheet.create({
-    runtime: {
-      flex: 1,
-      // width: layoutWidth / 2 - NOTES_MARGIN * 2 + 1,
-    }
-  })
-
   return (
     <View style={styles.container}>
       <ScrollView>

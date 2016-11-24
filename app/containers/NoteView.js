@@ -4,7 +4,6 @@ import {
   Text,
   View,
   StyleSheet,
-  Dimensions,
   ScrollView,
   TouchableOpacity,
   Alert,
@@ -20,10 +19,8 @@ import actions from '../actions/creators'
 
 import { findRelatedNotes } from '../reducers/queries'
 import RelatedNote from '../components/RelatedNote'
-import ActionButton from '../components/ActionButton'
 
-
-const {height, width} = Dimensions.get('window')
+import ButtonsGroup from '../components/ButtonsGroup'
 
 
 const mapStateToProps = (state, ownProps) => {
@@ -46,11 +43,13 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     editNote: () => dispatch(actions.openNote(noteId, false)),
     viewNote: (id) => dispatch(actions.openNote(id, true)),
     addRelation: (id) => RouteActions.newRelation({ noteId }),
-    deleteRelation: (groupId, relId) => dispatch(actions.deleteRelation(groupId, relId))
+    deleteRelation: (groupId, relId) => dispatch(actions.deleteRelation(groupId, relId)),
+    addChildNote: () => {
+      dispatch(actions.newNote())
+      RouteActions.noteEdit({ ownerNoteId: noteId })
+    }
   }
 }
-
-
 
 
 class NoteView extends Component {
@@ -62,12 +61,14 @@ class NoteView extends Component {
       PropTypes.shape({
         con: PropTypes.object.isRequired,
         note: PropTypes.object.isRequired,
+        noteOnEnd: PropTypes.bool.isRequired,
       })
     ).isRequired,
     editNote: PropTypes.func.isRequired,
     viewNote: PropTypes.func.isRequired,
     addRelation: PropTypes.func.isRequired,
     deleteRelation: PropTypes.func.isRequired,
+    addChildNote: PropTypes.func.isRequired,
   }
 
   editCurrentNote = () => {
@@ -101,21 +102,40 @@ class NoteView extends Component {
     )
   }
 
+  renderButtons () {
+    const { addRelation, addChildNote } = this.props
+    const buttons = [
+      {
+        title: 'Add Relation',
+        onPress: addRelation,
+      },
+      {
+        title: 'Add Note',
+        onPress: addChildNote,
+      },
+    ]
+
+    return (
+      <ButtonsGroup buttons={buttons} />
+    )
+  }
+
   render () {
-    const { note, addRelation, related } = this.props
+    const { note, related } = this.props
 
     return (
       <View style={{flex: 1}}>
         <ScrollView style={styles.scrollview}>
           <View style={[styles.container]}>
             <View style={styles.noteContainer}>
-              <TouchableOpacity onPress={this.editCurrentNote}>
-                <Icon name="mode-edit"
-                  size={Metrics.icons.medium}
-                />
-              </TouchableOpacity>
-
-              <Text style={styles.title}>{note.title}</Text>
+              <View style={styles.titleCont}>
+                <Text style={styles.title}>{note.title}</Text>
+                <TouchableOpacity onPress={this.editCurrentNote}>
+                  <Icon name="mode-edit"
+                    size={Metrics.icons.medium}
+                  />
+                </TouchableOpacity>
+              </View>
               <Text style={styles.text}>{note.text}</Text>
             </View>
 
@@ -127,15 +147,13 @@ class NoteView extends Component {
             }
           </View>
         </ScrollView>
-        <View style={styles.buttonsFooter} >
-          <ActionButton
-            onPress={addRelation}
-          />
-        </View>
+        {this.renderButtons()}
       </View>
     )
   }
 }
+
+const Spacer = () => <View style={styles.spacer} />
 
 
 const styles = StyleSheet.create({
@@ -145,46 +163,32 @@ const styles = StyleSheet.create({
   },
   container: {
     padding: 10,
-    paddingTop: 50,
+    paddingTop: 65,
     flex: 1,
     flexDirection: 'row',
 
   },
   noteContainer: {
     flex: 3,
-    // width: 100,
-    // flex: -1,
-    // flexWrap: 'wrap',
   },
   relatedContainer: {
-    // width: 100,
     flex: 2,
-    backgroundColor: '#eee',
-    padding: 15,
+    marginLeft: 5,
   },
-
+  titleCont: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+  },
   title: {
+    flex: 1,
     color: Colors.noteText,
     fontSize: 18,
     fontWeight: 'bold',
   },
   text: {
-    // flex: 1,
-    // flexDirection: 'column',
-    // justifyContent: 'flex-start',
-    // textAlignVertical: 'top',
     color: Colors.noteText,
     fontSize: 17,
-    // // fontFamily: 'System',
-    // // height: height - 30,
   },
-
-  buttonsFooter: {
-    position: 'absolute',
-    bottom: 30,
-    right: 30,
-  }
-
 })
 
 

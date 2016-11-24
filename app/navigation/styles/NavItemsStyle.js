@@ -20,6 +20,11 @@ export default StyleSheet.create({
 
   navButtonRight: {
     ...buttonCommon,
+  },
+
+  twoButtons: {
+    flex: 1,
+    flexDirection: 'row',
   }
 
 })

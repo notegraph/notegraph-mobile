@@ -52,6 +52,7 @@ const styles = StyleSheet.create({
     paddingTop: 5,
     // maxHeight: 40,
     // overflow: 'hidden',
+    maxHeight: 90,
   },
   separator: {
     borderTopColor: '#ccc',

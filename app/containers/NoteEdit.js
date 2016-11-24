@@ -29,9 +29,9 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
+  const { ownerNoteId } = ownProps
   return {
-    saveNote: note => dispatch(actions.saveNote(note)),
-
+    saveNote: note => dispatch(actions.saveNote(note, ownerNoteId)),
   }
 }
 
@@ -39,6 +39,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 class NoteEdit extends Component {
   static propTypes = {
     noteId: PropTypes.string,
+    ownerNoteId: PropTypes.string,
     note: PropTypes.object.isRequired,
     saveNote: PropTypes.func.isRequired,
     isReadMode: PropTypes.bool.isRequired,

@@ -10,13 +10,13 @@ const INITIAL_STATE = Immutable(defaultState.groups)
 
 
 const saveNote = (state, action) => {
-  const { groupId, note } = action.payload
+  const { groupId, note, owner } = action.payload
 
   return state.updateIn([groupId, 'items'], items => {
     if (!items) return items
     const idx = R.findIndex(R.propEq('id', note.id))(items)
     if (idx === -1) {
-      return R.append({ id: note.id }, items)
+      return R.append({ id: note.id, owner }, items)
     }
     return items
   })

@@ -7,6 +7,31 @@ import {
 } from 'react-native'
 
 import { Colors } from '../themes'
+import Icon from 'react-native-vector-icons/MaterialIcons'
+import { onStartIcons, onEndIcons } from '../constants/relTypes'
+
+
+function ConnectionIcon ({ con, onEnd }) {
+  const mapping = onEnd ? onEndIcons : onStartIcons
+  const iconName = mapping[con.type]
+
+  if (iconName) {
+    return (
+      <Icon name={iconName}
+        size={20}
+        color={'black'}
+        style={styles.relatedIcon}
+      />
+    )
+  }
+  return (
+    <Text style={styles.conType}>{con.type.name || con.type}</Text>
+  )
+}
+ConnectionIcon.propTypes = {
+  con: PropTypes.object.isRequired,
+  onEnd: PropTypes.bool.isRequired,
+}
 
 
 class RelatedNote extends Component {
@@ -22,19 +47,19 @@ class RelatedNote extends Component {
 
 
   render () {
-    const { note, con } = this.props
+    const { note, con, noteOnEnd } = this.props
 
     // FIXME: remove type.name || type hack
     return (
       <TouchableOpacity
         onPress={this.handlePress}
-        delayLongPress={3000}
+        delayLongPress={2000}
         onLongPress={this.handleLongPress}
       >
+        <ConnectionIcon con={con} onEnd={noteOnEnd} />
         <View style={styles.container}>
-          <Text style={styles.conType}>{con.type.name || con.type}</Text>
           {!!note.title && <Text style={styles.title}>{note.title}</Text>}
-          <Text>{note.text}</Text>
+          <Text style={styles.note}>{note.text}</Text>
         </View>
       </TouchableOpacity>
     )
@@ -44,6 +69,7 @@ class RelatedNote extends Component {
 RelatedNote.propTypes = {
   note: PropTypes.object.isRequired,
   con: PropTypes.object.isRequired,
+  noteOnEnd: PropTypes.bool.isRequired,
   onPress: PropTypes.func.isRequired,
   onLongPress: PropTypes.func.isRequired,
 }
@@ -58,8 +84,17 @@ const styles = StyleSheet.create({
   title: {
     fontWeight: 'bold',
   },
+  note: {
+    padding: 5,
+    paddingTop: 0,
+  },
   container: {
     marginBottom: 15,
+    backgroundColor: '#eee',
+    maxHeight: 120,
+  },
+
+  relatedIcon: {
   }
 })
 
