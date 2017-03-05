@@ -2,17 +2,9 @@ import React, { Component, PropTypes } from 'react'
 import {
   Text,
   View,
-  TextInput,
   StyleSheet,
-  Dimensions,
-  ScrollView,
   TouchableOpacity,
 } from 'react-native'
-
-import R from 'ramda'
-
-import { AppStyles, Colors, Metrics } from '../themes'
-
 
 
 class FoundNote extends Component {
@@ -27,11 +19,11 @@ class FoundNote extends Component {
     onSelect(note)
   }
 
-  render() {
+  render () {
     const { note, index } = this.props
 
     // TODO: find better solution trim long text
-    const text = note.text.substring(0, 100) || ''
+    const text = note.text && note.text.substring(0, 100) || ''
     return (
       <TouchableOpacity
         onPress={this._onPress}

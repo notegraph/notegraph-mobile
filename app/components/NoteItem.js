@@ -1,34 +1,33 @@
-import React, { Component, PropTypes } from 'react'
+import React, { PropTypes } from 'react'
 import {
   View,
   Text,
   StyleSheet,
-  TouchableHighlight
 } from 'react-native'
 import { Colors } from '../themes'
+import RippleTouchable from './RippleTouchable'
 
+const NOTE_TOUCH_COLOR = '#ccc'
+const NOTES_MARGIN = 4
 
 const NoteItem = ({id, note, onOpenNote}) => {
   const handlePress = () => onOpenNote(id)
   const { text, title } = note
 
   return (
-    <TouchableHighlight
+    <RippleTouchable
       onPress={handlePress}
-      style={[styles.note]}
-      underlayColor={NOTE_TOUCH_COLOR}
+      color={NOTE_TOUCH_COLOR}
     >
-      <View >
+      <View style={[styles.note]}>
         {!!title && <Text style={styles.title}>{title}</Text>}
         <Text style={styles.text}>{text}</Text>
       </View>
-    </TouchableHighlight>
+    </RippleTouchable>
   )
 }
 
 
-const NOTE_TOUCH_COLOR = '#eee'
-const NOTES_MARGIN = 4
 
 NoteItem.propTypes = {
   id: PropTypes.string.isRequired,

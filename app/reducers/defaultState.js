@@ -56,8 +56,8 @@ export default {
       items: [
         { id: 'a1', bgcolor: 'yellow' },
         { id: 'b1' },
-        { id: 'c' },
-        { id: 'd', owner: 'c', },
+        { id: 'c', owner: 'b1' },
+        { id: 'd', owner: 'c' },
       ],
 
       cons: [

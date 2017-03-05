@@ -17,7 +17,7 @@ import { Actions as RouteActions } from 'react-native-router-flux'
 
 import actions from '../actions/creators'
 
-import { findRelatedNotes } from '../reducers/queries'
+import { findRelatedNotes, findParentNotes } from '../reducers/queries'
 import RelatedNote from '../components/RelatedNote'
 
 import ButtonsGroup from '../components/ButtonsGroup'
@@ -29,10 +29,14 @@ const mapStateToProps = (state, ownProps) => {
   const note = notes[noteId] || {}
   const { groupId } = editor
 
-  const related = findRelatedNotes(state, groupId, note.id)
+  const parentNotes = findParentNotes(state, groupId, note.id)
+  const relatedNotes = findRelatedNotes(state, groupId, note.id)
+
   return {
     note,
-    related,
+    relatedNotes,
+    parentNotes,
+    hasConnections: !!relatedNotes.length || !!parentNotes.length,
     groupId,
   }
 }
@@ -52,18 +56,23 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 }
 
 
+const RelatedNotes = PropTypes.arrayOf(
+  PropTypes.shape({
+    con: PropTypes.object.isRequired,
+    note: PropTypes.object.isRequired,
+    noteOnEnd: PropTypes.bool.isRequired,
+  })
+).isRequired
+
+
 class NoteView extends Component {
   static propTypes = {
     noteId: PropTypes.string.isRequired,
     note: PropTypes.object.isRequired,
     groupId: PropTypes.string.isRequired,
-    related: PropTypes.arrayOf(
-      PropTypes.shape({
-        con: PropTypes.object.isRequired,
-        note: PropTypes.object.isRequired,
-        noteOnEnd: PropTypes.bool.isRequired,
-      })
-    ).isRequired,
+    relatedNotes: RelatedNotes,
+    parentNotes: RelatedNotes,
+    hasConnections: PropTypes.bool.isRequired,
     editNote: PropTypes.func.isRequired,
     viewNote: PropTypes.func.isRequired,
     addRelation: PropTypes.func.isRequired,
@@ -92,7 +101,16 @@ class NoteView extends Component {
   renderRelated () {
     const { viewNote } = this.props
 
-    return this.props.related.map(r => (
+    const breadcrumb = this.props.parentNotes.map(r => (
+      <RelatedNote
+        key={r.con.id}
+        {...r}
+        onPress={viewNote}
+        conPosition={'bottom'}
+      />)
+    )
+
+    const related = this.props.relatedNotes.map(r => (
       <RelatedNote
         key={`${r.note.id}-${r.con.type}`}
         {...r}
@@ -100,6 +118,7 @@ class NoteView extends Component {
         onLongPress={this.showDeleteConfirm}
       />)
     )
+    return [breadcrumb, related]
   }
 
   renderButtons () {
@@ -121,7 +140,7 @@ class NoteView extends Component {
   }
 
   render () {
-    const { note, related } = this.props
+    const { note, hasConnections } = this.props
 
     return (
       <View style={{flex: 1}}>
@@ -130,16 +149,17 @@ class NoteView extends Component {
             <View style={styles.noteContainer}>
               <View style={styles.titleCont}>
                 <Text style={styles.title}>{note.title}</Text>
-                <TouchableOpacity onPress={this.editCurrentNote}>
-                  <Icon name="mode-edit"
-                    size={Metrics.icons.medium}
-                  />
-                </TouchableOpacity>
               </View>
               <Text style={styles.text}>{note.text}</Text>
+
+              <TouchableOpacity onPress={this.editCurrentNote}>
+                <Icon name="mode-edit"
+                  size={Metrics.icons.medium}
+                />
+              </TouchableOpacity>
             </View>
 
-            { !!related.length && (
+            { hasConnections && (
               <View style={styles.relatedContainer}>
                 {this.renderRelated()}
               </View>
@@ -173,7 +193,7 @@ const styles = StyleSheet.create({
   },
   relatedContainer: {
     flex: 2,
-    marginLeft: 5,
+    marginLeft: 0,
   },
   titleCont: {
     flexDirection: 'row',

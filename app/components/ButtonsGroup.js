@@ -26,8 +26,8 @@ class ButtonsGroup extends Component {
   }
 
   renderButtonOptions () {
-    const { buttons } = this.props;
-    const buttonElems = buttons.map((b,i) => {
+    const { buttons } = this.props
+    const buttonElems = buttons.map((b, i) => {
       const handlePress = () => {
         this.setState({ isPressed: false })
         b.onPress()

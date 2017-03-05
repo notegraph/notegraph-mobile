@@ -5,6 +5,9 @@ import m from 'module'
 global.__DEV__ = true
 global.__TEST__ = true
 
+const chai = require('chai')
+chai.use(require('chai-shallow-deep-equal'))
+
 // We enable mockery and leave it on.
 mockery.enable()
 

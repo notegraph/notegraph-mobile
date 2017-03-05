@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import { AppRegistry, Text, View } from 'react-native'
-
+import { AppRegistry } from 'react-native'
+import './raven'
 import Root from './app/Root'
 
 import configureStore from './app/store'
+
 
 
 const store = configureStore()

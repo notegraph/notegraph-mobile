@@ -35,7 +35,7 @@ class NavigationRouter extends Component {
 
           <Scene initial key="dashboard" component={Dashboard} title="Notes" />
           <Scene
-            key="noteEdit" component={NoteEdit} title="Active Note"
+            key="noteEdit" component={NoteEdit} title="Edit Note"
             renderBackButton={this.renderSaveButton}
             renderRightButton={this.renderDeleteBtn}
           />

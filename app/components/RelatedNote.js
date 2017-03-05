@@ -11,16 +11,19 @@ import Icon from 'react-native-vector-icons/MaterialIcons'
 import { onStartIcons, onEndIcons } from '../constants/relTypes'
 
 
-function ConnectionIcon ({ con, onEnd }) {
+function ConnectionIcon ({ con, onEnd, down }) {
   const mapping = onEnd ? onEndIcons : onStartIcons
   const iconName = mapping[con.type]
+
+  const iconStyles = [styles.relatedIcon]
+  if (down) iconStyles.push(styles.iconPointsDown)
 
   if (iconName) {
     return (
       <Icon name={iconName}
         size={20}
         color={'black'}
-        style={styles.relatedIcon}
+        style={iconStyles}
       />
     )
   }
@@ -31,6 +34,7 @@ function ConnectionIcon ({ con, onEnd }) {
 ConnectionIcon.propTypes = {
   con: PropTypes.object.isRequired,
   onEnd: PropTypes.bool.isRequired,
+  down: PropTypes.bool,
 }
 
 
@@ -42,26 +46,34 @@ class RelatedNote extends Component {
 
   handleLongPress = () => {
     const { onLongPress, con } = this.props
-    onLongPress(con.id)
+    if (onLongPress) onLongPress(con.id)
   }
 
-
   render () {
-    const { note, con, noteOnEnd } = this.props
+    const { note, con, noteOnEnd, conPosition } = this.props
 
     // FIXME: remove type.name || type hack
     return (
-      <TouchableOpacity
-        onPress={this.handlePress}
-        delayLongPress={2000}
-        onLongPress={this.handleLongPress}
-      >
-        <ConnectionIcon con={con} onEnd={noteOnEnd} />
-        <View style={styles.container}>
-          {!!note.title && <Text style={styles.title}>{note.title}</Text>}
-          <Text style={styles.note}>{note.text}</Text>
+      <View style={styles.container}>
+        <View style={styles.leftConHolder}>
+          {conPosition === 'left' && <ConnectionIcon con={con} onEnd={noteOnEnd} />}
         </View>
-      </TouchableOpacity>
+        <View style={{ flex: 1, flexDirection: 'column' }}>
+          <TouchableOpacity style={styles.noteContainer}
+            onPress={this.handlePress}
+            delayLongPress={2000}
+            onLongPress={this.handleLongPress}
+          >
+            <View >
+              {!!note.title && <Text style={styles.title}>{note.title}</Text>}
+              <Text style={styles.note}>{conPosition}-{note.text}</Text>
+            </View>
+          </TouchableOpacity>
+          <View style={styles.bottomConHolder}>
+            {conPosition === 'bottom' && <ConnectionIcon con={con} onEnd={noteOnEnd} down={true} />}
+          </View>
+        </View>
+      </View>
     )
   }
 }
@@ -71,10 +83,20 @@ RelatedNote.propTypes = {
   con: PropTypes.object.isRequired,
   noteOnEnd: PropTypes.bool.isRequired,
   onPress: PropTypes.func.isRequired,
-  onLongPress: PropTypes.func.isRequired,
+  onLongPress: PropTypes.func,
+  conPosition: PropTypes.string,
+}
+
+RelatedNote.defaultProps = {
+  conPosition: 'left',
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   conType: {
     backgroundColor: Colors.blue,
     color: 'white',
@@ -88,13 +110,27 @@ const styles = StyleSheet.create({
     padding: 5,
     paddingTop: 0,
   },
-  container: {
+  leftConHolder: {
+    width: 18,
     marginBottom: 15,
+  },
+  bottomConHolder: {
+    // flex: 1,
+    // justifyContent: 'flex-end',
+    height: 18,
+    alignItems: 'center',
+  },
+  noteContainer: {
+    flex: 1,
     backgroundColor: '#eee',
     maxHeight: 120,
   },
 
   relatedIcon: {
+  },
+  iconPointsDown: {
+    transform: [{rotate: '90deg'}],
+    //
   }
 })
 

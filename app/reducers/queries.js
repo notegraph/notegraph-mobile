@@ -3,6 +3,34 @@
 import R from 'ramda'
 import relTypes from '../constants/relTypes'
 
+export const findParentNotes = ({ groups, notes }, groupId, noteId): RelInfo[] => {
+  const group = groups[groupId]
+
+  const groupItem = R.find(R.propEq('id', noteId), group.items)
+
+  const parents: Connection[] = []
+  const collectParents = (n, level = 0) => {
+    if (!n || !n.owner) return
+    const p = R.find(R.propEq('id', n.owner), group.items)
+    if (level) {
+      parents.push({
+        id: `${p.id}-${n.id}`,
+        a: p.id,
+        b: n.id,
+        type: relTypes.owns,
+      })
+    }
+    collectParents(p, ++level)
+  }
+  collectParents(groupItem)
+  return R.reverse(parents).map(r => {
+    return {
+      con: r,
+      note: notes[r.a],
+      noteOnEnd: false,
+    }
+  })
+}
 
 export const findRelatedNotes = (state, groupId, noteId): RelInfo[] => {
   const { groups, notes } = state
