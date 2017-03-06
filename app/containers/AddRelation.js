@@ -16,7 +16,7 @@ import { AppStyles, Fonts } from '../themes'
 import { Actions as RouteActions } from 'react-native-router-flux'
 
 import actions from '../actions/creators'
-import FoundNote from '../components/FoundNote'
+import SearchComponent from '../components/SearchComponent'
 import ConnectionType from '../components/ConnectionType'
 import relTypes, { relNames, onStartIcons } from '../constants/relTypes'
 // import { findRelatedNotes } from '../reducers/queries'
@@ -109,13 +109,12 @@ class AddRelation extends Component {
   }
 
   renderNoteSearch () {
+    const { matchedNotes } = this.props
     return (
-      <View>
-        <TextInput placeholder="Search" />
-        <ScrollView style={styles.results}>
-          {this.renderResults()}
-        </ScrollView>
-      </View>
+      <SearchComponent
+        allRecords={matchedNotes}
+        onSelect={this.onResultPress}
+      />
     )
   }
 

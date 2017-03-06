@@ -10,7 +10,7 @@ import {
 } from 'react-native'
 
 import { connect } from 'react-redux'
-import { AppStyles, Colors, Metrics } from '../themes'
+import { AppStyles, Colors, Metrics, Fonts } from '../themes'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { Actions as RouteActions } from 'react-native-router-flux'
 
@@ -194,6 +194,8 @@ const styles = StyleSheet.create({
   relatedContainer: {
     flex: 2,
     marginLeft: 0,
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
   },
   titleCont: {
     flexDirection: 'row',
@@ -202,12 +204,13 @@ const styles = StyleSheet.create({
   title: {
     flex: 1,
     color: Colors.noteText,
-    fontSize: 18,
-    fontWeight: 'bold',
+    fontSize: Fonts.size.h3,
+    fontFamily: Fonts.type.bold,
   },
   text: {
     color: Colors.noteText,
-    fontSize: 17,
+    fontSize: Fonts.size.regular,
+    fontFamily: Fonts.type.base,
   },
 })
 

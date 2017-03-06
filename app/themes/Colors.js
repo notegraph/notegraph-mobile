@@ -1,5 +1,5 @@
 const colors = {
-  background: '#1F0808',
+  background: '#ccc',
   clear: 'rgba(0,0,0,0)',
   navbar: '#031b33',
   statusBar: '#010911',

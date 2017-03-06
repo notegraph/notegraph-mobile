@@ -8,13 +8,14 @@
     "lint": "eslint *.js app/**/*.js",
     "fixcode": "npm run lint -- --fix",
     "android:install": "cd android && ./gradlew assembleRelease && adb -s 010fc2cba482160c install -r app/build/outputs/apk/app-release.apk",
-    "test": "NODE_ENV=production ava",
+    "test": "NODE_ENV=test ava",
     "test:watch": "npm run test -- --watch",
     "coverage": "nyc ava && nyc report --reporter=html && open coverage/index.html || xdg-open coverage/index.html",
     "adb:date": "adb shell \"date `date +%m%d%H%M%Y.%s`\"",
+    "sourcemap:android": "react-native bundle --dev false --platform android --entry-file index.android.js --bundle-output build/main.jsbundle --sourcemap-output build/main.jsbundle.map",
     "sentry:release": ". ./ver.sh && sentry-cli releases -o notegraph -p ngkeep new $VERSION",
-    "sentry:files": ". ./ver.sh && sentry-cli releases -o notegraph -p ngkeep files $VERSION upload-sourcemaps --url-prefix / main.jsbundle main.jsbundle.map",
-    "sentry:upload": "npm run sentry:release && npm run sentry:files",
+    "sentry:files": ". ./ver.sh && sentry-cli releases -o notegraph -p ngkeep files $VERSION upload-sourcemaps --url-prefix / build/main.jsbundle build/main.jsbundle.map",
+    "sentry:upload": "npm run sourcemap:android && npm run sentry:release && npm run sentry:files",
     "package:version": ". ./ver.sh && echo $VERSION"
   },
   "dependencies": {
@@ -31,6 +32,7 @@
     "redux-persist": "^4.0.0-alpha6",
     "redux-thunk": "^2.1.0",
     "reduxsauce": "^0.2.0",
+    "reselect": "^2.5.4",
     "seamless-immutable": "^6.1.4"
   },
   "devDependencies": {

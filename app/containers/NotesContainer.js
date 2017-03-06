@@ -11,17 +11,11 @@ import { connect } from 'react-redux'
 import actions from '../actions/creators'
 import { Colors } from '../themes'
 import NoteItem from '../components/NoteItem'
+import { selectActiveGroupItems } from '../selectors/noteSelectors'
 
-
-const mapStateToProps = (state) => {
-  const { groupId } = state.editor
-
-  const group = R.path(['groups', groupId], state) || {}
-  const items = R.filter(x => !x.owner)(group.items || [])
+const mapStateToProps = (state, props) => {
   return {
-    items: items.map(
-      item => ({ item, note: state.notes[item.id] })
-    ),
+    items: selectActiveGroupItems(state, props)
   }
 }
 

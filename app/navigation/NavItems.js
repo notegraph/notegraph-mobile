@@ -44,6 +44,18 @@ export default {
     )
   },
 
+  openSearch () {
+    return (
+      <TouchableOpacity onPress={() => RouteActions.search()}>
+        <Icon name="search"
+          size={Metrics.icons.medium}
+          color={Colors.snow}
+          style={styles.navButtonLeft}
+        />
+      </TouchableOpacity>
+    )
+  },
+
   backAndHome () {
     return (
       <View style={styles.twoButtons}>

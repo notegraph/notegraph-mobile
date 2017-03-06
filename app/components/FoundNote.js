@@ -6,6 +6,8 @@ import {
   TouchableOpacity,
 } from 'react-native'
 
+import { Colors, Fonts } from '../themes'
+
 
 class FoundNote extends Component {
   static propTypes = {
@@ -30,8 +32,8 @@ class FoundNote extends Component {
       >
         <View style={styles.container}>
           {!!index && <View style={styles.separator}></View>}
-          {!!note.title && <Text style={styles.title}>{note.title}</Text>}
-          <Text>{text}</Text>
+          {!!note.title && <Text style={styles.title} numberOfLines={1}>{note.title}</Text>}
+          <Text style={styles.text} numberOfLines={5}>{text}</Text>
         </View>
       </TouchableOpacity>
     )
@@ -41,17 +43,23 @@ class FoundNote extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 5,
-    // maxHeight: 40,
-    // overflow: 'hidden',
-    maxHeight: 90,
+    backgroundColor: Colors.snow,
+    padding: 5,
   },
   separator: {
     borderTopColor: '#ccc',
     borderTopWidth: 1,
+    marginBottom: 10,
   },
   title: {
-    fontWeight: 'bold'
+    fontFamily: Fonts.type.bold,
+    fontSize: Fonts.size.regular,
+    color: Colors.noteText,
+  },
+  text: {
+    fontFamily: Fonts.type.base,
+    fontSize: Fonts.size.medium,
+    color: Colors.noteText,
   }
 })
 

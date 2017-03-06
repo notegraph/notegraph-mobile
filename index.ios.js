@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { AppRegistry } from 'react-native'
-
-import './raven'
 import Root from './app/Root'
 
-// const RootX = () => (<View><Text>Fukc off</Text></View>);
+
+if (!__DEV__) {
+  require('./raven')
+}
 
 const data = {
   notes: []

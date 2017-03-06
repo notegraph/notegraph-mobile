@@ -23,7 +23,7 @@ class Dashboard extends Component {
   render () {
     return (
       <View style={[styles.mainContainer, styles.container]} >
-        <NotesContainer navToNote={this.navToNote} />
+        <NotesContainer />
         <View style={styles.buttonsFooter}>
           <ActionButton onPress={this.navToNewnote} />
         </View>

@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
 } from 'react-native'
 
-import { Colors } from '../themes'
+import { Colors, Fonts } from '../themes'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { onStartIcons, onEndIcons } from '../constants/relTypes'
 
@@ -58,15 +58,15 @@ class RelatedNote extends Component {
         <View style={styles.leftConHolder}>
           {conPosition === 'left' && <ConnectionIcon con={con} onEnd={noteOnEnd} />}
         </View>
-        <View style={{ flex: 1, flexDirection: 'column' }}>
+        <View style={styles.noteWrapper}>
           <TouchableOpacity style={styles.noteContainer}
             onPress={this.handlePress}
             delayLongPress={2000}
             onLongPress={this.handleLongPress}
           >
             <View >
-              {!!note.title && <Text style={styles.title}>{note.title}</Text>}
-              <Text style={styles.note}>{conPosition}-{note.text}</Text>
+              {!!note.title && <Text style={styles.title} numberOfLines={2}>{note.title}</Text>}
+              <Text style={styles.note} numberOfLines={7}>{note.text}</Text>
             </View>
           </TouchableOpacity>
           <View style={styles.bottomConHolder}>
@@ -93,9 +93,9 @@ RelatedNote.defaultProps = {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
+
   },
   conType: {
     backgroundColor: Colors.blue,
@@ -104,7 +104,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   title: {
-    fontWeight: 'bold',
+    fontFamily: Fonts.type.bold,
+    fontSize: Fonts.size.regular,
+    paddingLeft: 5,
+    paddingRight: 5,
   },
   note: {
     padding: 5,
@@ -120,10 +123,14 @@ const styles = StyleSheet.create({
     height: 18,
     alignItems: 'center',
   },
+  noteWrapper: {
+    flex: 1,
+    flexDirection: 'column',
+  },
   noteContainer: {
     flex: 1,
     backgroundColor: '#eee',
-    maxHeight: 120,
+    overflow: 'hidden',
   },
 
   relatedIcon: {

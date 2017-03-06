@@ -5,13 +5,12 @@ import {
   StyleSheet,
   TextInput,
   Dimensions,
-  ScrollView,
 } from 'react-native'
 
 import R from 'ramda'
 
 import { connect } from 'react-redux'
-import { AppStyles, Colors } from '../themes'
+import { AppStyles, Colors, Fonts } from '../themes'
 import actions from '../actions/creators'
 import { Actions as RouteActions } from 'react-native-router-flux'
 
@@ -112,12 +111,12 @@ const styles = StyleSheet.create({
   ...AppStyles.screen,
   container: {
     padding: 10,
-    paddingTop: 20,
+    paddingTop: 0,
   },
   title: {
     color: Colors.noteText,
-    fontSize: 18,
-    fontWeight: 'bold',
+    fontFamily: Fonts.type.bold,
+    fontSize: Fonts.size.h3,
   },
   text: {
     flex: 1,
@@ -125,9 +124,9 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     textAlignVertical: 'top',
     color: Colors.noteText,
-    fontSize: 17,
-    // fontFamily: 'System',
-    // height: height - 30,
+
+    fontFamily: Fonts.type.base,
+    fontSize: Fonts.size.regular,
   }
 
 })

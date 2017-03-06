@@ -4,7 +4,7 @@ import {
   Text,
   StyleSheet,
 } from 'react-native'
-import { Colors } from '../themes'
+import { Colors, Fonts } from '../themes'
 import RippleTouchable from './RippleTouchable'
 
 const NOTE_TOUCH_COLOR = '#ccc'
@@ -20,8 +20,8 @@ const NoteItem = ({id, note, onOpenNote}) => {
       color={NOTE_TOUCH_COLOR}
     >
       <View style={[styles.note]}>
-        {!!title && <Text style={styles.title}>{title}</Text>}
-        <Text style={styles.text}>{text}</Text>
+        {!!title && <Text style={styles.title} numberOfLines={2}>{title}</Text>}
+        <Text style={styles.text} numberOfLines={10}>{text}</Text>
       </View>
     </RippleTouchable>
   )
@@ -42,7 +42,6 @@ NoteItem.propTypes = {
 const styles = StyleSheet.create({
   note: {
     minHeight: 30,
-    maxHeight: 200,
     marginTop: NOTES_MARGIN,
     padding: 5,
     backgroundColor: '#fff',
@@ -51,14 +50,15 @@ const styles = StyleSheet.create({
 
   },
   title: {
-    fontWeight: 'bold',
+    fontFamily: Fonts.type.bold,
     color: Colors.noteTitle,
     paddingBottom: 4,
-    fontSize: 17,
+    fontSize: Fonts.size.regular,
   },
   text: {
+    fontFamily: Fonts.type.base,
     color: Colors.noteText,
-    fontSize: 15,
+    fontSize: Fonts.size.medium,
   },
 })
 

@@ -9,6 +9,7 @@ import { connect } from 'react-redux'
 
 // screens identified by the router
 import Dashboard from '../containers/Dashboard'
+import DashboardSearch from '../containers/DashboardSearch'
 import NoteEdit from '../containers/NoteEdit'
 import NoteView from '../containers/NoteView'
 import AddRelation from '../containers/AddRelation'
@@ -28,12 +29,17 @@ class NavigationRouter extends Component {
 
   backAndHomeButtons = () => NavItems.backAndHome()
 
+  renderSearchBtn = () => NavItems.openSearch()
+
   render () {
     return (
       <Router titleStyle={styles.title} >
         <Scene key="root" navigationBarStyle={styles.navBar} >
 
-          <Scene initial key="dashboard" component={Dashboard} title="Notes" />
+          <Scene initial key="dashboard" component={Dashboard} title="Notes"
+            renderRightButton={this.renderSearchBtn}
+          />
+          <Scene key="search" component={DashboardSearch} title="Search" />
           <Scene
             key="noteEdit" component={NoteEdit} title="Edit Note"
             renderBackButton={this.renderSaveButton}

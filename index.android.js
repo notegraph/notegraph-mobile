@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { AppRegistry } from 'react-native'
-import './raven'
 import Root from './app/Root'
-
 import configureStore from './app/store'
 
+if (!__DEV__) {
+  require('./raven')
+}
 
 
 const store = configureStore()
