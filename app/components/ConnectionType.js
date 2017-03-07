@@ -27,13 +27,15 @@ class ConnectionType extends Component {
       <TouchableOpacity onPress={this._onSelect}>
         <View style={styles.container}>
 
-          <Icon name={type.icon}
-            size={20}
-            color={'black'}
-            style={styles.relatedIcon}
-          />
+          <View style={styles.iconWrapper}>
+            <Icon name={type.icon}
+              size={30}
+              color={'black'}
+              style={styles.relatedIcon}
+            />
+          </View>
 
-          <Text>{type.name}</Text>
+          <Text style={styles.name}>{type.name}</Text>
         </View>
       </TouchableOpacity>
     )
@@ -44,7 +46,26 @@ class ConnectionType extends Component {
 const styles = StyleSheet.create({
   container: {
     padding: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+
+  iconWrapper: {
+    height: 40,
+    width: 40,
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: Colors.background,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: 20,
+  },
+  name: {
+    fontFamily: Fonts.type.bold,
+    fontSize: Fonts.size.h6,
+    color: Colors.noteTitle,
   }
+
 })
 
 export default ConnectionType

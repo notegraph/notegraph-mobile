@@ -31,6 +31,8 @@ class NavigationRouter extends Component {
 
   renderSearchBtn = () => NavItems.openSearch()
 
+  backButton = () => NavItems.backButton()
+
   render () {
     return (
       <Router titleStyle={styles.title} >
@@ -39,7 +41,9 @@ class NavigationRouter extends Component {
           <Scene initial key="dashboard" component={Dashboard} title="Notes"
             renderRightButton={this.renderSearchBtn}
           />
-          <Scene key="search" component={DashboardSearch} title="Search" />
+          <Scene key="search" component={DashboardSearch} title="Search"
+            renderBackButton={this.backButton}
+          />
           <Scene
             key="noteEdit" component={NoteEdit} title="Edit Note"
             renderBackButton={this.renderSaveButton}

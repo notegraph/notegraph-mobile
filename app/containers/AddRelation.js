@@ -4,21 +4,21 @@ import React, { Component, PropTypes } from 'react'
 import {
   Text,
   View,
-  TextInput,
   StyleSheet,
-  ScrollView,
 } from 'react-native'
 
 import R from 'ramda'
 
 import { connect } from 'react-redux'
-import { AppStyles, Fonts } from '../themes'
+import { AppStyles, Fonts, Colors } from '../themes'
 import { Actions as RouteActions } from 'react-native-router-flux'
 
 import actions from '../actions/creators'
 import SearchComponent from '../components/SearchComponent'
 import ConnectionType from '../components/ConnectionType'
 import relTypes, { relNames, onStartIcons } from '../constants/relTypes'
+
+
 // import { findRelatedNotes } from '../reducers/queries'
 
 
@@ -168,7 +168,8 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   header: {
-    fontSize: Fonts.size.h3,
+    paddingTop: 10,
+    fontSize: Fonts.size.h5,
     // color: 'red',
   }
 })

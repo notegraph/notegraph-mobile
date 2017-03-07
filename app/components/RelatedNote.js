@@ -20,11 +20,13 @@ function ConnectionIcon ({ con, onEnd, down }) {
 
   if (iconName) {
     return (
-      <Icon name={iconName}
-        size={20}
-        color={'black'}
-        style={iconStyles}
-      />
+      <View style={styles.iconWrapper}>
+        <Icon name={iconName}
+          size={20}
+          color={'black'}
+          style={iconStyles}
+        />
+      </View>
     )
   }
   return (
@@ -114,8 +116,10 @@ const styles = StyleSheet.create({
     paddingTop: 0,
   },
   leftConHolder: {
-    width: 18,
+    marginLeft: -3,
+    width: 23,
     marginBottom: 15,
+    marginRight: 2,
   },
   bottomConHolder: {
     // flex: 1,
@@ -133,6 +137,13 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
 
+  iconWrapper: {
+    width: 22,
+    height: 22,
+    borderRadius: 11,
+    borderColor: Colors.background,
+    borderWidth: 1,
+  },
   relatedIcon: {
   },
   iconPointsDown: {

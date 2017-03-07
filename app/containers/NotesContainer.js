@@ -2,7 +2,6 @@ import React, { PropTypes } from 'react'
 import {
   View,
   StyleSheet,
-  Dimensions,
   ScrollView,
 } from 'react-native'
 
@@ -29,7 +28,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 
 const notesColumn = (items: any[], isEven: bool, props) => {
   return items.map((elem, i) => {
-    const { note } = elem
+    const { note, relsCount } = elem
 
     if (isEven && (i % 2) === 1) return
     if (!isEven && (i % 2) === 0) return
@@ -39,7 +38,7 @@ const notesColumn = (items: any[], isEven: bool, props) => {
       return
     }
 
-    return <NoteItem key={i} id={note.id} note={note} {...props} />
+    return <NoteItem key={i} id={note.id} note={note} relsCount={relsCount} {...props} />
   })
 }
 

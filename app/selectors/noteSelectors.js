@@ -1,5 +1,7 @@
 import { createSelector } from 'reselect'
 import R from 'ramda'
+import { findRelatedNotes } from '../reducers/queries'
+
 
 const selectGroupDomain = (state) => state.groups
 const selectNotesDomain = (state) => state.notes
@@ -14,10 +16,21 @@ export const selectActiveGroupItems = createSelector(
   selectNotesDomain,
   selectActiveGroupId,
   (groups, notes, groupId) => {
-    const group = R.path([groupId], groups) || {}
+    const group = groups[groupId] || {}
     const items = R.filter(x => !x.owner)(group.items || [])
+
+    const limitedState = {
+      groups,
+      notes
+    }
+
     return items.map(
-        item => ({ item, note: notes[item.id] })
+        item => {
+          // FIXME: this could be the source of performance problems
+          // there should be more effective way to deal with graphs
+          const rels = findRelatedNotes(limitedState, groupId, item.id)
+          return { item, note: notes[item.id], relsCount: rels.length }
+        }
     )
   }
 )
