@@ -63,7 +63,7 @@ class RelatedNote extends Component {
         <View style={styles.noteWrapper}>
           <TouchableOpacity style={styles.noteContainer}
             onPress={this.handlePress}
-            delayLongPress={2000}
+            delayLongPress={1500}
             onLongPress={this.handleLongPress}
           >
             <View >
@@ -124,7 +124,9 @@ const styles = StyleSheet.create({
   bottomConHolder: {
     // flex: 1,
     // justifyContent: 'flex-end',
-    height: 18,
+    marginTop: 1,
+    marginBottom: 1,
+    height: 23,
     alignItems: 'center',
   },
   noteWrapper: {
