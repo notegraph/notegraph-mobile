@@ -37,6 +37,6 @@ export const selectActiveGroupItems = createSelector(
 
 
 export const selectActiveGroupNotes = createSelector(
-  selectActiveGroupItems,
-  (items) => items.map(x => x.note)
+  selectNotesDomain,
+  (notes) => R.toPairs(notes).map(([id, note]) => note).filter(note => typeof note === 'object')
 )

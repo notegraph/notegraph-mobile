@@ -1,0 +1,4 @@
+The key feature of notegraph is ability to connect notes.
+You can have parent-child relationship (as in mindmap). And you connect any notes in the graph, defining the connection type manually.
+
+Please note, it's a beta release and it is far from perfect or complete. Please help us to make it better.

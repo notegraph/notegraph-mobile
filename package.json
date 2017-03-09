@@ -13,10 +13,10 @@
     "coverage": "nyc ava && nyc report --reporter=html && open coverage/index.html || xdg-open coverage/index.html",
     "adb:date": "adb shell \"date `date +%m%d%H%M%Y.%s`\"",
     "sourcemap:android": "react-native bundle --dev false --platform android --entry-file index.android.js --bundle-output build/main.jsbundle --sourcemap-output build/main.jsbundle.map",
-    "sentry:release": ". ./ver.sh && sentry-cli releases -o notegraph -p ngkeep new $VERSION",
-    "sentry:files": ". ./ver.sh && sentry-cli releases -o notegraph -p ngkeep files $VERSION upload-sourcemaps --url-prefix / build/main.jsbundle build/main.jsbundle.map",
+    "sentry:release": "VERSION=$(./ver.sh) && sentry-cli releases -o notegraph -p ngkeep new $VERSION",
+    "sentry:files": "VERSION=$(./ver.sh) && sentry-cli releases -o notegraph -p ngkeep files $VERSION upload-sourcemaps --url-prefix / build/main.jsbundle build/main.jsbundle.map",
     "sentry:upload": "npm run sourcemap:android && npm run sentry:release && npm run sentry:files",
-    "package:version": ". ./ver.sh && echo $VERSION"
+    "package:version": "VERSION=$(./ver.sh) && echo $VERSION"
   },
   "dependencies": {
     "ramda": "^0.22.1",

@@ -1,0 +1,2 @@
+json_key_file "/home/roman/dev/keys/Android-Developer-77acc69fcea9.json" # Path to the json secret file - Follow https://github.com/fastlane/supply#setup to get one
+package_name "com.ngkeep" # e.g. com.krausefx.app

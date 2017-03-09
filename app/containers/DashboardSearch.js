@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, { PropTypes } from 'react'
 import {
   View,
   StyleSheet,
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
 
 
 
-function mapStateToProps(state, props) {
+function mapStateToProps (state, props) {
   const allItems = selectActiveGroupNotes(state, props)
   console.log({ allItems })
 
@@ -48,7 +48,7 @@ function mapStateToProps(state, props) {
   }
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps (dispatch) {
   return {
     onOpenNote: (note) => dispatch(actions.openNote(note.id, true))
   }

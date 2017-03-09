@@ -1,0 +1,1 @@
+Beta release. Notes taking app that allows connecting your notes as a graph.
