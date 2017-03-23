@@ -21,6 +21,7 @@ import { findRelatedNotes, findParentNotes } from '../reducers/queries'
 import RelatedNote from '../components/RelatedNote'
 
 import ButtonsGroup from '../components/ButtonsGroup'
+import MarkdownViewer from '../components/MarkdownViewer'
 
 
 const mapStateToProps = (state, ownProps) => {
@@ -150,8 +151,9 @@ class NoteView extends Component {
               <View style={styles.titleCont}>
                 <Text style={styles.title}>{note.title}</Text>
               </View>
-              <Text style={styles.text}>{note.text}</Text>
-
+              <View>
+                <MarkdownViewer text={note.text} />
+              </View>
               <TouchableOpacity onPress={this.editCurrentNote}>
                 <Icon name="mode-edit"
                   size={Metrics.icons.medium}
@@ -173,7 +175,7 @@ class NoteView extends Component {
   }
 }
 
-const Spacer = () => <View style={styles.spacer} />
+// const Spacer = () => <View style={styles.spacer} />
 
 
 const styles = StyleSheet.create({
@@ -207,11 +209,7 @@ const styles = StyleSheet.create({
     fontSize: Fonts.size.h3,
     fontFamily: Fonts.type.bold,
   },
-  text: {
-    color: Colors.noteText,
-    fontSize: Fonts.size.regular,
-    fontFamily: Fonts.type.base,
-  },
+
 })
 
 

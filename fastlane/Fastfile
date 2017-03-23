@@ -41,6 +41,17 @@ platform :android do
   end
 
 
+
+  # desc "Builds release version"
+  # lane :build do
+  #   # Build the release version of the Android App
+  #   gradle(
+  #     task: "assemble",
+  #     build_type: "Release",
+  #     project_dir: "android/"
+  #   )
+  # end
+
   desc "Submit a new Alpha Build to Google Play Store"
   lane :alpha do
     # Build the release version of the Android App
