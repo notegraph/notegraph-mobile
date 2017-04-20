@@ -15,6 +15,7 @@ import NoteView from '../containers/NoteView'
 import AddRelation from '../containers/AddRelation'
 
 import actions from '../actions/creators'
+import NavigationDrawer from './NavigationDrawer'
 
 
 /* **************************
@@ -31,34 +32,39 @@ class NavigationRouter extends Component {
 
   renderSearchBtn = () => NavItems.openSearch()
 
+  renderHamburgerBtn = () => NavItems.hamburgerButton()
+
   backButton = () => NavItems.backButton()
 
   render () {
     return (
       <Router titleStyle={styles.title} >
-        <Scene key="root" navigationBarStyle={styles.navBar} >
+        <Scene key="drawer" component={NavigationDrawer} open={false}>
+          <Scene key="root" navigationBarStyle={styles.navBar} >
 
-          <Scene initial key="dashboard" component={Dashboard} title="Notes"
-            renderRightButton={this.renderSearchBtn}
-          />
-          <Scene key="search" component={DashboardSearch} title="Search"
-            renderBackButton={this.backButton}
-          />
-          <Scene
-            key="noteEdit" component={NoteEdit} title="Edit Note"
-            renderBackButton={this.renderSaveButton}
-            renderRightButton={this.renderDeleteBtn}
-          />
-          <Scene
-            key="noteView" component={NoteView} title="Active Note"
-            renderBackButton={this.backAndHomeButtons}
-            renderRightButton={this.renderDeleteBtn}
-          />
-          <Scene
-            key="newRelation" component={AddRelation} title="Add Connection"
-            renderBackButton={NavItems.backButton}
-          />
+            <Scene initial key="dashboard" component={Dashboard} title="Notes"
+              renderRightButton={this.renderSearchBtn}
+              renderBackButton={this.renderHamburgerBtn}
+            />
+            <Scene key="search" component={DashboardSearch} title="Search"
+              renderBackButton={this.backButton}
+            />
+            <Scene
+              key="noteEdit" component={NoteEdit} title="Edit Note"
+              renderBackButton={this.renderSaveButton}
+              renderRightButton={this.renderDeleteBtn}
+            />
+            <Scene
+              key="noteView" component={NoteView} title="Active Note"
+              renderBackButton={this.backAndHomeButtons}
+              renderRightButton={this.renderDeleteBtn}
+            />
+            <Scene
+              key="newRelation" component={AddRelation} title="Add Connection"
+              renderBackButton={NavItems.backButton}
+            />
 
+          </Scene>
         </Scene>
       </Router>
     )

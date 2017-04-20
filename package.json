@@ -25,6 +25,7 @@
     "raven-js": "^3.12.0",
     "react": "15.3.2",
     "react-native": "^0.36.1",
+    "react-native-drawer": "^2.3.0",
     "react-native-material-kit": "^0.3.3",
     "react-native-router-flux": "^3.36.0",
     "react-native-simple-markdown": "CharlesMangwa/react-native-simple-markdown#29/head",
