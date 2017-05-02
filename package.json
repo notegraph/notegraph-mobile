@@ -25,7 +25,9 @@
     "raven-js": "^3.12.0",
     "react": "15.3.2",
     "react-native": "^0.36.1",
+    "react-native-device-info": "^0.10.2",
     "react-native-drawer": "^2.3.0",
+    "react-native-mail": "2.x",
     "react-native-material-kit": "^0.3.3",
     "react-native-router-flux": "^3.36.0",
     "react-native-simple-markdown": "CharlesMangwa/react-native-simple-markdown#29/head",
@@ -40,7 +42,7 @@
     "seamless-immutable": "^6.1.4"
   },
   "devDependencies": {
-    "ava": "^0.16.0",
+    "ava": "*",
     "babel-eslint": "^6.1.2",
     "chai": "^3.5.0",
     "chai-shallow-deep-equal": "^1.4.4",
@@ -61,7 +63,8 @@
     "react-native-mock": "^0.2.6",
     "reactotron-apisauce": "^1.1.2",
     "reactotron-react-native": "^1.1.2",
-    "reactotron-redux": "^1.1.2"
+    "reactotron-redux": "^1.1.2",
+    "sinon": "^2.1.0"
   },
   "ava": {
     "files": [

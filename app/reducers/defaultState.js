@@ -52,7 +52,8 @@ circle at the bottom shows number of connections
             title: 'Usage sample',
           }
         },
-        noteIds: ['a1', 'b1', 'c', 'fa', 'fb', 'fc', 'fd'],
+        // noteIds: ['a1', 'b1', 'c', 'fa', 'fb', 'fc', 'fd'],
+        // FIXME: which is the entry group for this notebook?
         groupIds: ['g-mmap1', 'g-flow1']
       },
     },
@@ -102,8 +103,8 @@ circle at the bottom shows number of connections
   },
 
   editor: {
-    notebook: 'ngbook1',
-    group: 'group1',
+    notebookId: 'ngbook1',
+    groupId: 'g-mmap1',
     note: 'fa1',
   }
 

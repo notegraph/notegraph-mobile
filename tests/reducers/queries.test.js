@@ -15,6 +15,7 @@ test('findRelatedNotes', t => {
 
   expect(rel).to.have.length(1)
   expect(rel[0]).to.have.deep.property('note.id', 'b1')
+  t.pass()
 })
 
 test('find related by ownership', t => {
@@ -30,6 +31,7 @@ test('find related by ownership', t => {
   const ownerRel = R.find(x => R.path(['con', 'a'], x) === 'c')(ownerRels)
   expect(ownerRel).to.not.be.undefined
   expect(ownerRel).to.have.deep.property('note.id', 'd')
+  t.pass()
 })
 
 test('find parent notes in mindmap', t => {
@@ -42,4 +44,5 @@ test('find parent notes in mindmap', t => {
   expect(b1.con).to.shallowDeepEqual({a: 'b1', b: 'c', type: 'owns'})
   expect(b1.note).to.not.contain.key('owner')
   expect(b1).to.have.property('noteOnEnd', false)
+  t.pass()
 })

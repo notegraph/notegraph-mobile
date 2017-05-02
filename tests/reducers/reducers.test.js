@@ -51,7 +51,7 @@ test('add note', t => {
 })
 
 
-test('delete note with relations', () => {
+test('delete note with relations', t => {
   const store = createStore()
   const groupId = 'g-mmap1'
   const noteId = 'a1'
@@ -72,9 +72,10 @@ test('delete note with relations', () => {
 
   expect(findCon(stateAfter)).to.be.undefined
   expect(findGroupItem(stateAfter)).to.be.undefined
+  t.pass()
 })
 
-test('delete parent note', () => {
+test('delete parent note', t => {
   const store = createStore()
   const noteId = 'c'
   const findNote = (state, id) => state.notes[id]
@@ -88,6 +89,7 @@ test('delete parent note', () => {
   const notesAfter = store.getState().notes
   expect(notesAfter).to.not.have.property('c')
   expect(notesAfter).to.not.have.property('d')
+  t.pass()
 })
 
 
@@ -130,5 +132,6 @@ test('add and remove relation', t => {
   ).to.be.undefined
 
   expect(getConsCount()).to.be.equal(consLen - 1)
+  t.pass()
 })
 
