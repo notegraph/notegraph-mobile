@@ -13,17 +13,17 @@ export const relNames = {
 }
 
 export const onStartIcons = {
-  [relTypes.related]: 'compare-arrows',
+  [relTypes.related]: 'settings-ethernet',
   [relTypes.owns]: 'arrow-forward',
-  [relTypes.defines]: 'arrow-forward',
-  [relTypes.custom]: 'settings-ethernet',
+  [relTypes.defines]: 'subdirectory-arrow-right',
+  [relTypes.custom]: 'swap-calls',
 }
 
 export const onEndIcons = {
-  [relTypes.related]: 'compare-arrows',
+  [relTypes.related]: 'settings-ethernet',
   [relTypes.owns]: 'arrow-back',
-  [relTypes.defines]: 'arrow-back',
-  [relTypes.custom]: 'settings-ethernet',
+  [relTypes.defines]: 'subdirectory-arrow-left',
+  [relTypes.custom]: 'swap-calls',
 }
 
 

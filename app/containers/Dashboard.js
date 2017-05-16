@@ -15,7 +15,7 @@ import NotesContainer from './NotesContainer'
 import ActionButton from '../components/ActionButton'
 
 
-import { AppStyles } from '../themes'
+import { AppStyles, Colors } from '../themes'
 
 
 class Dashboard extends Component {
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     margin: 0,
-    backgroundColor: '#ccc',
+    backgroundColor: Colors.background,
   },
   buttonsFooter: {
     position: 'absolute',

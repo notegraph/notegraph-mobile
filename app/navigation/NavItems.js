@@ -20,24 +20,24 @@ const openDrawer = () => {
 
 export default {
 
-  backButton () {
+  backButton (isWhite = false) {
     return (
       <TouchableOpacity onPress={RouteActions.pop}>
         <Icon name="arrow-back"
           size={Metrics.icons.medium}
-          color={Colors.snow}
+          color={!isWhite ? Colors.iconDark : Colors.snow}
           style={styles.navButtonLeft}
         />
       </TouchableOpacity>
     )
   },
 
-  homeButton () {
+  homeButton (isWhite = false) {
     return (
       <TouchableOpacity onPress={() => RouteActions.dashboard({ type: ActionConst.RESET })}>
         <Icon name="home"
           size={Metrics.icons.medium}
-          color={Colors.snow}
+          color={!isWhite ? Colors.iconDark : Colors.snow}
           style={styles.navButtonLeft}
         />
       </TouchableOpacity>
@@ -70,7 +70,7 @@ export default {
       <TouchableOpacity onPress={handlePress}>
         <Icon name="check"
           size={Metrics.icons.medium}
-          color={Colors.snow}
+          color={Colors.iconDark}
           style={styles.navButtonLeft}
         />
       </TouchableOpacity>
@@ -95,7 +95,7 @@ export default {
       <TouchableOpacity onPress={handlePress} >
         <Icon name="delete"
           size={Metrics.icons.medium}
-          color={Colors.snow}
+          color={Colors.iconDark}
           style={[styles.navButtonRight]}
         />
       </TouchableOpacity>

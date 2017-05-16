@@ -22,7 +22,7 @@ function ConnectionIcon ({ con, onEnd, down }) {
     return (
       <View style={styles.iconWrapper}>
         <Icon name={iconName}
-          size={20}
+          size={23}
           color={'black'}
           style={iconStyles}
         />
@@ -110,10 +110,12 @@ const styles = StyleSheet.create({
     fontSize: Fonts.size.regular,
     paddingLeft: 5,
     paddingRight: 5,
+    color: Colors.noteTitle,
   },
   note: {
     padding: 5,
     paddingTop: 0,
+    color: Colors.noteText,
   },
   leftConHolder: {
     marginLeft: -3,
@@ -135,18 +137,23 @@ const styles = StyleSheet.create({
   },
   noteContainer: {
     flex: 1,
-    backgroundColor: '#eee',
+    backgroundColor: Colors.background,
+    borderWidth: 1,
+    borderColor: Colors.border,
+    borderRadius: 2,
     overflow: 'hidden',
   },
 
   iconWrapper: {
+    top: -6,
     width: 22,
     height: 22,
-    borderRadius: 11,
-    borderColor: Colors.background,
-    borderWidth: 1,
+    // borderRadius: 11,
+    // borderColor: Colors.background,
+    // borderWidth: 1,
   },
-  relatedIcon: {
+  relatedIcn: {
+    right: -2,
   },
   iconPointsDown: {
     transform: [{rotate: '90deg'}],

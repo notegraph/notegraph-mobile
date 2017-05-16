@@ -7,14 +7,15 @@ import {
   TouchableOpacity,
   Text,
   Share,
+  View,
 } from 'react-native'
-// import { Images } from '../Themes'
 
 import { Actions as NavigationActions } from 'react-native-router-flux'
+import Images from '../themes/Images'
+import {Fonts, Colors} from '../themes'
 import {exportNotebook} from '../actions/share'
 import {sendFeedbackMail} from '../actions/mail'
 
-const Images = {}
 
 const styles = {
   container: {
@@ -22,14 +23,25 @@ const styles = {
     padding: 20
   },
   logo: {
-    alignSelf: 'center'
+    alignSelf: 'center',
+    marginBottom: 10,
+  },
+  linksContainer: {
+    paddingTop: 20,
+  },
+  menuLink: {
+    marginBottom: 10,
+  },
+  text: {
+    fontSize: Fonts.size.regular,
+    color: Colors.coal
   }
 }
 
 class DrawerButton extends Component {
   render () {
     return (
-      <TouchableOpacity onPress={this.props.onPress}>
+      <TouchableOpacity onPress={this.props.onPress} style={styles.menuLink}>
         <Text style={styles.text}>{this.props.text}</Text>
       </TouchableOpacity>
     )
@@ -84,8 +96,10 @@ class DrawerContent extends Component {
     return (
       <ScrollView style={styles.container}>
         <Image source={Images.logo} style={styles.logo} />
-        <DrawerButton text="Export Data" onPress={this.handleExportData} />
-        <DrawerButton text="Send Feedback" onPress={this.handleSendFeedback} />
+        <View style={styles.linksContainer}>
+          <DrawerButton text="Export Data" onPress={this.handleExportData} />
+          <DrawerButton text="Send Feedback" onPress={this.handleSendFeedback} />
+        </View>
       </ScrollView>
     )
   }

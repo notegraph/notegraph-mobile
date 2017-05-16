@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     padding: 5,
     backgroundColor: '#fff',
     borderWidth: 1,
-    borderColor: '#bbb',
+    borderColor: Colors.border,
 
   },
   title: {
@@ -86,8 +86,10 @@ const styles = StyleSheet.create({
     height: 20,
     width: 20,
     borderRadius: 10,
-    // borderWidth: 1,
+
     backgroundColor: Colors.background,
+    borderWidth: 1,
+    borderColor: Colors.border,
     alignSelf: 'flex-end',
   },
   relsCounterText: {

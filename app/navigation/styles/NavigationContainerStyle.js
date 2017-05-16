@@ -4,11 +4,17 @@ export default {
   container: {
     flex: 1
   },
-  navBar: {
-    backgroundColor: Colors.navbar,
+  navbar: {
+    backgroundColor: Colors.snow,
   },
   title: {
-    color: Colors.snow
+    color: Colors.charcoal,
+  },
+  dashNavBar: {
+    backgroundColor: Colors.navbar,
+  },
+  dashTitle: {
+    color: Colors.snow,
   },
   leftButton: {
     tintColor: Colors.snow

@@ -23,6 +23,11 @@ import NavigationDrawer from './NavigationDrawer'
 ***************************/
 
 
+const lightNav = {
+  navigationBarStyle: styles.dashNavBar,
+  titleStyle: styles.dashTitle,
+}
+
 class NavigationRouter extends Component {
 
   renderDeleteBtn = (navProps) => NavItems.deleteNoteButton(navProps, this.props.deleteNote)
@@ -35,19 +40,25 @@ class NavigationRouter extends Component {
   renderHamburgerBtn = () => NavItems.hamburgerButton()
 
   backButton = () => NavItems.backButton()
+  backButtonWhite = () => NavItems.backButton(true)
 
   render () {
     return (
-      <Router titleStyle={styles.title} >
+      <Router>
         <Scene key="drawer" component={NavigationDrawer} open={false}>
-          <Scene key="root" navigationBarStyle={styles.navBar} >
+          <Scene key="root"
+            navigationBarStyle={styles.navBar}
+            titleStyle={styles.title}
+          >
 
             <Scene initial key="dashboard" component={Dashboard} title="Notes"
               renderRightButton={this.renderSearchBtn}
               renderBackButton={this.renderHamburgerBtn}
+              {...lightNav}
             />
             <Scene key="search" component={DashboardSearch} title="Search"
-              renderBackButton={this.backButton}
+              renderBackButton={this.backButtonWhite}
+              {...lightNav}
             />
             <Scene
               key="noteEdit" component={NoteEdit} title="Edit Note"
@@ -55,13 +66,13 @@ class NavigationRouter extends Component {
               renderRightButton={this.renderDeleteBtn}
             />
             <Scene
-              key="noteView" component={NoteView} title="Active Note"
+              key="noteView" component={NoteView}
               renderBackButton={this.backAndHomeButtons}
               renderRightButton={this.renderDeleteBtn}
             />
             <Scene
               key="newRelation" component={AddRelation} title="Add Connection"
-              renderBackButton={NavItems.backButton}
+              renderBackButton={this.renderBackButton}
             />
 
           </Scene>

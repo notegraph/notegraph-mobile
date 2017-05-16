@@ -2,9 +2,9 @@ import {Colors} from '../../themes'
 
 export default {
   drawer: {
-    backgroundColor: Colors.background
+    backgroundColor: Colors.white
   },
   main: {
-    backgroundColor: Colors.white
+    backgroundColor: Colors.drawer
   }
 }

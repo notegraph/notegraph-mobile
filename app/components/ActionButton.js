@@ -35,7 +35,7 @@ ActionButton.propTypes = {
 
 const styles = StyleSheet.create({
   button: {
-    color: Colors.blue,
+    color: Colors.actionBtn,
   }
 })
 
