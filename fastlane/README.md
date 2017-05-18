@@ -27,6 +27,7 @@ xcode-select --install
 <td width="33%"><code>sudo gem install fastlane -NV</code></td>
 </tr>
 </table>
+
 # Available Actions
 ## Android
 ### android test
@@ -44,11 +45,6 @@ Submit a new Beta Build to Crashlytics Beta
 fastlane android deploy
 ```
 Deploy a new version to the Google Play
-### android build
-```
-fastlane android build
-```
-Builds release version
 ### android alpha
 ```
 fastlane android alpha
