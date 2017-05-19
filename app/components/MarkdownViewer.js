@@ -76,6 +76,12 @@ const styles = {
     paddingTop: 3,
     paddingBottom: 3,
     fontSize: Fonts.size.regular
+  },
+
+  listItem: {
+    paddingTop: 10,
+    paddingBottom: 10,
+    backgroundColor: 'red'
   }
 }
 

@@ -1,6 +1,6 @@
 {
   "name": "ngkeep",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
@@ -13,7 +13,7 @@
     "coverage": "nyc ava && nyc report --reporter=html && open coverage/index.html || xdg-open coverage/index.html",
     "precommit": "yarn test",
     "prepush": "yarn test",
-    "adb:date": "adb shell \"date `date +%m%d%H%M%Y.%s`\"",
+    "adb:date": "adb shell \"date `date +%m%d%H%M%Y.%S`\"",
     "sourcemap:android": "react-native bundle --dev false --platform android --entry-file index.android.js --bundle-output build/main.jsbundle --sourcemap-output build/main.jsbundle.map",
     "sentry:release": "VERSION=$(./ver.sh) && sentry-cli releases -o notegraph -p ngkeep new $VERSION",
     "sentry:files": "VERSION=$(./ver.sh) && sentry-cli releases -o notegraph -p ngkeep files $VERSION upload-sourcemaps --url-prefix / build/main.jsbundle build/main.jsbundle.map",
@@ -29,8 +29,9 @@
     "react-native-drawer": "^2.3.0",
     "react-native-mail": "2.x",
     "react-native-material-kit": "^0.3.3",
+    "react-native-menu": "^0.20.2",
     "react-native-router-flux": "^3.36.0",
-    "react-native-simple-markdown": "CharlesMangwa/react-native-simple-markdown#29/head",
+    "react-native-simple-markdown": "^1.0.x",
     "react-native-vector-icons": "^2.0.3",
     "react-redux": "^5.0.3",
     "redux": "^3.4.0",

@@ -2,7 +2,10 @@ import React from 'react'
 import {
   TouchableOpacity,
   View,
+  Text,
 } from 'react-native'
+import Menu, { MenuOptions, MenuOption, MenuTrigger } from 'react-native-menu'
+
 import styles from './styles/NavItemsStyle'
 import { Actions as RouteActions, ActionConst } from 'react-native-router-flux'
 import Icon from 'react-native-vector-icons/MaterialIcons'
@@ -99,6 +102,26 @@ export default {
           style={[styles.navButtonRight]}
         />
       </TouchableOpacity>
+    )
+  },
+
+  noteMenu ({ noteId }, onPressFunction) {
+    const handleSelect = (e) => onPressFunction(e, noteId)
+    return (
+      <Menu onSelect={handleSelect}>
+        <MenuTrigger>
+          <Icon name="more-vert"
+            size={Metrics.icons.medium}
+            color={Colors.iconDark}
+            style={styles.navButtonLeft}
+          />
+        </MenuTrigger>
+        <MenuOptions>
+          <MenuOption value="share">
+            <Text>Share</Text>
+          </MenuOption>
+        </MenuOptions>
+      </Menu>
     )
   },
 

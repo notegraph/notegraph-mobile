@@ -32,3 +32,10 @@ export const exportNotebook = (callback) => (dispatch, getState) => {
   const text = allText.join('\n--\n')
   callback(text)
 }
+
+
+export const exportNote = (noteId, callback) => (dispatch, getState) => {
+  const {notes} = getState()
+  const text = noteToText(noteId, notes, false)
+  callback(text)
+}

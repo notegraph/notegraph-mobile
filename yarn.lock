@@ -5353,6 +5353,12 @@ react-native-material-kit@^0.3.3:
   dependencies:
     ramda "~0.21.0"
 
+react-native-menu@^0.20.2:
+  version "0.20.2"
+  resolved "https://registry.yarnpkg.com/react-native-menu/-/react-native-menu-0.20.2.tgz#a1bec7a3d1660246561298c851f98728bc4a1305"
+  dependencies:
+    react-timer-mixin "^0.13.3"
+
 react-native-mock@^0.2.6:
   version "0.2.9"
   resolved "https://registry.yarnpkg.com/react-native-mock/-/react-native-mock-0.2.9.tgz#e213c714a20f532ba0df03474205e5276683c298"
@@ -5378,9 +5384,9 @@ react-native-router-flux@^3.36.0:
     react-native-tabs "^1.0.9"
     react-static-container "1.0.1"
 
-react-native-simple-markdown@CharlesMangwa/react-native-simple-markdown#29/head:
-  version "1.0.60-rc.3"
-  resolved "https://codeload.github.com/CharlesMangwa/react-native-simple-markdown/tar.gz/8658efb573028b5f977914b659d002bdbcbb92c1"
+react-native-simple-markdown@^1.0.x:
+  version "1.0.54"
+  resolved "https://registry.yarnpkg.com/react-native-simple-markdown/-/react-native-simple-markdown-1.0.54.tgz#4759a12fc947463ae1d46e681f9b6975fe3e5078"
   dependencies:
     lodash "^4.15.0"
     simple-markdown "git://github.com/CharlesMangwa/simple-markdown.git"

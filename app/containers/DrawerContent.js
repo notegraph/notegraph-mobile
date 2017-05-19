@@ -10,7 +10,6 @@ import {
   View,
 } from 'react-native'
 
-import { Actions as NavigationActions } from 'react-native-router-flux'
 import Images from '../themes/Images'
 import {Fonts, Colors} from '../themes'
 import {exportNotebook} from '../actions/share'

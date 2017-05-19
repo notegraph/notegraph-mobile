@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
-import { Alert } from 'react-native'
+import { Alert, View, Share } from 'react-native'
+
 
 import { Scene, Router, Actions as RouteActions, ActionConst } from 'react-native-router-flux'
 import styles from './styles/NavigationContainerStyle'
@@ -16,6 +17,7 @@ import AddRelation from '../containers/AddRelation'
 
 import actions from '../actions/creators'
 import NavigationDrawer from './NavigationDrawer'
+import {exportNote} from '../actions/share'
 
 
 /* **************************
@@ -28,9 +30,21 @@ const lightNav = {
   titleStyle: styles.dashTitle,
 }
 
+
 class NavigationRouter extends Component {
 
-  renderDeleteBtn = (navProps) => NavItems.deleteNoteButton(navProps, this.props.deleteNote)
+  renderDeleteBtn = (navProps) =>
+    NavItems.deleteNoteButton(navProps, this.props.deleteNote)
+
+  renderNoteActions = (navProps) => {
+    return (
+      <View style={styles.twoIcons}>
+        {this.renderDeleteBtn(navProps)}
+        {NavItems.noteMenu(navProps, this.props.onNoteMenu)}
+      </View>
+    )
+  }
+
   renderSaveButton = () => NavItems.saveNoteButton(this.props.setNoteEditorMode)
 
   backAndHomeButtons = () => NavItems.backAndHome()
@@ -51,29 +65,30 @@ class NavigationRouter extends Component {
             titleStyle={styles.title}
           >
 
+
             <Scene initial key="dashboard" component={Dashboard} title="Notes"
               renderRightButton={this.renderSearchBtn}
               renderBackButton={this.renderHamburgerBtn}
               {...lightNav}
-            />
+              />
             <Scene key="search" component={DashboardSearch} title="Search"
               renderBackButton={this.backButtonWhite}
               {...lightNav}
-            />
+              />
             <Scene
               key="noteEdit" component={NoteEdit} title="Edit Note"
               renderBackButton={this.renderSaveButton}
               renderRightButton={this.renderDeleteBtn}
-            />
+              />
             <Scene
               key="noteView" component={NoteView}
               renderBackButton={this.backAndHomeButtons}
-              renderRightButton={this.renderDeleteBtn}
-            />
+              renderRightButton={this.renderNoteActions}
+              />
             <Scene
               key="newRelation" component={AddRelation} title="Add Connection"
               renderBackButton={this.renderBackButton}
-            />
+              />
 
           </Scene>
         </Scene>
@@ -85,6 +100,7 @@ class NavigationRouter extends Component {
 NavigationRouter.propTypes = {
   deleteNote: PropTypes.func.isRequired,
   setNoteEditorMode: PropTypes.func.isRequired,
+  onNoteMenu: PropTypes.func.isRequired,
 }
 
 
@@ -110,7 +126,20 @@ function mapDispatchToProps (dispatch, ownProps) {
       )
     },
     setNoteEditorMode: () => dispatch(actions.setEditorReadMode()),
+    onNoteMenu: (option, noteId) => {
+      if (option === 'share') {
+        dispatch(exportNote(noteId, shareMessage))
+      }
+    }
   }
+}
+
+function shareMessage (text) {
+  Share.share({
+    message: text
+  })
+    // .then(this._showResult)
+    // .catch((error) => this.setState({result: 'error: ' + error.message}))
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavigationRouter)

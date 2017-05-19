@@ -4,6 +4,7 @@ import {
   StyleSheet,
   StatusBar,
 } from 'react-native'
+import {MenuContext} from 'react-native-menu'
 
 import { Colors } from './themes'
 
@@ -24,7 +25,10 @@ export default class Root extends Component {
             backgroundColor={Colors.statusBar}
             barStyle="light-content"
           />
-          <NavigationRouter />
+
+          <MenuContext style={{ flex: 1 }}>
+            <NavigationRouter />
+          </MenuContext>
         </View>
       </Provider>
     )

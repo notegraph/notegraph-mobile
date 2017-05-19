@@ -21,5 +21,9 @@ export default {
   },
   rightButton: {
     color: Colors.snow
+  },
+  twoIcons: {
+    flex: 1,
+    flexDirection: 'row',
   }
 }

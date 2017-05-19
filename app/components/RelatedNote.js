@@ -53,6 +53,11 @@ class RelatedNote extends Component {
 
   render () {
     const { note, con, noteOnEnd, conPosition } = this.props
+    const noteStyles = [styles.noteContainer]
+    if (con.type === 'owns' && (noteOnEnd || conPosition === 'bottom')) {
+      noteStyles.push(styles.parentNote)
+    }
+    // console.log({note, con, noteOnEnd, conPosition})
 
     // FIXME: remove type.name || type hack
     return (
@@ -61,7 +66,7 @@ class RelatedNote extends Component {
           {conPosition === 'left' && <ConnectionIcon con={con} onEnd={noteOnEnd} />}
         </View>
         <View style={styles.noteWrapper}>
-          <TouchableOpacity style={styles.noteContainer}
+          <TouchableOpacity style={noteStyles}
             onPress={this.handlePress}
             delayLongPress={1500}
             onLongPress={this.handleLongPress}
@@ -99,6 +104,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
 
   },
+
   conType: {
     backgroundColor: Colors.blue,
     color: 'white',
@@ -142,6 +148,10 @@ const styles = StyleSheet.create({
     borderColor: Colors.border,
     borderRadius: 2,
     overflow: 'hidden',
+  },
+  // highlight parent notes
+  parentNote: {
+    borderWidth: 3,
   },
 
   iconWrapper: {
