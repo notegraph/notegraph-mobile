@@ -79,9 +79,8 @@ const styles = {
   },
 
   listItem: {
-    paddingTop: 10,
-    paddingBottom: 10,
-    backgroundColor: 'red'
+    // paddingTop: 10,
+    // paddingBottom: 10,
   }
 }
 

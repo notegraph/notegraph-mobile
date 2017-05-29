@@ -27,11 +27,20 @@ platform :android do
 
   desc "Submit a new Beta Build to Crashlytics Beta"
   lane :beta do
-    gradle(task: "assembleRelease")
-    crashlytics
+    gradle(
+      task: "assemble",
+      build_type: "Release",
+      project_dir: "android/"
+    )
 
-    # sh "your_script.sh"
-    # You can also use other beta testing services here
+    # Uploads generated apk to Google Play Store as an Alpha build
+    supply(
+      track: "beta",
+      apk: "android/app/build/outputs/apk/app-release.apk"
+    )
+
+    # sh yarn run sentry:upload
+
   end
 
   desc "Deploy a new version to the Google Play"
