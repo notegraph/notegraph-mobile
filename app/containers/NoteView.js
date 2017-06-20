@@ -144,31 +144,30 @@ class NoteView extends Component {
     const { note, hasConnections } = this.props
 
     return (
-      <View style={{flex: 1}}>
+      <View style={[styles.container]}>
         <ScrollView style={styles.scrollview}>
-          <View style={[styles.container]}>
-            <View style={styles.noteContainer}>
-              <View style={styles.titleCont}>
-                <Text style={styles.title}>{note.title}</Text>
-              </View>
-              <View>
-                <MarkdownViewer text={note.text} />
-              </View>
-              <TouchableOpacity onPress={this.editCurrentNote}>
-                <Icon name="mode-edit"
-                  size={Metrics.icons.medium}
-                />
-              </TouchableOpacity>
+          <View style={styles.noteContainer}>
+            <View style={styles.titleCont}>
+              <Text style={styles.title}>{note.title}</Text>
             </View>
-
-            { hasConnections && (
-              <View style={styles.relatedContainer}>
-                {this.renderRelated()}
-              </View>
-              )
-            }
+            <View>
+              <MarkdownViewer text={note.text} />
+            </View>
+            <TouchableOpacity onPress={this.editCurrentNote}>
+              <Icon name="mode-edit"
+                size={Metrics.icons.medium}
+                />
+            </TouchableOpacity>
           </View>
         </ScrollView>
+        { hasConnections && (
+        <ScrollView style={styles.relatedScroll}>
+          <View style={styles.relatedContainer}>
+            {this.renderRelated()}
+          </View>
+        </ScrollView>
+          )
+        }
         {this.renderButtons()}
       </View>
     )
@@ -182,6 +181,7 @@ const styles = StyleSheet.create({
   ...AppStyles.screen,
   scrollview: {
     // flex: 1,
+    flex: 3,
   },
   container: {
     padding: 10,
@@ -191,10 +191,12 @@ const styles = StyleSheet.create({
 
   },
   noteContainer: {
-    flex: 3,
+
+  },
+  relatedScroll: {
+    flex: 2,
   },
   relatedContainer: {
-    flex: 2,
     marginLeft: 0,
     flexDirection: 'column',
     justifyContent: 'flex-start',

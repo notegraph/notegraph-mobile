@@ -18,7 +18,8 @@
     "sentry:release": "VERSION=$(./ver.sh) && sentry-cli releases -o notegraph -p ngkeep new $VERSION",
     "sentry:files": "VERSION=$(./ver.sh) && sentry-cli releases -o notegraph -p ngkeep files $VERSION upload-sourcemaps --url-prefix / build/main.jsbundle build/main.jsbundle.map",
     "sentry:upload": "npm run sourcemap:android && npm run sentry:release && npm run sentry:files",
-    "package:version": "VERSION=$(./ver.sh) && echo $VERSION"
+    "package:version": "VERSION=$(./ver.sh) && echo $VERSION",
+    "emulator": "$ANDROID_HOME/tools/emulator @Nexus_5X_API_23&"
   },
   "dependencies": {
     "ramda": "^0.22.1",
@@ -31,7 +32,7 @@
     "react-native-material-kit": "^0.3.3",
     "react-native-menu": "^0.20.2",
     "react-native-router-flux": "^3.36.0",
-    "react-native-simple-markdown": "^1.0.x",
+    "react-native-simple-markdown": "*",
     "react-native-vector-icons": "^2.0.3",
     "react-redux": "^5.0.3",
     "redux": "^3.4.0",

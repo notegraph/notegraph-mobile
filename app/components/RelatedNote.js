@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
     // borderColor: Colors.background,
     // borderWidth: 1,
   },
-  relatedIcn: {
+  relatedIcon: {
     right: -2,
   },
   iconPointsDown: {

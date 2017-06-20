@@ -79,6 +79,9 @@ const styles = {
   },
 
   listItem: {
+    flexDirection: 'row',
+    // paddingTop: 5,
+    paddingBottom: 10,
     // paddingTop: 10,
     // paddingBottom: 10,
   }

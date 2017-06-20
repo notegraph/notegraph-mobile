@@ -5384,7 +5384,7 @@ react-native-router-flux@^3.36.0:
     react-native-tabs "^1.0.9"
     react-static-container "1.0.1"
 
-react-native-simple-markdown@^1.0.x:
+react-native-simple-markdown@*:
   version "1.0.54"
   resolved "https://registry.yarnpkg.com/react-native-simple-markdown/-/react-native-simple-markdown-1.0.54.tgz#4759a12fc947463ae1d46e681f9b6975fe3e5078"
   dependencies:
