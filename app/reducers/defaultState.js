@@ -12,16 +12,16 @@ export default {
       title: 'Start here',
       text:
 `Hello, thank you for installing the app.
-The key feature of notegraph is ability to connect notes.
-You can have parent-child relationship (as in mindmap). Or you can connect any notes in the graph, defining connection type manually.
+The key feature of notegraph is an ability to connect notes.
+You can have a parent-child relationship (as in mind maps). Or you can connect any notes in the graph, defining connection type manually.
 
-Take a moment to play with it. Things are not perfect yet... Please help us to make it better!
+Take a moment to play with it. Things are not perfect yet... Let us know how to make it better!
 `
     },
     b1: {
       id: 'b1',
       text:
-`This is a related note.
+`This is another and related note.
 
 p. s. titles are optional, but highly encouraged
 circle at the bottom shows number of connections
@@ -30,6 +30,35 @@ circle at the bottom shows number of connections
     },
     c: { id: 'c', text: 'This is a child note ... ' },
     d: { id: 'd', text: 'hierarchy is not limited, its your ideas' },
+    m: {
+      id: 'm',
+      title: 'Markdown',
+      text:
+`limited markdown support makes it possible to do some things (edit to see the source)
+
+## format text
+You can **emphasize** what you want or just *suggest it*
+
+## create lists
+
+- item 1
+- item 2
+
+### or create numeric lists
+
+1. first
+2. second
+
+# make titles
+
+## or subtitles
+
+### even smaller titles
+
+P.S. do no forget empty lines after different markdown structures
+
+`
+    }
 
     // fa: { id: 'fa', title: 'A' },
     // fb: { id: 'fb', title: 'B' },
@@ -66,10 +95,11 @@ circle at the bottom shows number of connections
       title: 'Main group',
       entrypoint: true,
       items: [
-        { id: 'a1', bgcolor: 'yellow' },
+        { id: 'a1' }, // bgcolor: 'yellow'
         { id: 'b1' },
         { id: 'c', owner: 'b1' },
         { id: 'd', owner: 'c' },
+        { id: 'm', owner: 'a1' },
       ],
 
       cons: [

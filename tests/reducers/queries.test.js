@@ -13,8 +13,8 @@ import relTypes from '../../app/constants/relTypes'
 test('findRelatedNotes', t => {
   const rel = findRelatedNotes(defState, 'g-mmap1', 'a1')
 
-  expect(rel).to.have.length(1)
-  expect(rel[0]).to.have.deep.property('note.id', 'b1')
+  expect(rel).to.have.length(2)
+  expect(rel[0]).to.have.deep.property('note.id', 'm')
   t.pass()
 })
 

@@ -80,18 +80,28 @@ const styles = {
 
   listItem: {
     flexDirection: 'row',
-    // paddingTop: 5,
-    paddingBottom: 10,
-    // paddingTop: 10,
+    paddingBottom: 3,
+    paddingTop: 7,
     // paddingBottom: 10,
+  },
+  listItemBullet: {
+    fontWeight: 'bold',
+    color: 'black',
+  },
+  strong: {
+    fontWeight: 'bold',
+  },
+  blockQuoteText: {
+    backgroundColor: '#ccc',
   }
 }
 
 ;[
-  'link', 'mailTo', 'listItemBullet', 'listItemNumber', 'listItemText',
-  'plainText', 'strong', 'tableHeaderCell', 'url',
+  'link', 'mailTo', 'listItemBullet', 'strong', 'listItemNumber', 'listItemText',
+  'plainText', 'tableHeaderCell', 'url',
 ].forEach(key => {
   styles[key] = {
+    ...(styles[key] || {}),
     fontSize: Fonts.size.regular
   }
 })

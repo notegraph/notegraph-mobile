@@ -7,7 +7,7 @@ import sinon from 'sinon'
 test.cb('exportNotebook', t => {
   const done = (text) => {
     t.regex(text, /This is a child note/)
-    t.is(text.split('\n--\n').length, 4)
+    t.is(text.split('\n--\n').length, 5)
     t.end()
   }
   const dispatch = sinon.spy()
