@@ -37,6 +37,7 @@ circle at the bottom shows number of connections
 `limited markdown support makes it possible to do some things (edit to see the source)
 
 ## format text
+
 You can **emphasize** what you want or just *suggest it*
 
 ## create lists
@@ -56,7 +57,6 @@ You can **emphasize** what you want or just *suggest it*
 ### even smaller titles
 
 P.S. do no forget empty lines after different markdown structures
-
 `
     }
 
