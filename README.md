@@ -5,7 +5,7 @@ currently available as [Android app](https://play.google.com/store/apps/details?
 
 It should be easy to create iOS release, since it's a ReactNative app.
 
-This app is very lightweight, and I'm not actively working on it until I can see enough interest from potential users.
+This app is very lightweight, and I'm not actively working on it until I can see enough interest from potential users. Patches and bug fixes are welcome.
 
 # motivation 
 
