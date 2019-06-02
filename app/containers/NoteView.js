@@ -1,5 +1,7 @@
 /* @flow weak */
-import React, { Component, PropTypes } from 'react'
+import PropTypes from 'prop-types';
+
+import React, { Component } from 'react';
 import {
   Text,
   View,
@@ -58,11 +60,11 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 
 
 const RelatedNotes = PropTypes.arrayOf(
-  PropTypes.shape({
-    con: PropTypes.object.isRequired,
-    note: PropTypes.object.isRequired,
-    noteOnEnd: PropTypes.bool.isRequired,
-  })
+  // PropTypes.shape({
+  //   con: PropTypes.object.isRequired,
+  //   note: PropTypes.object.isRequired,
+  //   noteOnEnd: PropTypes.bool.isRequired,
+  // })
 ).isRequired
 
 

@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react'
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import {
   ScrollView,
@@ -106,11 +107,11 @@ class DrawerContent extends Component {
 }
 
 DrawerContent.propTypes = {
-  export: React.PropTypes.func.isRequired,
+  export: PropTypes.func.isRequired,
 }
 
 DrawerContent.contextTypes = {
-  drawer: React.PropTypes.object,
+  drawer: PropTypes.object,
 }
 
 function mapStateToProps (state) {

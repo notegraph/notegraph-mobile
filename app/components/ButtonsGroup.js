@@ -1,4 +1,5 @@
-import React, { PropTypes, Component } from 'react'
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import {
   StyleSheet,
   View,
@@ -67,13 +68,13 @@ class ButtonsGroup extends Component {
   }
 }
 
-const ButtonProp = PropTypes.shape({
-  title: PropTypes.string,
-  onPress: PropTypes.func.isRequired,
-})
+// const ButtonProp = PropTypes.shape({
+//   title: PropTypes.string,
+//   onPress: PropTypes.func.isRequired,
+// })
 
 ButtonsGroup.propTypes = {
-  buttons: PropTypes.arrayOf(ButtonProp).isRequired,
+  // buttons: PropTypes.arrayOf(ButtonProp).isRequired,
 }
 
 const styles = StyleSheet.create({

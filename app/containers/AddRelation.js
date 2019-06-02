@@ -1,11 +1,13 @@
-/* @flow weak */
-
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react';
 import {
   Text,
   View,
   StyleSheet,
 } from 'react-native'
+
+/* @flow weak */
+
+import PropTypes from 'prop-types';
 
 import R from 'ramda'
 
