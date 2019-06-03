@@ -1,11 +1,11 @@
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import PropTypes from 'prop-types'
+import React, { Component } from 'react'
 import { Alert, View, Share } from 'react-native'
 
 
-import { Scene, Router, Actions as RouteActions, ActionConst } from 'react-native-router-flux'
+import { Scene, Stack, Router, Actions as RouteActions, ActionConst, Drawer } from 'react-native-router-flux'
 import styles from './styles/NavigationContainerStyle'
-import NavItems from './NavItems'
+import NavItems, { DrawerIcon } from './NavItems'
 
 import { connect } from 'react-redux'
 
@@ -17,7 +17,7 @@ import NoteView from '../containers/NoteView'
 import AddRelation from '../containers/AddRelation'
 
 import actions from '../actions/creators'
-import NavigationDrawer from './NavigationDrawer'
+import DrawerContent from '../containers/DrawerContent'
 import {exportNote} from '../actions/share'
 
 
@@ -60,39 +60,42 @@ class NavigationRouter extends Component {
   render () {
     return (
       <Router>
-        <Scene key="drawer" component={NavigationDrawer} open={false}>
-          <Scene key="root"
-            navigationBarStyle={styles.navBar}
-            titleStyle={styles.title}
+        <Scene key="root"
+          navigationBarStyle={styles.navBar}
+          titleStyle={styles.title}
+        >
+          <Drawer
+            hideNavBar
+            key="dashboard"
+            contentComponent={DrawerContent}
+            drawerIcon={DrawerIcon}
           >
-
-
-            <Scene initial key="dashboard" component={Dashboard} title="Notes"
+            <Scene initial key="dashboard_nav" component={Dashboard} title="Notes"
               renderRightButton={this.renderSearchBtn}
               renderBackButton={this.renderHamburgerBtn}
               {...lightNav}
               />
-            <Scene key="search" component={DashboardSearch} title="Search"
-              renderBackButton={this.backButtonWhite}
-              {...lightNav}
-              />
-            <Scene
-              key="noteEdit" component={NoteEdit} title="Edit Note"
-              renderBackButton={this.renderSaveButton}
-              renderRightButton={this.renderDeleteBtn}
-              />
-            <Scene
-              key="noteView" component={NoteView}
-              renderBackButton={this.backAndHomeButtons}
-              renderRightButton={this.renderNoteActions}
-              />
-            <Scene
-              key="newRelation" component={AddRelation} title="Add Connection"
-              renderBackButton={this.renderBackButton}
-              />
-
-          </Scene>
+          </Drawer>
+          <Scene key="search" component={DashboardSearch} title="Search"
+            renderBackButton={this.backButtonWhite}
+            {...lightNav}
+            />
+          <Scene
+            key="noteEdit" component={NoteEdit} title="Edit Note"
+            renderBackButton={this.renderSaveButton}
+            renderRightButton={this.renderDeleteBtn}
+            />
+          <Scene
+            key="noteView" component={NoteView}
+            renderBackButton={this.backAndHomeButtons}
+            renderRightButton={this.renderNoteActions}
+            />
+          <Scene
+            key="newRelation" component={AddRelation} title="Add Connection"
+            renderBackButton={this.renderBackButton}
+            />
         </Scene>
+
       </Router>
     )
   }

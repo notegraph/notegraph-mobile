@@ -114,6 +114,7 @@ const styles = StyleSheet.create({
   container: {
     padding: 10,
     paddingTop: 0,
+    backgroundColor: Colors.snow,
   },
   title: {
     color: Colors.noteText,

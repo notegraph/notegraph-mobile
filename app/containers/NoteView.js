@@ -60,11 +60,11 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 
 
 const RelatedNotes = PropTypes.arrayOf(
-  // PropTypes.shape({
-  //   con: PropTypes.object.isRequired,
-  //   note: PropTypes.object.isRequired,
-  //   noteOnEnd: PropTypes.bool.isRequired,
-  // })
+  PropTypes.shape({
+    con: PropTypes.object.isRequired,
+    note: PropTypes.object.isRequired,
+    noteOnEnd: PropTypes.bool.isRequired,
+  })
 ).isRequired
 
 
@@ -187,13 +187,11 @@ const styles = StyleSheet.create({
   },
   container: {
     padding: 10,
-    paddingTop: 65,
     flex: 1,
     flexDirection: 'row',
-
+    backgroundColor: Colors.snow,
   },
   noteContainer: {
-
   },
   relatedScroll: {
     flex: 2,

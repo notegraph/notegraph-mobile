@@ -50,10 +50,10 @@ const NoteItem = ({id, note, relsCount, onOpenNote}) => {
 
 NoteItem.propTypes = {
   id: PropTypes.string.isRequired,
-  // note: PropTypes.shape({
-  //   text: PropTypes.string.isRequired,
-  //   title: PropTypes.string,
-  // }),
+  note: PropTypes.shape({
+    text: PropTypes.string.isRequired,
+    title: PropTypes.string,
+  }),
   relsCount: PropTypes.number,
   onOpenNote: PropTypes.func.isRequired,
 }

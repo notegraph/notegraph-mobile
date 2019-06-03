@@ -161,7 +161,6 @@ const styles = StyleSheet.create({
   ...AppStyles.screen,
   container: {
     padding: 10,
-    paddingTop: 50,
     flex: 1,
     // flexDirection: 'row',
 
