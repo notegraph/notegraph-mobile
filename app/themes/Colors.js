@@ -28,6 +28,7 @@ const colors = {
   drawer: 'rgba(30, 30, 29, 0.95)',
   noteTitle: '#000',
   noteText: '#000000',
+  link: '#325f8f'
 }
 
 export default colors

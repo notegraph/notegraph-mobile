@@ -1,9 +1,11 @@
-import PropTypes from 'prop-types';
-import React from 'react';
+import PropTypes from 'prop-types'
+import React from 'react'
 import {
   View,
   Text,
   StyleSheet,
+  Platform,
+  TouchableOpacity
 } from 'react-native'
 import { Colors, Fonts } from '../themes'
 import RippleTouchable from './RippleTouchable'
@@ -26,13 +28,16 @@ RelsCounter.propTypes = {
   count: PropTypes.number,
 }
 
+const isIOS = Platform.OS === 'ios'
+const Touchable = isIOS ? TouchableOpacity : RippleTouchable
+
 
 const NoteItem = ({id, note, relsCount, onOpenNote}) => {
   const handlePress = () => onOpenNote(id)
   const { text, title } = note
 
   return (
-    <RippleTouchable
+    <Touchable
       onPress={handlePress}
       color={NOTE_TOUCH_COLOR}
     >
@@ -42,7 +47,7 @@ const NoteItem = ({id, note, relsCount, onOpenNote}) => {
         {relsCount !== 0 && <RelsCounter count={relsCount} />}
       </View>
 
-    </RippleTouchable>
+    </Touchable>
   )
 }
 

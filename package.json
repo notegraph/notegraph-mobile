@@ -6,7 +6,7 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "flow": "flow; test $? -eq 0 -o $? -eq 2",
     "lint": "eslint *.js app/**/*.js",
-    "fixcode": "npm run lint -- --fix",
+    "lint:fix": "yarn lint --fix",
     "android:install": "cd android && ./gradlew assembleRelease && adb -s 010fc2cba482160c install -r app/build/outputs/apk/app-release.apk",
     "test": "NODE_ENV=test ava",
     "test:jest": "jest",
@@ -23,6 +23,11 @@
     "emulator": "$ANDROID_HOME/tools/emulator @Nexus_5X_API_23&",
     "codemod": "react-codemod React-PropTypes-to-prop-types app"
   },
+  "rnpm": {
+    "assets": [
+      "./assets/fonts/"
+    ]
+  },
   "dependencies": {
     "@react-native-community/async-storage": "^1.4.2",
     "prop-types": "^15.7.2",
@@ -33,10 +38,10 @@
     "react-native-device-info": "^2.0.2",
     "react-native-gesture-handler": "^1.3.0",
     "react-native-mail": "^3.0.7",
+    "react-native-markdown-renderer": "^3.2.8",
     "react-native-material-kit": "^0.5.1",
     "react-native-menu": "^0.23.0",
     "react-native-router-flux": "^4.0.6",
-    "react-native-simple-markdown": "^1.1.0",
     "react-native-vector-icons": "^6.4.2",
     "react-redux": "^7.0.3",
     "redux": "^4.0.1",

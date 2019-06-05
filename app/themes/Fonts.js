@@ -1,5 +1,5 @@
 const type = {
-  base: 'RobotoSlab',
+  base: 'RobotoSlab-Regular',
   bold: 'Exo-Bold',
   emphasis: 'HelveticaNeue-Italic'
 }

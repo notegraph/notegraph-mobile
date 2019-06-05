@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import PropTypes from 'prop-types'
+import React, { Component } from 'react'
 import {
   Text,
   View,
@@ -32,7 +32,7 @@ class FoundNote extends Component {
         onPress={this._onPress}
       >
         <View style={styles.container}>
-          {!!index && <View style={styles.separator}></View>}
+          {!!index && <View style={styles.separator} />}
           {!!note.title && <Text style={styles.title} numberOfLines={1}>{note.title}</Text>}
           <Text style={styles.text} numberOfLines={5}>{text}</Text>
         </View>

@@ -59,7 +59,7 @@ export const findRelatedNotes = (state, groupId, noteId): RelInfo[] => {
     R.concat(ownerRels),
     R.filter(R.prop('note')),
     R.uniqBy(x => {
-      const con = x.con;
+      const con = x.con
       return `${con.a}-${con.b}-${con.type}`
     }),
     R.map(con => {

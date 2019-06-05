@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import {
   Text,
   View,
@@ -7,7 +7,7 @@ import {
 
 /* @flow weak */
 
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
 
 import R from 'ramda'
 

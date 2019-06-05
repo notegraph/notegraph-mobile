@@ -1,11 +1,11 @@
-import React from 'react';
+import React from 'react'
 import {
   View,
   StyleSheet,
   ScrollView,
 } from 'react-native'
 
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
 
 import R from 'ramda'
 import { connect } from 'react-redux'
