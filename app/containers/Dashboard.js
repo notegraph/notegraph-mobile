@@ -20,7 +20,6 @@ import { AppStyles, Colors } from '../themes'
 
 
 class Dashboard extends Component {
-
   render () {
     return (
       <View style={[styles.mainContainer, styles.container]} >
