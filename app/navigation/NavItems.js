@@ -14,12 +14,13 @@ import { Colors, Metrics } from '../themes'
 // I18n
 // import I18n from '../I18n/I18n.js'
 
-const openDrawer = () => {
-  RouteActions.refresh({
-    key: 'drawer',
-    open: true
-  })
-}
+export const DrawerIcon = () => (
+  <Icon name="menu"
+    size={Metrics.icons.medium}
+    color={Colors.snow}
+  />
+)
+
 
 export default {
 
@@ -74,18 +75,6 @@ export default {
         <Icon name="check"
           size={Metrics.icons.medium}
           color={Colors.iconDark}
-          style={styles.navButtonLeft}
-        />
-      </TouchableOpacity>
-    )
-  },
-
-  hamburgerButton () {
-    return (
-      <TouchableOpacity onPress={openDrawer}>
-        <Icon name="menu"
-          size={Metrics.icons.medium}
-          color={Colors.snow}
           style={styles.navButtonLeft}
         />
       </TouchableOpacity>

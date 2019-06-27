@@ -1,5 +1,7 @@
 /* @flow weak */
-import React, { Component, PropTypes } from 'react'
+import PropTypes from 'prop-types'
+
+import React, { Component } from 'react'
 import {
   Text,
   View,
@@ -150,7 +152,7 @@ class NoteView extends Component {
             <View style={styles.titleCont}>
               <Text style={styles.title}>{note.title}</Text>
             </View>
-            <View>
+            <View style={styles.bodyContainer}>
               <MarkdownViewer text={note.text} />
             </View>
             <TouchableOpacity onPress={this.editCurrentNote}>
@@ -168,7 +170,9 @@ class NoteView extends Component {
         </ScrollView>
           )
         }
-        {this.renderButtons()}
+        <View style={styles.buttonsCont}>
+          {this.renderButtons()}
+        </View>
       </View>
     )
   }
@@ -185,13 +189,11 @@ const styles = StyleSheet.create({
   },
   container: {
     padding: 10,
-    paddingTop: 65,
     flex: 1,
     flexDirection: 'row',
-
+    backgroundColor: Colors.snow,
   },
   noteContainer: {
-
   },
   relatedScroll: {
     flex: 2,
@@ -204,6 +206,10 @@ const styles = StyleSheet.create({
   titleCont: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
+  },
+  buttonsCont: {
+    marginTop: 20,
+    marginBottom: 20
   },
   title: {
     flex: 1,

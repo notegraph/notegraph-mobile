@@ -4,8 +4,8 @@ export default {
   container: {
     flex: 1
   },
-  navbar: {
-    backgroundColor: Colors.snow,
+  navBar: {
+    backgroundColor: Colors.bgLight,
   },
   title: {
     color: Colors.charcoal,

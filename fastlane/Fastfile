@@ -96,6 +96,19 @@ platform :android do
   end
 end
 
+platform :ios do
+  # does not work
+  # use XCode for now - https://www.raywenderlich.com/5352-testflight-tutorial-ios-beta-testing
+  # TODO: https://github.com/thecodingmachine/react-native-boilerplate/blob/master/docs/beta%20builds.md
+  lane :beta do
+    # increment_build_number(
+    #   build_number: latest_testflight_build_number + 1,
+    #   xcodeproj: "./ios/ngkeep.xcodeproj"
+    # )
+    build_app(scheme: "ngkeep", workspace: "./ios/ngkeep.xcodeproj/project.xcworkspace")
+    upload_to_testflight
+  end
+end
 
 # More information about multiple platforms in fastlane: https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Platforms.md
 # All available actions: https://docs.fastlane.tools/actions

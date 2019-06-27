@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react'
+import PropTypes from 'prop-types'
+import React from 'react'
 import {
   View,
   StyleSheet,
@@ -32,7 +33,6 @@ const styles = StyleSheet.create({
     flex: 1,
     margin: 0,
     backgroundColor: Colors.background,
-    paddingTop: 50,
   },
 
 })

@@ -1,9 +1,9 @@
-import React, { Component, PropTypes } from 'react'
+import PropTypes from 'prop-types'
+import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import {
   ScrollView,
   Image,
-  BackAndroid,
   TouchableOpacity,
   Text,
   Share,
@@ -19,11 +19,12 @@ import {sendFeedbackMail} from '../actions/mail'
 const styles = {
   container: {
     flex: 1,
-    padding: 20
+    padding: 20,
   },
   logo: {
-    alignSelf: 'center',
-    marginBottom: 10,
+    // FIXME: align to the left
+    // alignSelf: 'flex-start',
+    transform: [{ scale: 0.8 }]
   },
   linksContainer: {
     paddingTop: 20,
@@ -55,22 +56,7 @@ DrawerButton.propTypes = {
 
 class DrawerContent extends Component {
 
-  componentDidMount () {
-    BackAndroid.addEventListener('hardwareBackPress', () => {
-      if (this.context.drawer.props.open) {
-        this.toggleDrawer()
-        return true
-      }
-      return false
-    })
-  }
-
-  toggleDrawer () {
-    this.context.drawer.toggle()
-  }
-
   handleExportData = () => {
-    this.toggleDrawer()
     // NavigationActions.componentExamples()
     this.props.export((msg) => {
       this._shareMessage(msg)
@@ -78,7 +64,6 @@ class DrawerContent extends Component {
   }
 
   handleSendFeedback = () => {
-    this.toggleDrawer()
     sendFeedbackMail()
   }
 
@@ -93,7 +78,7 @@ class DrawerContent extends Component {
 
   render () {
     return (
-      <ScrollView style={styles.container}>
+      <ScrollView contentContainerStyle={styles.container}>
         <Image source={Images.logo} style={styles.logo} />
         <View style={styles.linksContainer}>
           <DrawerButton text="Export Data" onPress={this.handleExportData} />
@@ -106,11 +91,11 @@ class DrawerContent extends Component {
 }
 
 DrawerContent.propTypes = {
-  export: React.PropTypes.func.isRequired,
+  export: PropTypes.func.isRequired,
 }
 
 DrawerContent.contextTypes = {
-  drawer: React.PropTypes.object,
+  drawer: PropTypes.object,
 }
 
 function mapStateToProps (state) {

@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import {
   Text,
   View,
@@ -6,6 +6,8 @@ import {
   TextInput,
   Dimensions,
 } from 'react-native'
+
+import PropTypes from 'prop-types'
 
 import R from 'ramda'
 
@@ -112,6 +114,7 @@ const styles = StyleSheet.create({
   container: {
     padding: 10,
     paddingTop: 0,
+    backgroundColor: Colors.snow,
   },
   title: {
     color: Colors.noteText,
