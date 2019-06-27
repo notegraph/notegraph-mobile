@@ -34,7 +34,7 @@ circle at the bottom shows number of connections
       id: 'm',
       title: 'Markdown',
       text:
-`limited markdown support makes it possible to do some things (edit to see the source)
+`markdown support makes it possible to do some things (edit to see the source)
 
 ## format text
 
@@ -56,7 +56,7 @@ You can **emphasize** what you want or just *suggest it*
 
 ### even smaller titles
 
-P.S. do no forget empty lines after different markdown structures
+[links can be included too](https://commonmark.org/help/)
 `
     }
 

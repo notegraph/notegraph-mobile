@@ -1,86 +1,82 @@
 {
   "name": "ngkeep",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "private": false,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "flow": "flow; test $? -eq 0 -o $? -eq 2",
     "lint": "eslint *.js app/**/*.js",
-    "fixcode": "npm run lint -- --fix",
+    "lint:fix": "yarn lint --fix",
     "android:install": "cd android && ./gradlew assembleRelease && adb -s 010fc2cba482160c install -r app/build/outputs/apk/app-release.apk",
-    "test": "NODE_ENV=test ava",
-    "test:watch": "npm run test -- --watch",
+    "test:once": "NODE_ENV=test jest",
+    "test": "npm run test:once -- --watch",
     "coverage": "nyc ava && nyc report --reporter=html && open coverage/index.html || xdg-open coverage/index.html",
-    "precommit": "yarn test",
-    "prepush": "yarn test",
+    "precommit": "yarn test:once",
+    "prepush": "yarn test:once",
     "adb:date": "adb shell \"date `date +%m%d%H%M%Y.%S`\"",
     "sourcemap:android": "react-native bundle --dev false --platform android --entry-file index.android.js --bundle-output build/main.jsbundle --sourcemap-output build/main.jsbundle.map",
     "sentry:release": "VERSION=$(./ver.sh) && sentry-cli releases -o notegraph -p ngkeep new $VERSION",
     "sentry:files": "VERSION=$(./ver.sh) && sentry-cli releases -o notegraph -p ngkeep files $VERSION upload-sourcemaps --url-prefix / build/main.jsbundle build/main.jsbundle.map",
     "sentry:upload": "npm run sourcemap:android && npm run sentry:release && npm run sentry:files",
     "package:version": "VERSION=$(./ver.sh) && echo $VERSION",
-    "emulator": "$ANDROID_HOME/tools/emulator @Nexus_5X_API_23&"
+    "emulator": "$ANDROID_HOME/tools/emulator @Nexus_5X_API_23&",
+    "codemod": "react-codemod React-PropTypes-to-prop-types app"
+  },
+  "rnpm": {
+    "assets": [
+      "./assets/fonts/"
+    ]
   },
   "dependencies": {
+    "@react-native-community/async-storage": "^1.4.2",
+    "prop-types": "^15.7.2",
     "ramda": "^0.22.1",
     "raven-js": "^3.12.0",
-    "react": "15.3.2",
-    "react-native": "^0.36.1",
-    "react-native-device-info": "^0.10.2",
-    "react-native-drawer": "^2.3.0",
-    "react-native-mail": "2.x",
-    "react-native-material-kit": "^0.3.3",
-    "react-native-menu": "^0.20.2",
-    "react-native-router-flux": "^3.36.0",
-    "react-native-simple-markdown": "*",
-    "react-native-vector-icons": "^2.0.3",
-    "react-redux": "^5.0.3",
-    "redux": "^3.4.0",
-    "redux-logger": "^2.4.0",
-    "redux-persist": "^4.0.0-alpha6",
+    "react": "16.8.3",
+    "react-native": "0.59.8",
+    "react-native-device-info": "^2.0.2",
+    "react-native-gesture-handler": "^1.3.0",
+    "react-native-mail": "^3.0.7",
+    "react-native-markdown-renderer": "^3.2.8",
+    "react-native-material-kit": "^0.5.1",
+    "react-native-menu": "^0.23.0",
+    "react-native-router-flux": "^4.0.6",
+    "react-native-vector-icons": "^6.4.2",
+    "react-redux": "^7.0.3",
+    "redux": "^4.0.1",
+    "redux-logger": "^3.0.6",
+    "redux-persist": "^5.10.0",
+    "redux-persist-seamless-immutable": "^2.0.0",
     "redux-thunk": "^2.1.0",
-    "reduxsauce": "^0.2.0",
-    "reselect": "^2.5.4",
+    "reduxsauce": "^1.1.0",
+    "reselect": "^4.0.0",
     "seamless-immutable": "^6.1.4"
   },
   "devDependencies": {
-    "ava": "*",
-    "babel-eslint": "^6.1.2",
-    "chai": "^3.5.0",
-    "chai-shallow-deep-equal": "^1.4.4",
+    "@babel/core": "^7.4.5",
+    "@babel/runtime": "^7.4.5",
+    "babel-eslint": "^10.0.2",
+    "babel-jest": "^24.8.0",
     "enzyme": "^2.3.0",
-    "eslint": "^3.3.1",
+    "eslint": "^4.18.2",
     "eslint-config-standard": "^6.0.0-beta.3",
     "eslint-config-standard-react": "^3.0.0",
     "eslint-plugin-import": "^2.1.0",
     "eslint-plugin-promise": "^2.0.1",
     "eslint-plugin-react": "^6.1.2",
     "eslint-plugin-standard": "^2.0.0",
-    "flow-bin": "^0.32.0",
     "husky": "^0.13.3",
-    "mockery": "^1.7.0",
-    "nyc": "^8.1.0",
-    "react-addons-test-utils": "^15.3.1",
-    "react-dom": "^15.3.1",
-    "react-native-mock": "^0.2.6",
+    "jest": "^24.8.0",
+    "metro-react-native-babel-preset": "^0.54.1",
+    "react-test-renderer": "16.8.3",
     "reactotron-apisauce": "^1.1.2",
     "reactotron-react-native": "^1.1.2",
-    "reactotron-redux": "^1.1.2",
-    "sinon": "^2.1.0"
+    "reactotron-redux": "^1.1.2"
   },
-  "ava": {
-    "files": [
-      "tests/**/*.js",
-      "!tests/setup.js",
-      "!tests/components/*",
-      "!tests/sagas/*"
-    ],
-    "require": [
-      "babel-register",
-      "babel-polyfill",
-      "react-native-mock/mock",
-      "./tests/setup"
-    ],
-    "babel": "inherit"
+  "jest": {
+    "preset": "react-native",
+    "globals": {
+      "__TEST__": true
+    }
   }
 }

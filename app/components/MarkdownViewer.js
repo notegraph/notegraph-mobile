@@ -1,8 +1,9 @@
-import React, {PropTypes, PureComponent} from 'react'
+import PropTypes from 'prop-types';
+import React, { PureComponent } from 'react';
 import {StyleSheet, Text} from 'react-native'
 import {Colors, Fonts} from '../themes'
 
-import Markdown from 'react-native-simple-markdown'
+import Markdown from 'react-native-markdown-renderer'
 
 
 class MarkdownViewer extends PureComponent {
@@ -14,8 +15,9 @@ class MarkdownViewer extends PureComponent {
   }
 
   // eslint-disable-next-line
-  unstable_handleError (e) {
-    console.warn('markdown canot be rendered, too complicated', e)
+  componentDidCatch(e, info) {
+    console.error(e)
+    console.warn('markdown canot be rendered, too complicated', info)
     this.setState({error: true})
   }
   render () {
@@ -23,7 +25,7 @@ class MarkdownViewer extends PureComponent {
     if (this.state.error) {
       return <Text style={textStyles.text}>{text}</Text>
     }
-    return (<Markdown styles={styles} >{text}</Markdown>)
+    return (<Markdown style={mdStyles}>{text}</Markdown>)
   }
 }
 
@@ -32,7 +34,7 @@ const fontSizeX = (m) => parseInt(Fonts.size.regular * m, 10)
 
 const textProps = {
   color: Colors.noteText,
-  // fontSize: Fonts.size.regular,
+  fontSize: Fonts.size.regular,
   fontFamily: Fonts.type.base,
 }
 
@@ -78,26 +80,30 @@ const styles = {
     fontSize: Fonts.size.regular
   },
 
-  listItem: {
-    flexDirection: 'row',
-    paddingBottom: 3,
-    paddingTop: 7,
-    // paddingBottom: 10,
-  },
-  listItemBullet: {
-    fontWeight: 'bold',
-    color: 'black',
-  },
+  // listItem: {
+  //   flexDirection: 'row',
+  //   paddingBottom: 3,
+  //   paddingTop: 7,
+  //   // paddingBottom: 10,
+  // },
+  // listItemBullet: {
+  //   fontWeight: 'bold',
+  //   color: 'black',
+  // },
   strong: {
     fontWeight: 'bold',
   },
   blockQuoteText: {
     backgroundColor: '#ccc',
-  }
+  },
+  link: {
+    textDecorationLine: 'underline',
+    color: Colors.link
+  },
 }
 
 ;[
-  'link', 'mailTo', 'listItemBullet', 'strong', 'listItemNumber', 'listItemText',
+  'link', 'mailTo', 'strong', ,
   'plainText', 'tableHeaderCell', 'url',
 ].forEach(key => {
   styles[key] = {
@@ -105,6 +111,8 @@ const styles = {
     fontSize: Fonts.size.regular
   }
 })
+
+const mdStyles = StyleSheet.create(styles)
 
 
 const textStyles = StyleSheet.create({

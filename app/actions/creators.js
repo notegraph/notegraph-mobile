@@ -116,7 +116,6 @@ const saveRelation = (groupId: string, rel: Rel) => (dispatch, getState) => {
 }
 
 const deleteRelation = (groupId: string, relId: string) => {
-
   if (!groupId || !relId) {
     console.warn('deleteRelation, insufficient parameters')
     console.log({ n: 'deleteRelation', groupId, relId })

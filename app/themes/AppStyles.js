@@ -9,7 +9,6 @@ const AppStyles = {
   screen: {
     mainContainer: {
       flex: 1,
-      marginTop: Metrics.navBarHeight
     },
     backgroundImage: {
       position: 'absolute',

@@ -47,7 +47,8 @@ export default {
         },
         cons: [
           { a: 'a1', b: 'b1', type: 'defines' },
-          { a: 'a1', b: 'b1',
+          { a: 'a1',
+            b: 'b1',
             type: 'cusbm',
             desc: 'how are they related...',
             nondir: true, // non directional
