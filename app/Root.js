@@ -14,6 +14,10 @@ import { Colors } from './themes'
 
 import { Provider } from 'react-redux'
 import NavigationRouter from './navigation/NavigationRouter'
+import configureStore from './redux/createStore'
+
+const { store, persistor } = configureStore()
+
 
 const Loading = () => (
   <View style={{ flex: 1 }}>
@@ -28,7 +32,6 @@ export default class Root extends Component {
   }
 
   render () {
-    const { store, persistor } = this.props
     return (
       <Provider store={store}>
         <PersistGate loading={<Loading />} persistor={persistor}>

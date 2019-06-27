@@ -8,12 +8,11 @@
     "lint": "eslint *.js app/**/*.js",
     "lint:fix": "yarn lint --fix",
     "android:install": "cd android && ./gradlew assembleRelease && adb -s 010fc2cba482160c install -r app/build/outputs/apk/app-release.apk",
-    "test": "NODE_ENV=test ava",
-    "test:jest": "jest",
-    "test:watch": "npm run test -- --watch",
+    "test:once": "NODE_ENV=test jest",
+    "test": "npm run test:once -- --watch",
     "coverage": "nyc ava && nyc report --reporter=html && open coverage/index.html || xdg-open coverage/index.html",
-    "precommit": "yarn test",
-    "prepush": "yarn test",
+    "precommit": "yarn test:once",
+    "prepush": "yarn test:once",
     "adb:date": "adb shell \"date `date +%m%d%H%M%Y.%S`\"",
     "sourcemap:android": "react-native bundle --dev false --platform android --entry-file index.android.js --bundle-output build/main.jsbundle --sourcemap-output build/main.jsbundle.map",
     "sentry:release": "VERSION=$(./ver.sh) && sentry-cli releases -o notegraph -p ngkeep new $VERSION",
@@ -56,11 +55,8 @@
   "devDependencies": {
     "@babel/core": "^7.4.5",
     "@babel/runtime": "^7.4.5",
-    "ava": "*",
-    "babel-eslint": "^6.1.2",
+    "babel-eslint": "^10.0.2",
     "babel-jest": "^24.8.0",
-    "chai": "^3.5.0",
-    "chai-shallow-deep-equal": "^1.4.4",
     "enzyme": "^2.3.0",
     "eslint": "^4.18.2",
     "eslint-config-standard": "^6.0.0-beta.3",
@@ -72,32 +68,15 @@
     "husky": "^0.13.3",
     "jest": "^24.8.0",
     "metro-react-native-babel-preset": "^0.54.1",
-    "mockery": "^1.7.0",
-    "nyc": "^8.1.0",
-    "react-addons-test-utils": "^15.3.1",
-    "react-dom": "^15.3.1",
     "react-test-renderer": "16.8.3",
     "reactotron-apisauce": "^1.1.2",
     "reactotron-react-native": "^1.1.2",
-    "reactotron-redux": "^1.1.2",
-    "sinon": "^2.1.0"
-  },
-  "ava": {
-    "files": [
-      "tests/**/*.js",
-      "!tests/setup.js",
-      "!tests/components/*",
-      "!tests/sagas/*"
-    ],
-    "require": [
-      "babel-register",
-      "babel-polyfill",
-      "react-native-mock/mock",
-      "./tests/setup"
-    ],
-    "babel": "inherit"
+    "reactotron-redux": "^1.1.2"
   },
   "jest": {
-    "preset": "react-native"
+    "preset": "react-native",
+    "globals": {
+      "__TEST__": true
+    }
   }
 }

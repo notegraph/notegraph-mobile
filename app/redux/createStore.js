@@ -8,10 +8,10 @@ import Config from '../config/debugSettings'
 // import createSagaMiddleware from 'redux-saga'
 import R from 'ramda'
 import { persistConfig } from '../config/reduxPersist'
-import { StartupTypes } from './StartupRedux'
+import rootReducer from '../reducers'
 
 // creates the store
-export default (rootReducer, rootSaga) => {
+export default () => {
   /* ------------- Redux Configuration ------------- */
 
   const persistEnabled = persistConfig.active && !global.__TEST__
@@ -44,10 +44,14 @@ export default (rootReducer, rootSaga) => {
 
 
   const store = createStore(persistedReducer, compose(...enhancers))
-  const persistor = persistStore(store)
+  const persistor = !global.__TEST__ && persistStore(store)
 
   // kick off root saga
   // sagaMiddleware.run(rootSaga)
 
   return { store, persistor }
+}
+
+export const createTestStore = () => {
+  return createStore(rootReducer, applyMiddleware(thunk))
 }
