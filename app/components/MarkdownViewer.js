@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types';
-import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types'
+import React, { PureComponent } from 'react'
 import {StyleSheet, Text} from 'react-native'
 import {Colors, Fonts} from '../themes'
 
@@ -57,7 +57,7 @@ const styles = {
   },
   heading: {
     ...headingProps,
-    //fontSize: fontSizeX(1.6),
+    // fontSize: fontSizeX(1.6),
   },
   heading1: {
     fontSize: fontSizeX(1.6),

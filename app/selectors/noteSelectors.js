@@ -25,12 +25,12 @@ export const selectActiveGroupItems = createSelector(
     }
 
     return items.map(
-        item => {
-          // FIXME: this could be the source of performance problems
-          // there should be more effective way to deal with graphs
-          const rels = findRelatedNotes(limitedState, groupId, item.id)
-          return { item, note: notes[item.id], relsCount: rels.length }
-        }
+      item => {
+        // FIXME: this could be the source of performance problems
+        // there should be more effective way to deal with graphs
+        const rels = findRelatedNotes(limitedState, groupId, item.id)
+        return { item, note: notes[item.id], relsCount: rels.length }
+      }
     )
   }
 )

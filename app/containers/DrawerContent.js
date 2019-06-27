@@ -55,7 +55,6 @@ DrawerButton.propTypes = {
 
 
 class DrawerContent extends Component {
-
   handleExportData = () => {
     // NavigationActions.componentExamples()
     this.props.export((msg) => {
@@ -71,8 +70,8 @@ class DrawerContent extends Component {
     Share.share({
       message: msg
     })
-    .then(this._showResult)
-    .catch((error) => this.setState({result: 'error: ' + error.message}))
+      .then(this._showResult)
+      .catch((error) => this.setState({result: 'error: ' + error.message}))
   }
 
 
@@ -87,7 +86,6 @@ class DrawerContent extends Component {
       </ScrollView>
     )
   }
-
 }
 
 DrawerContent.propTypes = {

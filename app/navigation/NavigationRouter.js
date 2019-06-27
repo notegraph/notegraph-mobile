@@ -33,7 +33,6 @@ const lightNav = {
 
 
 class NavigationRouter extends Component {
-
   renderDeleteBtn = (navProps) =>
     NavItems.deleteNoteButton(navProps, this.props.deleteNote)
 
@@ -74,26 +73,26 @@ class NavigationRouter extends Component {
               renderRightButton={this.renderSearchBtn}
               renderBackButton={this.renderHamburgerBtn}
               {...lightNav}
-              />
+            />
           </Drawer>
           <Scene key="search" component={DashboardSearch} title="Search"
             renderBackButton={this.backButtonWhite}
             {...lightNav}
-            />
+          />
           <Scene
             key="noteEdit" component={NoteEdit} title="Edit Note"
             renderBackButton={this.renderSaveButton}
             renderRightButton={this.renderDeleteBtn}
-            />
+          />
           <Scene
             key="noteView" component={NoteView}
             renderBackButton={this.backAndHomeButtons}
             renderRightButton={this.renderNoteActions}
-            />
+          />
           <Scene
             key="newRelation" component={AddRelation} title="Add Connection"
             renderBackButton={this.renderBackButton}
-            />
+          />
         </Scene>
 
       </Router>
@@ -142,8 +141,8 @@ function shareMessage (text) {
   Share.share({
     message: text
   })
-    // .then(this._showResult)
-    // .catch((error) => this.setState({result: 'error: ' + error.message}))
+  // .then(this._showResult)
+  // .catch((error) => this.setState({result: 'error: ' + error.message}))
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavigationRouter)

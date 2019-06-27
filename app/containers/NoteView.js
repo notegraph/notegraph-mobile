@@ -158,17 +158,17 @@ class NoteView extends Component {
             <TouchableOpacity onPress={this.editCurrentNote}>
               <Icon name="mode-edit"
                 size={Metrics.icons.medium}
-                />
+              />
             </TouchableOpacity>
           </View>
         </ScrollView>
         { hasConnections && (
-        <ScrollView style={styles.relatedScroll}>
-          <View style={styles.relatedContainer}>
-            {this.renderRelated()}
-          </View>
-        </ScrollView>
-          )
+          <ScrollView style={styles.relatedScroll}>
+            <View style={styles.relatedContainer}>
+              {this.renderRelated()}
+            </View>
+          </ScrollView>
+        )
         }
         <View style={styles.buttonsCont}>
           {this.renderButtons()}
