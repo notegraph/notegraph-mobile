@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
   },
   contOverlay: {
     top: 0,
-    opacity: 0.8,
+    // opacity: 0.8,
     backgroundColor: 'white',
   },
 
@@ -110,7 +110,8 @@ const styles = StyleSheet.create({
   },
 
   inlineButtonCont: {
-    paddingBottom: 10,
+    padding: 10,
+    backgroundColor: 'white',
   },
   inlineButton: {
     fontSize: 18,
