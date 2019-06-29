@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -49,6 +48,7 @@
 		D5B12B04386049C8B9CC6EFA /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 717D50DA0450472C97144EEC /* Foundation.ttf */; };
 		E83A64094C35486ABAF10777 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D0FA19A301B941C68BC23AED /* Feather.ttf */; };
 		ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED297162215061F000B7C4FE /* JavaScriptCore.framework */; };
+		0D02B17A1E4F45009CF8EEFB /* Fontisto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C36551346885411C9C9F347C /* Fontisto.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -449,6 +449,7 @@
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 		FF82923989C6451E9497A821 /* Exo-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Exo-Bold.ttf"; path = "../assets/fonts/Exo-Bold.ttf"; sourceTree = "<group>"; };
+		C36551346885411C9C9F347C /* Fontisto.ttf */ = {isa = PBXFileReference; name = "Fontisto.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -789,6 +790,7 @@
 				0D2D48A92F6F467C9AA86DFF /* FontAwesome5_Solid.ttf */,
 				8E9C5433A0D046D7BC54EEC2 /* MaterialCommunityIcons.ttf */,
 				D5E272E3D01442EFA59B0AD4 /* SimpleLineIcons.ttf */,
+				C36551346885411C9C9F347C /* Fontisto.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1309,6 +1311,7 @@
 				A228722900984D6ABFE45644 /* FontAwesome5_Solid.ttf in Resources */,
 				6030073865D74F92A0F8C21B /* MaterialCommunityIcons.ttf in Resources */,
 				CF9BCBB78289441CA1EDBD5D /* SimpleLineIcons.ttf in Resources */,
+				0D02B17A1E4F45009CF8EEFB /* Fontisto.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
