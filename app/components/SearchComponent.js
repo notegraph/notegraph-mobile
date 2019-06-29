@@ -10,7 +10,7 @@ import PropTypes from 'prop-types'
 import R from 'ramda'
 
 
-import { Fonts } from '../themes'
+import { Fonts, Colors } from '../themes';
 import FoundNote from './FoundNote'
 
 const matchKeyword = (note, re) => {
@@ -73,11 +73,12 @@ class SearchComponent extends Component {
 
   render () {
     return (
-      <View>
+      <View style={styles.container}>
         <TextInput
           placeholder="Search"
           onChangeText={this.handleKeywordChange}
           style={styles.searchInput}
+          autoFocus
         />
         <ScrollView style={styles.results}>
           {this.renderResults()}
@@ -93,14 +94,20 @@ SearchComponent.propTypes = {
 }
 
 const styles = StyleSheet.create({
-  searchInput: {
+  container: {
     backgroundColor: 'white',
+  },
+  searchInput: {
+    padding: 10,
+    fontSize: Fonts.size.normal,
+    borderBottomWidth: 1,
+    borderBottomColor: Colors.border,
   },
   results: {
     marginTop: 5,
   },
   noResultsWrapper: {
-
+    padding: 10
   },
   noResults: {
     textAlign: 'center',

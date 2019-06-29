@@ -38,7 +38,7 @@ export default class Root extends Component {
           <View style={styles.applicationView}>
             <StatusBar
               backgroundColor={Colors.statusBar}
-              barStyle="light-content"
+              barStyle="default"
             />
 
             <MenuContext style={{ flex: 1 }}>

@@ -4,6 +4,7 @@ import {
   StyleSheet,
   View,
   Text,
+  TouchableOpacity,
 } from 'react-native'
 
 import { MKButton } from 'react-native-material-kit'
@@ -58,11 +59,9 @@ class ButtonsGroup extends Component {
     ]
 
     return (
-      <View style={contStyles}>
-        <View style={styles.buttonsFooter}>
-          {isPressed && this.renderButtonOptions()}
-          <ActionButton onPress={this.handleButtonPress} />
-        </View>
+      <View style={styles.buttonsFooter}>
+        {isPressed && this.renderButtonOptions()}
+        <ActionButton onPress={this.handleButtonPress} />
       </View>
     )
   }
@@ -90,8 +89,9 @@ const styles = StyleSheet.create({
   },
   contOverlay: {
     top: 0,
-    opacity: 0.8,
+    // opacity: 0.8,
     backgroundColor: 'white',
+
   },
 
   buttonsFooter: {
@@ -100,6 +100,7 @@ const styles = StyleSheet.create({
     right: 20,
     flexDirection: 'column',
     alignItems: 'flex-end',
+
   },
 
   button: {
@@ -110,7 +111,8 @@ const styles = StyleSheet.create({
   },
 
   inlineButtonCont: {
-    paddingBottom: 10,
+    padding: 10,
+    backgroundColor: 'white',
   },
   inlineButton: {
     fontSize: 18,
