@@ -5,45 +5,31 @@ import {
   StyleSheet,
   TextInput,
   Dimensions,
+  KeyboardAvoidingView,
+  ScrollView,
+  Platform
 } from 'react-native'
+
+// import InputScrollView from 'react-native-input-scroll-view'
 
 import PropTypes from 'prop-types'
 
 import R from 'ramda'
 
-import { connect } from 'react-redux'
-import { AppStyles, Colors, Fonts } from '../themes'
-import actions from '../actions/creators'
+
+import { AppStyles, Colors, Fonts } from '../../themes'
+
 import { Actions as RouteActions } from 'react-native-router-flux'
 
 
-const {height, width} = Dimensions.get('window')
-
-
-const mapStateToProps = (state, ownProps) => {
-  const { noteId } = ownProps
-  const { notes, editor } = state
-  return {
-    note: noteId ? notes[noteId] : {},
-    isReadMode: editor.isReadMode,
-  }
-}
-
-const mapDispatchToProps = (dispatch, ownProps) => {
-  const { ownerNoteId } = ownProps
-  return {
-    saveNote: note => dispatch(actions.saveNote(note, ownerNoteId)),
-  }
-}
-
-
-class NoteEdit extends Component {
+export class NoteEditView extends Component {
   static propTypes = {
     noteId: PropTypes.string,
     ownerNoteId: PropTypes.string,
     note: PropTypes.object.isRequired,
     saveNote: PropTypes.func.isRequired,
     isReadMode: PropTypes.bool.isRequired,
+    isNew: PropTypes.bool.isRequired
   }
 
   constructor (props) {
@@ -51,7 +37,7 @@ class NoteEdit extends Component {
     const { note } = props
 
     this.state = {
-      note,
+      note
     }
   }
 
@@ -83,43 +69,50 @@ class NoteEdit extends Component {
       isChanged: true,
     })
   }
-
   render () {
-    const { note } = this.props
-
+    const { note, isNew } = this.props
     return (
-      <View style={[styles.mainContainer, styles.container]}>
-        <TextInput
-          style={styles.title}
-          defaultValue={note.title}
-          onChangeText={this.onChangeTitle}
-          placeholder={'Title'}
-        />
-
-        <TextInput
-          style={styles.text}
-          defaultValue={note.text}
-          multiline={true}
-          onChangeText={this.onChangeText}
-          placeholder={'Note'}
-        />
-      </View>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : null}
+        style={{ flex: 1 }}
+      >
+        <View style={styles.container}
+        >
+          <TextInput
+            style={styles.title}
+            defaultValue={note.title}
+            onChangeText={this.onChangeTitle}
+            placeholder={'Title'}
+            autoFocus={isNew}
+          />
+          <TextInput
+            style={[styles.text]}
+            defaultValue={note.text}
+            multiline
+            onChangeText={this.onChangeText}
+            placeholder={'Note'}
+            autoFocus={!isNew}
+          />
+        </View>
+      </KeyboardAvoidingView>
     )
   }
 }
 
 
 const styles = StyleSheet.create({
-  ...AppStyles.screen,
   container: {
     padding: 10,
     paddingTop: 0,
     backgroundColor: Colors.snow,
+    flex: 1,
   },
   title: {
     color: Colors.noteText,
     fontFamily: Fonts.type.bold,
     fontSize: Fonts.size.h3,
+    margin: 0,
+    padding: 0,
   },
   text: {
     flex: 1,
@@ -127,6 +120,8 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     textAlignVertical: 'top',
     color: Colors.noteText,
+    margin: 0,
+    padding: 0,
 
     fontFamily: Fonts.type.base,
     fontSize: Fonts.size.regular,
@@ -136,4 +131,3 @@ const styles = StyleSheet.create({
 
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(NoteEdit)
