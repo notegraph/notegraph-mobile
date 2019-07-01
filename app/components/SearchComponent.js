@@ -5,6 +5,7 @@ import {
   ScrollView,
   View,
   Text,
+  Keyboard,
 } from 'react-native'
 import PropTypes from 'prop-types'
 import R from 'ramda'
@@ -14,7 +15,7 @@ import { Fonts, Colors } from '../themes';
 import FoundNote from './FoundNote'
 
 const matchKeyword = (note, re) => {
-  if (!note || !note.text) return false
+  if (!note) return false
 
   return re.test(note.title) || re.test(note.text)
 }
@@ -80,7 +81,7 @@ class SearchComponent extends Component {
           style={styles.searchInput}
           autoFocus
         />
-        <ScrollView style={styles.results}>
+        <ScrollView style={styles.results} onScroll={Keyboard.dismiss}>
           {this.renderResults()}
         </ScrollView>
       </View>

@@ -25,6 +25,9 @@ class MarkdownViewer extends PureComponent {
     if (this.state.error) {
       return <Text style={textStyles.text}>{text}</Text>
     }
+    if (!text) {
+      return null
+    }
     return (<Markdown style={mdStyles}>{text}</Markdown>)
   }
 }
