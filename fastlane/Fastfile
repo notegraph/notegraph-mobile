@@ -33,10 +33,12 @@ platform :android do
       project_dir: "android/"
     )
 
+    apk_path = Actions.lane_context[SharedValues::GRADLE_APK_OUTPUT_PATH]
     # Uploads generated apk to Google Play Store as an Alpha build
     supply(
       track: "beta",
-      apk: "android/app/build/outputs/apk/app-release.apk"
+      apk: apk_path
+      # apk: "android/app/build/outputs/apk/app-release.apk"
     )
 
     # sh yarn run sentry:upload
@@ -70,10 +72,13 @@ platform :android do
       project_dir: "android/"
     )
 
+    apk_path = Actions.lane_context[SharedValues::GRADLE_APK_OUTPUT_PATH]
+
     # Uploads generated apk to Google Play Store as an Alpha build
     supply(
       track: "alpha",
-      apk: "android/app/build/outputs/apk/app-release.apk"
+      apk: apk_path
+      # apk: "android/app/build/outputs/apk/release/app-release.apk"
     )
 
   end

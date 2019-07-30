@@ -1,6 +1,6 @@
 {
   "name": "ngkeep",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": false,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
@@ -15,13 +15,14 @@
     "precommit": "yarn test:once",
     "prepush": "yarn test:once",
     "adb:date": "adb shell \"date `date +%m%d%H%M%Y.%S`\"",
-    "sourcemap:android": "react-native bundle --dev false --platform android --entry-file index.android.js --bundle-output build/main.jsbundle --sourcemap-output build/main.jsbundle.map",
+    "sourcemap:android": "mkdir -p build && react-native bundle --dev false --platform android --entry-file index.js --bundle-output build/main.jsbundle --sourcemap-output build/main.jsbundle.map",
     "sentry:release": "VERSION=$(./ver.sh) && sentry-cli releases -o notegraph -p ngkeep new $VERSION",
     "sentry:files": "VERSION=$(./ver.sh) && sentry-cli releases -o notegraph -p ngkeep files $VERSION upload-sourcemaps --url-prefix / build/main.jsbundle build/main.jsbundle.map",
     "sentry:upload": "npm run sourcemap:android && npm run sentry:release && npm run sentry:files",
     "package:version": "VERSION=$(./ver.sh) && echo $VERSION",
     "emulator": "$ANDROID_HOME/tools/emulator @Nexus_5X_API_23&",
-    "codemod": "react-codemod React-PropTypes-to-prop-types app"
+    "codemod": "react-codemod React-PropTypes-to-prop-types app",
+    "android:beta": "bundle exec fastlane android beta"
   },
   "rnpm": {
     "assets": [
@@ -56,6 +57,7 @@
   "devDependencies": {
     "@babel/core": "^7.4.5",
     "@babel/runtime": "^7.4.5",
+    "@sentry/cli": "^1.47.1",
     "babel-eslint": "^10.0.2",
     "babel-jest": "^24.8.0",
     "enzyme": "^2.3.0",
