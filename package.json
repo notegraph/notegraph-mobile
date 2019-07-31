@@ -7,7 +7,7 @@
     "flow": "flow; test $? -eq 0 -o $? -eq 2",
     "lint": "eslint *.js app/**/*.js",
     "lint:fix": "yarn lint --fix",
-    "android:install": "cd android && ./gradlew assembleRelease && adb -e install -r app/build/outputs/apk/app-release.apk",
+    "android:install": "cd android && ./gradlew assembleRelease && adb -d install -r app/build/outputs/apk/release/app-release.apk",
     "adb:reverse": "adb -e reverse tcp:8081 tcp:8081",
     "test:once": "NODE_ENV=test jest",
     "test": "npm run test:once -- --watch",
